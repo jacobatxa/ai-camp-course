@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<title>超级AI一日营 — 课程主页</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;800;900&family=Albert+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@200;300;400;500;700;900&display=swap" rel="stylesheet" />
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#000}
+body{font-family:'Albert Sans','Noto Sans SC',sans-serif;color:#fff;overflow:hidden;-webkit-font-smoothing:antialiased}
+.bg{position:fixed;inset:0;z-index:0;overflow:hidden}
+.bg img{width:100%;height:100%;object-fit:cover;opacity:.22}
+.ol{position:fixed;inset:0;z-index:1;background:linear-gradient(180deg,rgba(0,0,0,.92)0%,rgba(0,0,0,.8)60%,rgba(0,0,0,.96)100%)}
+.c{position:relative;z-index:2;max-width:900px;margin:0 auto;padding:clamp(36px,5vh,80px) clamp(24px,3vw,48px);height:100vh;display:flex;flex-direction:column}
+/* Back link */
+.back{display:inline-flex;align-items:center;gap:4px;font-size:clamp(10px,.65vw,12px);color:rgba(255,255,255,.2);text-decoration:none;margin-bottom:clamp(20px,2.5vh,40px);transition:color .2s}
+.back:hover{color:rgba(255,255,255,.5)}
+/* Header */
+header{margin-bottom:clamp(28px,3.5vh,56px)}
+header .badge{display:flex;align-items:center;gap:6px;font-size:clamp(12px,.8vw,14px);color:#52a8ff;margin-bottom:clamp(6px,.6vh,10px)}
+header .badge .b{width:5px;height:5px;border-radius:50%;background:#52a8ff}
+header h1{font-family:'Big Shoulders Display','Noto Sans SC',sans-serif;font-weight:900;font-size:clamp(36px,4vw,68px);letter-spacing:-.018em;line-height:.9;background:linear-gradient(135deg,#fff 45%,rgba(82,168,255,.7));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+header .info{display:flex;gap:clamp(12px,1.4vw,24px);margin-top:clamp(8px,.8vh,14px);flex-wrap:wrap}
+header .info span{font-size:clamp(10px,.65vw,12px);color:rgba(255,255,255,.25);display:flex;align-items:center;gap:4px}
+header .info .dot{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.1)}
+/* Three entries */
+.entries{flex:1;display:flex;flex-direction:column;gap:clamp(10px,1.2vh,18px);justify-content:center}
+.entry{display:flex;align-items:center;gap:clamp(16px,2vw,32px);border:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.02);padding:clamp(18px,2.2vh,34px) clamp(20px,2.4vw,40px);text-decoration:none;color:#fff;transition:all .3s cubic-bezier(.16,1,.3,1);cursor:pointer}
+.entry:hover{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.12);transform:translateX(6px)}
+.entry .num{font-family:'Big Shoulders Display','Noto Sans SC',sans-serif;font-weight:900;font-size:clamp(28px,3vw,50px);line-height:.85;flex-shrink:0;width:clamp(40px,4vw,64px);text-align:center}
+.entry .num.n1{color:#FF6B35}
+.entry .num.n2{color:#8b5cf6}
+.entry .num.n3{color:#52a8ff}
+.entry .body{flex:1}
+.entry .body .label{font-size:clamp(11px,.7vw,13px);color:rgba(255,255,255,.2);text-transform:uppercase;letter-spacing:.14em;margin-bottom:2px}
+.entry .body h2{font-family:'Big Shoulders Display','Noto Sans SC',sans-serif;font-weight:800;font-size:clamp(18px,1.5vw,26px);letter-spacing:-.003em;margin-bottom:2px}
+.entry .body .desc{font-size:clamp(10px,.6vw,12px);color:rgba(255,255,255,.3);line-height:1.4;max-width:450px}
+.entry .arrow{font-size:clamp(16px,1.4vw,24px);color:rgba(255,255,255,.08);transition:all .3s;flex-shrink:0}
+.entry:hover .arrow{color:rgba(82,168,255,.5);transform:translateX(4px)}
+.entry .tag{padding:2px 8px;font-size:clamp(8px,.45vw,10px);border:1px solid;margin-top:4px;display:inline-block}
+.entry .tag.t1{border-color:rgba(255,107,53,.2);color:#FF6B35;background:rgba(255,107,53,.04)}
+.entry .tag.t2{border-color:rgba(139,92,246,.2);color:#8b5cf6;background:rgba(139,92,246,.04)}
+.entry .tag.t3{border-color:rgba(82,168,255,.2);color:#52a8ff;background:rgba(82,168,255,.04)}
+</style>
+</head>
+<body>
+<div class="bg"><img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1920&q=80" alt="" /></div>
+<div class="ol"></div>
+<div class="c">
+  <a class="back" href="../">← 返回所有课程</a>
+
+  <header>
+    <div class="badge"><span class="b"></span>超级AI一日营</div>
+    <h1>选择版本</h1>
+    <div class="info">
+      <span>9-11岁</span><span class="dot"></span>
+      <span>≈3.5小时</span><span class="dot"></span>
+      <span>3个版本</span>
+    </div>
+  </header>
+
+  <div class="entries">
+    <a class="entry" href="../template.html" target="_blank">
+      <div class="num n1">01</div>
+      <div class="body">
+        <div class="label">孩子版</div>
+        <h2>给孩子上的课</h2>
+        <div class="desc">交互式课件slide，用于课堂投影教学。含猫挑战、Kolb学习循环、AI原理、Prompt实操、项目挑战。</div>
+        <span class="tag t1">点击打开课件</span>
+      </div>
+      <div class="arrow">→</div>
+    </a>
+
+    <a class="entry" href="parent.html" target="_blank">
+      <div class="num n2">02</div>
+      <div class="body">
+        <div class="label">家长版</div>
+        <h2>给家长的课堂</h2>
+        <div class="desc">让家长理解这代孩子为什么需要AI素养，孩子今天学了什么，以及家长在家如何引导。</div>
+        <span class="tag t2">建设中</span>
+      </div>
+      <div class="arrow">→</div>
+    </a>
+
+    <a class="entry" href="design.html" target="_blank">
+      <div class="num n3">03</div>
+      <div class="body">
+        <div class="label">教学设计</div>
+        <h2>教学目的 & 设计思路</h2>
+        <div class="desc">你和我共同设计教学过程的全记录——教学目的、方法论选择、内容设计、工具选型、迭代日志。</div>
+        <span class="tag t3">建设中</span>
+      </div>
+      <div class="arrow">→</div>
+    </a>
+  </div>
+</div>
+</body>
+</html>
