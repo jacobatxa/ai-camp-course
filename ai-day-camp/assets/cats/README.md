@@ -8,9 +8,11 @@
 | 02 · 穿西装上班的猫 | `k8DzLwHWIbk` |
 | 03 · 背书包上学的猫 | `_fbiQUff82w` |
 
-## 封面图（可选）
+## 封面图
 
-若需幻灯片上显示缩略图，可放同名 JPG（点击 ▶ 后仍播 YouTube）：
+课件默认使用 **YouTube 缩略图**：`https://img.youtube.com/vi/{视频ID}/hqdefault.jpg`
+
+本目录下的 JPG 仅作离线备用（可选），点击 ▶ 后仍播 YouTube：
 
 - `cat_daily.jpg`
 - `cat_office.jpg`
