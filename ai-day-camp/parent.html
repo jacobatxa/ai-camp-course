@@ -1,22 +1,53 @@
 <!doctype html>
 <html lang="zh-CN">
-<head><meta charset="utf-8" /><title>家长版 — 超级AI一日营</title>
+<head>
+<meta charset="utf-8" />
+<title>家长版 — 超级AI一日营</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;800;900&family=Albert+Sans:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@200;300;400;500;700;900&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;600;700&family=Noto+Sans+SC:wght@400;600;700&display=swap" rel="stylesheet" />
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;background:#000;color:#fff;font-family:'Albert Sans','Noto Sans SC',sans-serif;-webkit-font-smoothing:antialiased}
-body{display:grid;place-items:center;text-align:center;padding:40px}
-h1{font-family:'Big Shoulders Display','Noto Sans SC',sans-serif;font-weight:900;font-size:clamp(32px,3.6vw,60px);background:linear-gradient(135deg,#8b5cf6,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px}
-p{font-size:clamp(14px,1vw,18px);color:rgba(255,255,255,.35);max-width:400px;line-height:1.6}
-a{color:rgba(139,92,246,.6);text-decoration:none;margin-top:24px;display:inline-block;font-size:clamp(11px,.7vw,13px)}
-a:hover{color:rgba(139,92,246,.9)}
-</style></head>
+body{font-family:'Albert Sans','Noto Sans SC',sans-serif;background:#0a0a0a;color:rgba(255,255,255,.85);line-height:1.65;padding:clamp(28px,5vw,56px);max-width:640px;margin:0 auto}
+h1{font-size:clamp(26px,3.5vw,36px);background:linear-gradient(135deg,#8b5cf6,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:16px}
+h2{font-size:clamp(17px,2vw,20px);color:#8b5cf6;margin:24px 0 8px}
+p,li{font-size:clamp(15px,1.05vw,17px);color:rgba(255,255,255,.6)}
+ul{margin:8px 0 12px 22px}
+.back{display:inline-block;margin-bottom:24px;font-size:13px;color:rgba(139,92,246,.7);text-decoration:none}
+.back:hover{color:rgba(139,92,246,1)}
+.card{border:1px solid rgba(139,92,246,.15);background:rgba(139,92,246,.04);padding:16px 18px;margin:12px 0;border-radius:4px}
+</style>
+</head>
 <body>
-<h1>家长版</h1>
-<p>内容开发中。这里将呈现给家长的课堂——孩子今天学了什么、为什么重要、以及家长如何配合引导。</p>
-<a href="index.html">← 返回课程主页</a>
+<a class="back" href="index.html">← 返回课程主页</a>
+<h1>给孩子家长的说明</h1>
+<p>孩子今天参加了「超级AI一日营」——不是学编程，而是学<strong>怎么理解 AI、怎么安全地用 AI 解决身边的小问题</strong>。</p>
+
+<h2>今天孩子学了四件事</h2>
+<div class="card">
+<ol>
+<li><b>人是怎么学习的</b> — 体验、观察、思考、实践（用看 AI 猫视频的例子串起来）</li>
+<li><b>AI 是怎么学习的</b> — 数据、统计、调参、模型（和人的四步一一对应）</li>
+<li><b>动手试了一次</b> — 在老师带领下用豆包 / 通义 / Kimi 等工具想主意</li>
+<li><b>小组真问题</b> — 选校园或生活里的一个问题，用 AI 帮忙设计方案并展示</li>
+</ol>
+</div>
+
+<h2>回家可以这样聊</h2>
+<ul>
+<li>「今天三段猫视频，你觉得哪段最像真的？最后发现是什么？」</li>
+<li>「你们小组的问题是什么？AI 给了什么主意，你们最后选了哪个？」</li>
+<li>「你觉得 AI 最厉害的是什么？最不靠谱的是什么？」</li>
+</ul>
+
+<h2>安全提醒（请和孩子一起看）</h2>
+<ul>
+<li>不要在 AI 里输入真实姓名、电话、家庭地址、学校全名</li>
+<li>AI 说的话要人来判断，尤其是作业答案和健康建议</li>
+<li>网上的 AI 图片/视频可能是假的，重要的事要问大人</li>
+</ul>
+
+<p style="margin-top:28px;font-size:14px;color:rgba(255,255,255,.35)">详细教学节奏见 <a href="design.html" style="color:rgba(139,92,246,.8)">教师大纲</a>（仅供老师参考）。</p>
 </body>
 </html>
