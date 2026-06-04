@@ -61,7 +61,7 @@ h2 .o{color:#FF6B35}
 .cc .play-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:clamp(28px,2.4vw,40px);height:clamp(28px,2.4vw,40px);border-radius:50%;background:rgba(255,255,255,.12);display:grid;place-items:center;color:#fff;font-size:clamp(10px,.8vw,14px);transition:all .3s;z-index:6}
 .cc:hover .play-btn{background:rgba(255,255,255,.2);transform:translate(-50%,-50%) scale(1.1)}
 .cc .cp{position:absolute;inset:0;z-index:7;display:none;background:#000}
-.cc .cp video{width:100%;height:100%;object-fit:contain}
+.cc .cp video,.cc .cp iframe{width:100%;height:100%;object-fit:contain;border:none}
 .cc .cp .vph{display:grid;place-items:center;height:100%;padding:12px;text-align:center;font-size:clamp(12px,.75vw,16px);color:rgba(255,255,255,.35)}
 .cc.playing .play-btn{display:none}
 .vreset{font-size:clamp(10px,.6vw,13px);color:rgba(255,255,255,.2);cursor:pointer;margin-top:4px;border:none;background:none;font-family:inherit}
@@ -200,19 +200,19 @@ h2 .o{color:#FF6B35}
   <div class="pos" style="top:clamp(70px,8vh,130px);left:clamp(20px,2.5vw,48px);right:clamp(20px,2.5vw,48px);bottom:clamp(120px,13vh,190px);z-index:5">
     <div class="cg">
       <div class="cc" onclick="playCat(0)" id="c0">
-        <img class="th" src="assets/cats/cat_daily.jpg" alt="" onerror="this.style.display='none'"/>
+        <img class="th" src="assets/cats/cat_daily.jpg" alt="可爱的日常猫"/>
         <div class="play-btn" id="p0">▶</div>
         <div class="lb">01 · 可爱的日常猫</div>
         <div class="cp" id="cp0"><div class="vph" id="vph0">请放入 assets/cats/cat_daily.mp4</div><video id="vid0" playsinline controls preload="metadata"></video></div>
       </div>
       <div class="cc" onclick="playCat(1)" id="c1">
-        <img class="th" src="assets/cats/cat_office.jpg" alt="" onerror="this.style.display='none'"/>
+        <img class="th" src="assets/cats/cat_office.jpg" alt="穿西装上班的猫"/>
         <div class="play-btn" id="p1">▶</div>
         <div class="lb">02 · 穿西装上班的猫</div>
         <div class="cp" id="cp1"><div class="vph" id="vph1">请放入 assets/cats/cat_office.mp4</div><video id="vid1" playsinline controls preload="metadata"></video></div>
       </div>
       <div class="cc" onclick="playCat(2)" id="c2">
-        <img class="th" src="assets/cats/cat_school.jpg" alt="" onerror="this.style.display='none'"/>
+        <img class="th" src="assets/cats/cat_school.jpg" alt="背书包上学的猫"/>
         <div class="play-btn" id="p2">▶</div>
         <div class="lb">03 · 背书包上学的猫</div>
         <div class="cp" id="cp2"><div class="vph" id="vph2">请放入 assets/cats/cat_school.mp4</div><video id="vid2" playsinline controls preload="metadata"></video></div>
@@ -713,6 +713,26 @@ const CAT_SRC=[
   {mp4:'assets/cats/cat_office.mp4',poster:'assets/cats/cat_office.jpg'},
   {mp4:'assets/cats/cat_school.mp4',poster:'assets/cats/cat_school.jpg'}
 ];
+const CAT_YT=['g6dhJx_GXaA','k8DzLwHWIbk','_fbiQUff82w'];
+const catUseYt={};
+function catYoutube(i){
+  const pl=document.getElementById('cp'+i);
+  const vph=document.getElementById('vph'+i);
+  const v=document.getElementById('vid'+i);
+  if(!pl)return;
+  catUseYt[i]=true;
+  if(v){v.style.display='none';v.pause();}
+  if(vph)vph.style.display='none';
+  let iframe=pl.querySelector('iframe');
+  if(!iframe){
+    iframe=document.createElement('iframe');
+    iframe.setAttribute('allow','autoplay; encrypted-media; fullscreen');
+    iframe.setAttribute('allowfullscreen','');
+    pl.appendChild(iframe);
+  }
+  iframe.style.display='block';
+  iframe.src='https://www.youtube.com/embed/'+CAT_YT[i]+'?autoplay=1&mute=1&rel=0&controls=1';
+}
 function updatePageNumbers(){S.forEach((el,i)=>{const p=el.querySelector('.pgn');if(p)p.textContent=String(i+1).padStart(2,'0')+' / '+S.length});}
 function sh(i){if(i<0)i=0;if(i>=S.length)i=S.length-1;S[c].classList.remove('active');S[i].classList.add('active');c=i}
 function isInteractiveTarget(t){
@@ -743,7 +763,7 @@ function initCatVideos(){
     if(!v)return;
     v.src=s.mp4;
     if(s.poster)v.poster=s.poster;
-    v.addEventListener('error',()=>{const ph=document.getElementById('vph'+i);if(ph)ph.style.display='grid';});
+    v.addEventListener('error',()=>catYoutube(i));
     v.addEventListener('loadeddata',()=>{const ph=document.getElementById('vph'+i);if(ph)ph.style.display='none';});
   });
 }
@@ -754,20 +774,27 @@ function playCat(i){
   if(!cell||!pl)return;
   if(activeCat===i){
     pl.style.display='none';cell.classList.remove('playing');
-    if(v){v.pause();v.currentTime=0;}
+    if(v&&!catUseYt[i]){v.pause();v.currentTime=0;}
+    const iframe=pl.querySelector('iframe');
+    if(iframe){iframe.src='';iframe.style.display='none';}
     activeCat=-1;return;
   }
   if(activeCat>=0){
     const o=document.getElementById('cp'+activeCat);
     const oc=document.getElementById('c'+activeCat);
     const ov=document.getElementById('vid'+activeCat);
-    if(o)o.style.display='none';
+    if(o){o.style.display='none';const oi=o.querySelector('iframe');if(oi){oi.src='';oi.style.display='none';}}
     if(oc)oc.classList.remove('playing');
-    if(ov){ov.pause();ov.currentTime=0;}
+    if(ov&&!catUseYt[activeCat]){ov.pause();ov.currentTime=0;}
   }
   pl.style.display='block';cell.classList.add('playing');
   activeCat=i;
-  if(v){v.play().catch(()=>{});}
+  if(catUseYt[i]){catYoutube(i);return;}
+  if(v){
+    v.style.display='block';
+    v.play().catch(()=>catYoutube(i));
+    v.onerror=()=>catYoutube(i);
+  }
 }
 let vt=false;
 function cv(i){if(vt)return;vt=true;const ls=['01 日常猫','02 上班猫','03 上学猫'];
