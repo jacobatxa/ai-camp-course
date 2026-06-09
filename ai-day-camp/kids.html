@@ -15,16 +15,41 @@ body{font-family:'Albert Sans','Noto Sans SC',sans-serif;overflow:hidden;-webkit
 .stage{position:relative;width:100vw;height:100vh;overflow:hidden}
 .slide{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity 500ms cubic-bezier(.4,0,.2,1);z-index:2}
 .slide.active{opacity:1;pointer-events:auto}
-.pgn{position:absolute;right:clamp(14px,1.5vw,28px);bottom:clamp(12px,1.4vh,20px);font-family:'JetBrains Mono',monospace;font-size:clamp(12px,.7vw,16px);color:rgba(255,255,255,.15);letter-spacing:.06em;z-index:30}
+.pgn{position:absolute;right:clamp(14px,1.5vw,28px);bottom:clamp(12px,1.4vh,20px);font-family:'JetBrains Mono',monospace;font-size:clamp(16px,.85vw,20px);color:rgba(255,255,255,.55);letter-spacing:.06em;z-index:30}
+.nav-bar{position:fixed;top:0;left:0;right:0;height:clamp(40px,4.5vh,48px);z-index:40;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(14px,1.5vw,28px);background:rgba(0,0,0,.72);border-bottom:1px solid rgba(255,255,255,.08);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);pointer-events:auto}
+.nav-bar .nav-info{font-family:'JetBrains Mono',monospace;font-size:clamp(15px,.9vw,18px);color:rgba(255,255,255,.7)}
+.nav-bar .nav-info b{color:#FF6B35;font-weight:600;margin:0 6px}
+.nav-bar .nav-btn{border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.04);color:rgba(255,255,255,.75);font-size:clamp(14px,.85vw,17px);font-weight:600;padding:clamp(4px,.35vh,6px) clamp(12px,1.1vw,18px);cursor:pointer;font-family:inherit}
+.nav-bar .nav-btn:hover{border-color:rgba(255,107,53,.4);color:#fff}
+.nav-actions{display:flex;align-items:center;gap:clamp(6px,.5vw,10px);flex-wrap:wrap}
+.nav-bar .nav-btn.on{border-color:#2A9D8F;color:#2A9D8F;background:rgba(42,157,143,.1)}
+.edit-tools{display:none;align-items:center;gap:6px}
+body.edit-mode .edit-tools{display:flex}
+body.edit-mode .nh::after{content:' · E 退出编辑 · 改完自动保存'}
+body.edit-mode .deck [contenteditable="true"]{outline:1px dashed rgba(42,157,143,.55);outline-offset:2px;cursor:text;border-radius:2px}
+body.edit-mode .deck [contenteditable="true"]:focus{outline:2px solid #2A9D8F;background:rgba(42,157,143,.08)}
+.edit-status{font-size:clamp(11px,.65vw,13px);color:rgba(42,157,143,.85);font-family:'JetBrains Mono',monospace}
+.edit-status.dirty{color:#FF6B35}
+.edit-file-input{display:none}
+.nav-panel{position:fixed;top:clamp(40px,4.5vh,48px);right:0;width:min(320px,92vw);max-height:calc(100vh - 48px);overflow-y:auto;z-index:41;background:rgba(8,8,8,.96);border-left:1px solid rgba(255,255,255,.1);padding:clamp(10px,1vh,14px);display:none;pointer-events:auto}
+.nav-panel.open{display:block}
+.nav-panel .ng{font-size:clamp(11px,.65vw,13px);color:rgba(255,107,53,.85);font-weight:700;letter-spacing:.08em;margin:clamp(10px,.8vh,12px) 0 clamp(4px,.4vh,6px);text-transform:uppercase}
+.nav-panel .ng:first-child{margin-top:4px}
+.nav-panel .ni{display:block;width:100%;text-align:left;border:none;background:transparent;color:rgba(255,255,255,.55);font-size:clamp(14px,.85vw,16px);padding:clamp(5px,.45vh,7px) clamp(8px,.6vw,10px);cursor:pointer;font-family:inherit;border-radius:2px}
+.nav-panel .ni:hover{background:rgba(255,255,255,.06);color:#fff}
+.nav-panel .ni.cur{background:rgba(255,107,53,.12);color:#FF6B35;font-weight:600}
+.nav-backdrop{position:fixed;inset:0;z-index:39;background:rgba(0,0,0,.4);display:none;pointer-events:auto}
+.nav-backdrop.open{display:block}
 .nh{position:fixed;left:clamp(10px,1vw,18px);bottom:clamp(10px,1vh,16px);font-family:'JetBrains Mono',monospace;font-size:clamp(9px,.5vw,11px);color:rgba(255,255,255,.25);z-index:30;pointer-events:none}
 /* Background */
-.pb{position:absolute;inset:0;z-index:0;overflow:hidden}
+.pb{position:absolute;inset:0;z-index:0;overflow:hidden;background:linear-gradient(145deg,#0d1117 0%,#1a1f2e 50%,#0a0a12 100%)}
 .pb img{width:100%;height:100%;object-fit:cover;transition:transform 8s cubic-bezier(.2,.8,.3,1)}
+.pb img[data-failed]{display:none}
 .slide.active .pb img{transform:scale(1.06)}
 .ol{position:absolute;inset:0;z-index:1;background:linear-gradient(135deg,rgba(0,0,0,.72) 0%,rgba(0,0,0,.48) 60%,rgba(0,0,0,.28) 100%)}
 .od{position:absolute;inset:0;z-index:1;background:linear-gradient(135deg,rgba(0,0,0,.85) 0%,rgba(0,0,0,.55) 60%,rgba(0,0,0,.35) 100%)}
 /* Mode tag */
-.mode{position:absolute;top:clamp(10px,1.2vh,20px);left:clamp(10px,1.2vw,20px);z-index:15;padding:1px clamp(6px,.4vw,10px);font-size:clamp(11px,.65vw,16px);font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-width:1px;border-style:solid;display:inline-flex;align-items:center;gap:3px}
+.mode{position:absolute;top:clamp(48px,5.5vh,56px);left:clamp(10px,1.2vw,20px);z-index:15;padding:1px clamp(6px,.4vw,10px);font-size:clamp(11px,.65vw,16px);font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-width:1px;border-style:solid;display:inline-flex;align-items:center;gap:3px}
 .mt{border-color:rgba(82,168,255,.15);color:#52a8ff;background:rgba(82,168,255,.04)}
 .md{border-color:rgba(139,92,246,.15);color:#8b5cf6;background:rgba(139,92,246,.04)}
 .mh{border-color:rgba(255,107,53,.15);color:#FF6B35;background:rgba(255,107,53,.04)}
@@ -41,7 +66,7 @@ h2 .o{color:#FF6B35}
 .ps{font-size:clamp(16px,.85vw,22px);line-height:1.5;color:rgba(255,255,255,.55)}
 .tg{display:inline-flex;padding:1px 6px;font-size:clamp(11px,.65vw,16px);font-weight:700;letter-spacing:.10em;text-transform:uppercase;background:rgba(255,255,255,.08);color:rgba(255,255,255,.6);margin-bottom:4px}
 .pos{position:absolute;z-index:5}
-.t{top:clamp(50px,6vh,100px);left:clamp(32px,3.5vw,60px);right:clamp(32px,3.5vw,60px)}
+.t{top:clamp(56px,7vh,108px);left:clamp(32px,3.5vw,60px);right:clamp(32px,3.5vw,60px)}
 .b{bottom:clamp(50px,6vh,90px);left:clamp(32px,3.5vw,60px);right:clamp(32px,3.5vw,60px)}
 .c{top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;width:80%;max-width:800px}
 .l{top:50%;transform:translateY(-50%);left:clamp(40px,5vw,80px);right:40%}
@@ -149,16 +174,105 @@ h2 .o{color:#FF6B35}
 .pair-thumb{width:clamp(40px,4vw,56px);height:clamp(40px,4vw,56px);object-fit:cover;border-radius:4px;flex-shrink:0;border:1px solid rgba(255,255,255,.1)}
 .qb:hover{transform:scale(1.05)}
 .qb:active{transform:scale(0.95)}
+/* 学习目标页 */
+.obj-wrap{position:absolute;top:clamp(88px,10vh,160px);left:clamp(28px,3vw,56px);right:clamp(28px,3vw,56px);bottom:clamp(48px,5vh,80px);z-index:5;display:flex;flex-direction:column;gap:clamp(8px,.8vh,12px);overflow:auto}
+.obj-intro{max-width:720px;line-height:1.55}
+.obj-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(8px,.7vw,12px)}
+.obj-card{border:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.45);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);padding:clamp(10px,1vh,14px) clamp(12px,1.1vw,18px);cursor:default}
+.obj-card .obj-tag{font-size:clamp(13px,.75vw,16px);font-weight:700;letter-spacing:.04em;margin-bottom:4px}
+.obj-card .obj-title{font-family:'Big Shoulders Display','Noto Sans SC',sans-serif;font-weight:800;font-size:clamp(20px,1.35vw,28px);color:#fff;line-height:1.15;margin-bottom:clamp(6px,.5vh,8px)}
+.obj-card .obj-body{font-size:clamp(17px,.9vw,22px);color:rgba(255,255,255,.72);line-height:1.55;margin:0}
+.obj-card .obj-body b{color:#fff;font-weight:600}
+@media(max-width:768px){.obj-grid{grid-template-columns:1fr}}
+.story-page{position:absolute;top:clamp(52px,6vh,92px);left:clamp(28px,3vw,56px);right:clamp(28px,3vw,56px);bottom:clamp(44px,4.5vh,52px);z-index:5;overflow-y:auto;padding-right:clamp(4px,.3vw,8px)}
+.story-page h2{margin-bottom:clamp(6px,.6vh,10px)}
+.story-lead{margin-bottom:clamp(10px,1vh,14px);max-width:720px}
+.story-illus-inline{max-width:240px;width:100%;height:clamp(64px,9vh,100px);object-fit:cover;border-radius:4px;border:1px solid rgba(255,255,255,.1);margin-bottom:clamp(8px,.8vh,10px);display:block}
+.kolb-rows{display:flex;flex-direction:column;gap:clamp(8px,.65vh,10px);max-width:820px}
+.kolb-row{display:grid;grid-template-columns:clamp(68px,5vw,84px) 1fr;gap:clamp(10px,.9vw,14px);align-items:start;padding:clamp(8px,.75vh,11px) clamp(10px,1vw,14px);border:1px solid rgba(255,255,255,.07);background:rgba(0,0,0,.38);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.kolb-step{display:block;font-weight:800;font-size:clamp(14px,.8vw,17px);padding:clamp(5px,.4vh,7px) clamp(4px,.4vw,6px);text-align:center;color:#fff;line-height:1.2}
+.kolb-row .obj-body{margin:0}
+.vote-zone{max-height:38vh;overflow-y:auto;padding:clamp(4px,.4vh,8px) 0;width:100%;max-width:520px;margin:0 auto}
+.vote-zone .rb{position:static;transform:none;display:none;margin:0 auto clamp(6px,.5vh,10px)}
+.vote-zone .rb.sh{display:block}
+.close-footer .sc-label{font-size:clamp(12px,.7vw,15px);text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.35)}
+.close-footer .sc-body{font-size:clamp(16px,.85vw,20px);color:rgba(255,255,255,.55);margin-top:4px;line-height:1.45}
+/* 统一幻灯片内容区（左对齐、避开顶栏） */
+.slide-panel{position:absolute;top:clamp(52px,5.5vh,56px);left:clamp(32px,3.5vw,60px);right:clamp(32px,3.5vw,60px);bottom:clamp(40px,4vh,48px);z-index:5;overflow-y:auto;display:flex;flex-direction:column;gap:clamp(10px,1vh,14px);text-align:left;max-width:900px}
+.slide-panel h2{margin:0;line-height:1.05}
+.slide-panel .lead{font-size:clamp(20px,1.1vw,26px);line-height:1.55;color:rgba(255,255,255,.78);max-width:680px}
+.slide-panel .teacher-cue{font-size:clamp(18px,1vw,24px);color:rgba(255,107,53,.9);font-weight:600;margin-top:clamp(6px,.6vh,10px)}
+.od-strong{background:linear-gradient(180deg,rgba(0,0,0,.82) 0%,rgba(0,0,0,.65) 50%,rgba(0,0,0,.5) 100%)!important}
+/* 第2页：学习目标 */
+.goal-list{display:flex;flex-direction:column;gap:clamp(10px,.9vh,12px)}
+.goal-item{display:grid;grid-template-columns:clamp(36px,3vw,48px) 1fr;gap:clamp(12px,1vw,18px);align-items:start;padding:clamp(14px,1.2vh,18px);border:1px solid rgba(255,255,255,.1);background:rgba(0,0,0,.55);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.goal-num{font-family:'Big Shoulders Display','Noto Sans SC',sans-serif;font-weight:900;font-size:clamp(28px,2vw,40px);line-height:1;color:rgba(255,255,255,.25)}
+.goal-item h3{font-family:'Big Shoulders Display','Noto Sans SC',sans-serif;font-weight:800;font-size:clamp(22px,1.4vw,30px);color:#fff;margin:0 0 6px;line-height:1.1}
+.goal-item p{font-size:clamp(18px,1vw,23px);line-height:1.55;color:rgba(255,255,255,.8);margin:0}
+.goal-item p b{color:#fff}
+/* 第3页：路线 */
+.roadmap-wrap{max-width:920px;width:100%}
+.roadmap-wrap .road{margin-top:clamp(12px,1.2vh,18px)}
+/* 第4页：猫挑战 */
+.slide-cat.slide-panel{max-width:none}
+.slide-cat .slide-head{display:flex;flex-direction:column;text-align:center;max-width:100%;align-items:center;margin-bottom:clamp(8px,.8vh,12px)}
+.slide-cat .cc.playing .th{opacity:0}
+.slide-cat .cc.playing .play-hit{pointer-events:none;visibility:hidden}
+.slide-cat .cat-stage{flex:1;min-height:0;display:flex;flex-direction:column;margin-top:clamp(4px,.4vh,8px)}
+.slide-cat .cg{flex:1;min-height:clamp(180px,28vh,360px)}
+.slide-cat .cc{cursor:pointer;position:relative;z-index:1}
+.slide-cat .cc .cp{z-index:20}
+.slide-cat .cc.playing{z-index:25}
+.slide-cat .cc .play-hit{position:absolute;inset:0;z-index:8;border:none;background:transparent;cursor:pointer}
+.slide-cat .vote-area{flex-shrink:0;margin-top:clamp(8px,.8vh,12px)}
+/* 第5页：身体操 */
+.gesture-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,.9vw,14px);max-width:640px}
+.gesture-card{padding:clamp(14px,1.2vh,18px);border:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.45)}
+.gesture-card .g-label{font-family:'Big Shoulders Display','Noto Sans SC',sans-serif;font-weight:800;font-size:clamp(22px,1.35vw,28px);margin-bottom:6px}
+.gesture-card .g-action{font-size:clamp(18px,1vw,22px);color:rgba(255,255,255,.75);line-height:1.45}
+/* 故事页（11–15） */
+.story-panel{max-width:860px}
+.story-panel h2{font-size:clamp(32px,3.2vw,52px)}
+.story-panel .lead{font-size:clamp(19px,1.05vw,24px);color:rgba(255,255,255,.75);line-height:1.5}
+.kolb-table{display:flex;flex-direction:column;gap:clamp(10px,.85vh,12px);margin-top:clamp(4px,.4vh,6px)}
+.kolb-table .k-row{display:grid;grid-template-columns:clamp(76px,5.5vw,92px) 1fr;gap:clamp(12px,1vw,16px);align-items:start;padding:clamp(12px,1.1vh,16px);background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.12);border-left:4px solid var(--k-accent,#FF6B35)}
+.k-row.k-obs{--k-accent:#457B9D;border-left-color:#457B9D}
+.k-row.k-think{--k-accent:#2A9D8F;border-left-color:#2A9D8F}
+.k-row.k-do{--k-accent:#D62828;border-left-color:#D62828}
+.k-label{font-weight:800;font-size:clamp(15px,.85vw,18px);color:var(--k-accent);letter-spacing:.04em;padding-top:2px}
+.k-text{font-size:clamp(19px,1.05vw,24px);line-height:1.55;color:rgba(255,255,255,.88);margin:0}
+.k-text b{color:#fff}
+.story-foot{font-size:clamp(17px,.95vw,21px);color:rgba(255,255,255,.55);margin-top:clamp(8px,.8vh,12px);padding-top:clamp(8px,.8vh,10px);border-top:1px solid rgba(255,255,255,.08)}
+.story-dual{display:flex;gap:clamp(10px,1vw,14px);margin:clamp(8px,.8vh,10px) 0;flex-wrap:wrap}
+.story-dual figure{flex:1;min-width:140px;max-width:220px}
+.story-dual img{width:100%;height:clamp(72px,10vh,100px);object-fit:cover;border-radius:4px;border:1px solid rgba(255,255,255,.15)}
+.story-dual figcaption{font-size:clamp(14px,.8vw,17px);color:rgba(255,255,255,.5);margin-top:4px}
 </style>
 </head>
 <body>
+<header class="nav-bar" id="nav-bar">
+  <div class="nav-info"><span id="nav-page">01 / 29</span><b id="nav-title">封面</b></div>
+  <div class="nav-actions">
+    <div class="edit-tools" id="edit-tools">
+      <span class="edit-status" id="edit-status">已保存</span>
+      <button type="button" class="nav-btn" id="edit-export" data-no-advance>导出</button>
+      <button type="button" class="nav-btn" id="edit-import" data-no-advance>导入</button>
+      <button type="button" class="nav-btn" id="edit-reset" data-no-advance>恢复默认</button>
+    </div>
+    <button type="button" class="nav-btn" id="nav-edit" data-no-advance title="快捷键 E">编辑 (E)</button>
+    <button type="button" class="nav-btn" id="nav-toggle" data-no-advance>目录 (G)</button>
+  </div>
+  <input type="file" id="edit-file-input" class="edit-file-input" accept="application/json,.json" />
+</header>
+<div class="nav-backdrop" id="nav-backdrop" data-no-advance></div>
+<nav class="nav-panel" id="nav-panel" aria-label="幻灯片目录"></nav>
 <div class="deck"><div class="stage">
 
 <!-- S1: COVER -->
-<section class="slide active">
-  <div class="pb"><img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1920&q=80" alt="" /></div>
+<section class="slide active" data-title="封面" data-chapter="intro">
+  <div class="pb"><img src="assets/bg/cover.jpg" alt="" /></div>
   <div class="od"></div>
-  <div class="pos" style="top:clamp(50px,7vh,120px);left:clamp(32px,3.5vw,60px);z-index:5">
+  <div class="pos" style="top:clamp(56px,7vh,120px);left:clamp(32px,3.5vw,60px);z-index:5">
     <h1>超级<br/>AI<span class="o">一日营</span></h1>
     <div class="p" style="font-size:clamp(20px,1.4vw,32px);color:rgba(255,255,255,.5);max-width:clamp(260px,30vw,480px);margin-top:clamp(6px,.6vh,12px)">教孩子 <b>用AI解决真问题</b></div>
   </div>
@@ -175,32 +289,52 @@ h2 .o{color:#FF6B35}
 </section>
 
 <!-- S2: OBJECTIVES -->
-<section class="slide">
-  <div class="pb"><img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1920&q=80" alt="" /></div>
-  <div class="ol"></div>
+<section class="slide" data-title="学习目标" data-chapter="intro">
+  <div class="pb"><img src="assets/bg/goals.jpg" alt="" /></div>
+  <div class="ol od-strong"></div>
   <div class="mode mt">讲解</div>
-  <div class="pos t"><h2 style="font-size:clamp(34px,3.8vw,64px)">你今天会学到什么</h2></div>
-  <div class="ks" style="position:absolute;top:clamp(90px,11vh,180px);left:clamp(32px,3.5vw,60px);right:clamp(32px,3.5vw,60px);bottom:clamp(60px,7vh,120px);z-index:5">
-    <div class="kc" style="border-color:rgba(255,107,53,.15);cursor:default"><div class="kt"><div class="kn" style="background:#FF6B35;color:#fff">知</div><div class="ktl" style="color:#FF6B35">知识 01</div></div><p class="p-sm" style="margin-top:4px">人类的四种学习方式 — <b>体验 → 观察 → 思考 → 实践</b></p></div>
-    <div class="kc" style="border-color:rgba(69,123,157,.15);cursor:default"><div class="kt"><div class="kn" style="background:#457B9D;color:#fff">知</div><div class="ktl" style="color:#457B9D">知识 02</div></div><p class="p-sm" style="margin-top:4px">AI的学习原理 — <b>数据 → 统计 → 调参 → 模型</b></p></div>
-    <div class="kc" style="border-color:rgba(42,157,143,.15);cursor:default"><div class="kt"><div class="kn" style="background:#2A9D8F;color:#fff">技</div><div class="ktl" style="color:#2A9D8F">技能 01</div></div><p class="p-sm" style="margin-top:4px"><b>辨别AI vs 真实</b> — 判断哪些是AI生成的、哪些是真实的</p></div>
-    <div class="kc" style="border-color:rgba(214,40,40,.15);cursor:default"><div class="kt"><div class="kn" style="background:#D62828;color:#fff">技</div><div class="ktl" style="color:#D62828">技能 02</div></div><p class="p-sm" style="margin-top:4px"><b>用AI解决真问题</b> — 分组用AI工具设计一个方案</p></div>
+  <div class="slide-panel">
+    <h2>今天结束，你能讲清楚<span class="o">四件事</span></h2>
+    <p class="lead">今天不是背概念，是<b>玩明白、做明白</b>。下面四件事，用你自己的话就能说给同桌听。</p>
+    <div class="goal-list">
+      <article class="goal-item" style="border-left:4px solid #FF6B35">
+        <div class="goal-num" style="color:#FF6B35">1</div>
+        <div><h3>人是怎么学会一件事的？</h3>
+        <p>体验 → 观察 → 思考 → 实践。后面有<b>学骑车</b>的完整故事。</p></div>
+      </article>
+      <article class="goal-item" style="border-left:4px solid #457B9D">
+        <div class="goal-num" style="color:#457B9D">2</div>
+        <div><h3>AI 没有身体，怎么「上学」？</h3>
+        <p>数据 → 统计 → 调参 → 模型。<b>AI 不是魔法，是特别会学习。</b></p></div>
+      </article>
+      <article class="goal-item" style="border-left:4px solid #2A9D8F">
+        <div class="goal-num" style="color:#2A9D8F">3</div>
+        <div><h3>怎么分辨真的和 AI 做的？</h3>
+        <p>猫视频闯关，学会找破绽。<b>刷视频时多留心一眼。</b></p></div>
+      </article>
+      <article class="goal-item" style="border-left:4px solid #D62828">
+        <div class="goal-num" style="color:#D62828">4</div>
+        <div><h3>用 AI 解决一个真问题</h3>
+        <p>分组选题，用豆包/通义/Kimi 想主意，画海报展示。<b>AI 出点子，你们拍板。</b></p></div>
+      </article>
+    </div>
+    <p class="teacher-cue">跟同桌说一句：你最期待哪一件？</p>
   </div>
   <div class="pgn"></div>
 </section>
 
 <!-- S3: ROADMAP -->
-<section class="slide">
-  <div class="pb"><img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=80" alt="" /></div>
-  <div class="ol"></div>
+<section class="slide" data-title="今日路线" data-chapter="intro">
+  <div class="pb"><img src="assets/bg/roadmap.jpg" alt="" /></div>
+  <div class="ol od-strong"></div>
   <div class="mode mt">路线</div>
-  <div class="sh" style="width:92%;max-width:920px">
-    <h2 style="font-size:clamp(28px,3.2vw,56px)">今日<span class="o">路线</span></h2>
-    <div class="p" style="margin:clamp(4px,.4vh,8px) auto">全程约 <b>3.5 小时</b> — 跟着走就不会迷路！</div>
+  <div class="slide-panel roadmap-wrap">
+    <h2>今日<span class="o">路线</span></h2>
+    <p class="lead">全程约 <b>3.5 小时</b>。老师带着走，不用记页码——想跳哪一段，点顶栏「目录」。</p>
     <div class="road">
       <div class="rg"><div class="rt">①</div><div class="rn">识破AI猫</div><div class="rm">25分</div></div>
       <div class="rg"><div class="rt">②</div><div class="rn">人怎么学</div><div class="rm">50分</div></div>
-      <div class="rg"><div class="rt">③</div><div class="rn">自然三故事</div><div class="rm">40分</div></div>
+      <div class="rg"><div class="rt">③</div><div class="rn">自然四故事</div><div class="rm">40分</div></div>
       <div class="rg"><div class="rt">④</div><div class="rn">AI+实验</div><div class="rm">70分</div></div>
       <div class="rg"><div class="rt">⑤</div><div class="rn">真问题</div><div class="rm">45分</div></div>
     </div>
@@ -209,44 +343,51 @@ h2 .o{color:#FF6B35}
 </section>
 
 <!-- S4: CAT CHALLENGE -->
-<section class="slide" style="background:#0a0a0a" data-slide-interactive>
+<section class="slide slide-cat" style="background:#0a0a0a" data-slide-interactive data-title="猫挑战" data-chapter="cat">
+  <div class="pb"><img src="assets/bg/cat-challenge.jpg" alt="" /></div>
+  <div class="od"></div>
   <div class="mode mh">动手</div>
-  <div class="pos" style="top:clamp(16px,2vh,32px);left:50%;transform:translateX(-50%);z-index:10;text-align:center;width:90%">
-    <h2 style="font-size:clamp(20px,2.2vw,36px)">猜猜哪个是 <span class="o">真的</span>？</h2>
-    <p class="p-sm" style="text-align:center;margin-top:4px">点开视频看看。边看边想——投出你觉得是真实拍摄的那段。</p>
-  </div>
-  <div class="pos" style="top:clamp(70px,8vh,130px);left:clamp(20px,2.5vw,48px);right:clamp(20px,2.5vw,48px);bottom:clamp(120px,13vh,190px);z-index:5">
-    <div class="cg">
-      <div class="cc" onclick="playCat(0)" id="c0">
-        <img class="th" src="https://img.youtube.com/vi/g6dhJx_GXaA/hqdefault.jpg" alt="可爱的日常猫"/>
-        <div class="play-btn" id="p0">▶</div>
-        <div class="lb">01 · 可爱的日常猫</div>
-        <div class="cp" id="cp0"><iframe src="" allow="autoplay; encrypted-media" allowfullscreen title="01 日常猫"></iframe></div>
-      </div>
-      <div class="cc" onclick="playCat(1)" id="c1">
-        <img class="th" src="https://img.youtube.com/vi/k8DzLwHWIbk/hqdefault.jpg" alt="穿西装上班的猫"/>
-        <div class="play-btn" id="p1">▶</div>
-        <div class="lb">02 · 穿西装上班的猫</div>
-        <div class="cp" id="cp1"><iframe src="" allow="autoplay; encrypted-media" allowfullscreen title="02 上班猫"></iframe></div>
-      </div>
-      <div class="cc" onclick="playCat(2)" id="c2">
-        <img class="th" src="https://img.youtube.com/vi/_fbiQUff82w/hqdefault.jpg" alt="背书包上学的猫"/>
-        <div class="play-btn" id="p2">▶</div>
-        <div class="lb">03 · 背书包上学的猫</div>
-        <div class="cp" id="cp2"><iframe src="" allow="autoplay; encrypted-media" allowfullscreen title="03 上学猫"></iframe></div>
+  <div class="slide-panel slide-cat" style="left:clamp(24px,2.5vw,48px);right:clamp(24px,2.5vw,48px);max-width:none">
+    <div class="slide-head">
+      <h2>猜猜哪个是 <span class="o">真的</span>？</h2>
+      <p class="lead" style="text-align:center;max-width:640px">点一下封面上的 <b>▶ 播放</b>，看完再投票。</p>
+    </div>
+    <div class="cat-stage">
+      <div class="cg">
+        <div class="cc" id="c0" data-cat-i="0">
+          <button type="button" class="play-hit" data-no-advance aria-label="播放视频1"></button>
+          <img class="th" src="https://img.youtube.com/vi/g6dhJx_GXaA/hqdefault.jpg" alt="可爱的日常猫"/>
+          <div class="play-btn">▶</div>
+          <div class="lb">01 · 可爱的日常猫</div>
+          <div class="cp" id="cp0"><iframe src="" allow="autoplay; encrypted-media; fullscreen" allowfullscreen title="01 日常猫"></iframe></div>
+        </div>
+        <div class="cc" id="c1" data-cat-i="1">
+          <button type="button" class="play-hit" data-no-advance aria-label="播放视频2"></button>
+          <img class="th" src="https://img.youtube.com/vi/k8DzLwHWIbk/hqdefault.jpg" alt="穿西装上班的猫"/>
+          <div class="play-btn">▶</div>
+          <div class="lb">02 · 穿西装上班的猫</div>
+          <div class="cp" id="cp1"><iframe src="" allow="autoplay; encrypted-media; fullscreen" allowfullscreen title="02 上班猫"></iframe></div>
+        </div>
+        <div class="cc" id="c2" data-cat-i="2">
+          <button type="button" class="play-hit" data-no-advance aria-label="播放视频3"></button>
+          <img class="th" src="https://img.youtube.com/vi/_fbiQUff82w/hqdefault.jpg" alt="背书包上学的猫"/>
+          <div class="play-btn">▶</div>
+          <div class="lb">03 · 背书包上学的猫</div>
+          <div class="cp" id="cp2"><iframe src="" allow="autoplay; encrypted-media; fullscreen" allowfullscreen title="03 上学猫"></iframe></div>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="rb" id="rb">全部由AI生成 —— 每一段都是！</div>
-  <div class="pos" style="bottom:clamp(32px,3.5vh,56px);left:50%;transform:translateX(-50%);z-index:10;text-align:center">
-    <div class="tps" style="position:static;margin:0 auto clamp(4px,.4vh,8px)"><b>跟同桌说说：</b>你觉得哪段是真的？为什么？</div>
-    <div class="va" id="va">
-      <div class="vb" onclick="cv(0)">01 日常猫</div>
-      <div class="vb" onclick="cv(1)">02 上班猫</div>
-      <div class="vb" onclick="cv(2)">03 上学猫</div>
+    <div class="vote-area vote-zone">
+      <div class="rb" id="rb">全部由AI生成 —— 每一段都是！</div>
+      <p class="lead" style="text-align:center;margin-bottom:8px;font-size:clamp(17px,.95vw,21px)"><b>跟同桌说说：</b>你觉得哪段是真的？</p>
+      <div class="va" id="va">
+        <div class="vb" data-no-advance data-vote="0">01 日常猫</div>
+        <div class="vb" data-no-advance data-vote="1">02 上班猫</div>
+        <div class="vb" data-no-advance data-vote="2">03 上学猫</div>
+      </div>
+      <div class="vr" id="vr">大家觉得 <span id="vw"></span> 最像真的！<div class="sb">其实全部是AI生成的，没有一段是真实拍摄的</div><ul class="clues"><li>爪子有时会「融化」或穿进地板</li><li>毛的方向、光影不统一</li><li>背景里的字、门把手会变形</li></ul></div>
+      <button type="button" class="vreset" data-no-advance id="vote-reset">老师：重新投票</button>
     </div>
-    <div class="vr" id="vr">大家觉得 <span id="vw"></span> 最像真的！<div class="sb">其实全部是AI生成的，没有一段是真实拍摄的</div><ul class="clues"><li>爪子有时会「融化」或穿进地板</li><li>毛的方向、光影不统一</li><li>背景里的字、门把手会变形</li></ul></div>
-    <button type="button" class="vreset" data-no-advance onclick="resetVote()">老师：重新投票</button>
   </div>
   <div class="pgn"></div>
 </section>
@@ -256,27 +397,27 @@ h2 .o{color:#FF6B35}
 
 
 <!-- S5: Body activity - 4 gestures -->
-<section class="slide">
-  <div class="pb"><img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1920&q=80" alt="" /></div>
-  <div class="ol"></div>
+<section class="slide" data-title="身体操" data-chapter="cat">
+  <div class="pb"><img src="assets/bg/nature.jpg" alt="" /></div>
+  <div class="ol od-strong"></div>
   <div class="mode ms">活动</div>
-  <div class="sh">
-    <div class="num">BODY</div>
-    <h2>用身体记住这四个词</h2>
-    <div class="p" style="max-width:480px;margin:clamp(6px,.6vh,12px) auto;line-height:2">
-      <b style="color:#FF6B35">体验</b> — 举手摸空气<br/>
-      <b style="color:#457B9D">观察</b> — 手搭凉棚四处看<br/>
-      <b style="color:#2A9D8F">思考</b> — 摸下巴做思考状<br/>
-      <b style="color:#D62828">实践</b> — 握拳举起来
+  <div class="slide-panel">
+    <h2>用身体记住<span class="o">四个词</span></h2>
+    <p class="lead">后面会反复出现：<b>体验 → 观察 → 思考 → 实践</b>。先让身体有印象，脑子就更好记。</p>
+    <div class="gesture-grid">
+      <div class="gesture-card"><div class="g-label" style="color:#FF6B35">体验</div><div class="g-action">举手，摸一摸空气</div></div>
+      <div class="gesture-card"><div class="g-label" style="color:#457B9D">观察</div><div class="g-action">手搭凉棚，四处看</div></div>
+      <div class="gesture-card"><div class="g-label" style="color:#2A9D8F">思考</div><div class="g-action">摸下巴，做思考状</div></div>
+      <div class="gesture-card"><div class="g-label" style="color:#D62828">实践</div><div class="g-action">握拳举起来</div></div>
     </div>
-    <div class="act" style="position:static;margin:clamp(6px,.6vh,12px) auto"><b>全班一起来：</b>老师说体验→摸空气！观察→四处看！思考→摸下巴！实践→举拳！</div>
+    <p class="teacher-cue">老师喊一个词，全班做一个动作——体验、观察、思考、实践，各来一遍！</p>
   </div>
   <div class="pgn"></div>
 </section>
 
 <!-- S6-S9: 4 steps -->
-<section class="slide">
-  <div class="pb"><img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=1920&q=80" alt="" /></div>
+<section class="slide" data-title="体验·猫视频" data-chapter="cat">
+  <div class="pb"><img src="assets/bg/cat-exp.jpg" alt="" /></div>
   <div class="ol"></div>
   <div class="mode ms">活动</div>
   <div class="kw" style="justify-content:center">
@@ -289,8 +430,8 @@ h2 .o{color:#FF6B35}
   <div class="pgn"></div>
 </section>
 
-<section class="slide">
-  <div class="pb"><img src="https://images.unsplash.com/photo-1529912344545-7090a55a7ce6?w=1920&q=80" alt="" /></div>
+<section class="slide" data-title="观察·猫视频" data-chapter="cat">
+  <div class="pb"><img src="assets/bg/cat-obs.jpg" alt="" /></div>
   <div class="ol"></div>
   <div class="mode md">讨论</div>
   <div class="kw" style="justify-content:center">
@@ -304,8 +445,8 @@ h2 .o{color:#FF6B35}
   <div class="pgn"></div>
 </section>
 
-<section class="slide">
-  <div class="pb"><img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=1920&q=80" alt="" /></div>
+<section class="slide" data-title="思考·猫视频" data-chapter="cat">
+  <div class="pb"><img src="assets/bg/cat-think.jpg" alt="" /></div>
   <div class="ol"></div>
   <div class="mode mt">讲解</div>
   <div class="kw" style="justify-content:center">
@@ -318,8 +459,8 @@ h2 .o{color:#FF6B35}
   <div class="pgn"></div>
 </section>
 
-<section class="slide">
-  <div class="pb"><img src="https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?w=1920&q=80" alt="" /></div>
+<section class="slide" data-title="实践·投票" data-chapter="cat">
+  <div class="pb"><img src="assets/bg/cat-do.jpg" alt="" /></div>
   <div class="ol"></div>
   <div class="mode mh">动手</div>
   <div class="kw" style="justify-content:center">
@@ -334,8 +475,8 @@ h2 .o{color:#FF6B35}
 </section>
 
 <!-- S10: Summary -->
-<section class="slide">
-  <div class="pb"><img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1920&q=80" alt="" /></div>
+<section class="slide" data-title="科尔布总结" data-chapter="human">
+  <div class="pb"><img src="assets/bg/nature.jpg" alt="" /></div>
   <div class="ol"></div>
   <div class="mode ms">总结</div>
   <div class="sh">
@@ -351,28 +492,45 @@ h2 .o{color:#FF6B35}
   <div class="pgn"></div>
 </section>
 
-<!-- ═══ S11-S14: ANCIENT LEARNING ═══ -->
-
-<section class="slide">
-  <div class="pb"><img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?w=1920&q=80" alt="" /></div>
-  <div class="od"></div>
-  <div class="mode mt">讲解</div>
-  <div class="kw">
-    <div class="kh"><h2>从星星到日历</h2><span class="ke" style="color:rgba(255,255,255,.15);font-size:clamp(9px,.55vw,11px)">古人 · 一</span></div>
-    <div class="p" style="max-width:600px;margin-bottom:clamp(4px,.4vh,8px)">看同一片天 → 发现季节的秘密。</div>
-    <img class="story-illus" src="https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=400&q=80" alt="夜空与星星示意" style="max-width:280px;margin-bottom:8px" />
-    <div class="ks">
-      <div class="kc story-card exp"><div class="kt"><div class="kn" style="background:#FF6B35;color:#fff">1</div><div class="ktl">体验</div></div><div class="kb"><p>每天晚上躺在草地上看星星。位置总在变——<b>这就是古人"体验"世界的方式。</b></p></div></div>
-      <div class="kc story-card exp"><div class="kt"><div class="kn" style="background:#457B9D;color:#fff">2</div><div class="ktl">观察</div></div><div class="kb"><p>发现星星会"搬家"——春天的北斗在东方，夏天在头顶，秋天在西方。<b>"观察"让模糊的印象变成清晰的规律。</b></p></div></div>
-      <div class="kc story-card exp"><div class="kt"><div class="kn" style="background:#2A9D8F;color:#fff">3</div><div class="ktl">思考</div></div><div class="kb"><p>看了几十年，他们总结出"斗柄指东，天下皆春"。<b>把观察变成了口诀——这就是知识。</b></p></div></div>
-      <div class="kc story-card exp"><div class="kt"><div class="kn" style="background:#D62828;color:#fff">4</div><div class="ktl">实践</div></div><div class="kb"><p>用这套"星空日历"指导播种——第二年验证：规律是对的。<b>人类不再靠运气种地。</b></p></div></div>
+<!-- 故事1：学骑车 -->
+<section class="slide" data-title="学骑车" data-chapter="human">
+  <div class="pb"><img src="assets/bg/bike.jpg" alt="" /></div>
+  <div class="ol od-strong"></div>
+  <div class="mode ms">故事</div>
+  <div class="slide-panel story-panel">
+    <h2>学骑车 — <span class="o">你自己的</span> Kolb 故事</h2>
+    <p class="lead">很多同学都学过骑车。用四步讲完整——这也是<b>人类</b>怎么学会一件事的样板。</p>
+    <div class="kolb-table">
+      <div class="k-row"><div class="k-label">体验</div><p class="k-text">第一次跨上车，脚一踩就晃，摔了。<b>膝盖擦破皮。</b> 疼，但你真实感受到了什么叫「平衡」。</p></div>
+      <div class="k-row k-obs"><div class="k-label">观察</div><p class="k-text">看别人骑——<b>速度快反而更稳。</b> 眼睛要看前方，不是死盯着车轮。</p></div>
+      <div class="k-row k-think"><div class="k-label">思考</div><p class="k-text">「速度 = 稳定。越紧张越容易倒，放松反而稳。看哪里，车就往哪里走。」——<b>你把体验变成了口诀。</b></p></div>
+      <div class="k-row k-do"><div class="k-label">实践</div><p class="k-text">再骑一次，加速，看远方——<b>骑出 10 米没倒！</b> 转弯又摔了。修正：转弯要倾斜。再试——成功了！</p></div>
     </div>
-    <div class="bridge"><b>古人用眼睛观察；AI 用成千上万张照片。</b> 大自然 → 数学 → 代码 → AI</div>
+    <p class="story-foot"><b>跟同桌说：</b>你学一样东西时，哪一步最难？</p>
   </div>
   <div class="pgn"></div>
 </section>
-<!-- GAME: 古人发明的秘密 -->
-<section class="slide" style="background:#0c0c0c" data-slide-interactive id="slide-pair">
+
+<!-- 故事2：古人观星 -->
+<section class="slide" data-title="古人观星" data-chapter="human">
+  <div class="pb"><img src="assets/bg/stars.jpg" alt="" /></div>
+  <div class="od od-strong"></div>
+  <div class="mode mt">讲解</div>
+  <div class="slide-panel story-panel">
+    <h2>古人观星 — 从星星到<span class="o">日历</span></h2>
+    <p class="lead">古人没有手机日历，却从同一片星空里读出了季节——体验 → 观察 → 思考 → 实践。</p>
+    <div class="kolb-table">
+      <div class="k-row"><div class="k-label">体验</div><p class="k-text">每晚躺在草地上看星星。<b>位置一直在变。</b></p></div>
+      <div class="k-row k-obs"><div class="k-label">观察</div><p class="k-text">记了几年——<b>北斗春天在东方，夏天在头顶，秋天在西方。</b> 它像大钟的指针，在慢慢转。</p></div>
+      <div class="k-row k-think"><div class="k-label">思考</div><p class="k-text">「斗柄指东，天下皆春。斗柄指南，天下皆夏……」<b>星星的规律 = 季节的规律。</b></p></div>
+      <div class="k-row k-do"><div class="k-label">实践</div><p class="k-text">用星空日历种地——北斗指东时播种，<b>收成更好了。</b> 一代代传下去，这是最早的农业科学。</p></div>
+    </div>
+    <p class="story-foot"><b>古人用眼睛观察；AI 用成千上万张照片。</b> 大自然 → 数学 → 代码 → AI</p>
+  </div>
+  <div class="pgn"></div>
+</section>
+<!-- GAME: 古人发明的秘密 — 配对互动（上一页：古人观星故事） -->
+<section class="slide" style="background:#0c0c0c" data-slide-interactive id="slide-pair" data-title="古人配对" data-chapter="nature">
   <div class="mode mh">游戏</div>
   <div class="pos" style="top:clamp(14px,1.5vh,28px);left:50%;transform:translateX(-50%);z-index:10;text-align:center;width:90%">
     <h2 style="font-size:clamp(28px,3vw,52px)">古人发明的<span class="o">秘密</span></h2>
@@ -381,10 +539,10 @@ h2 .o{color:#FF6B35}
   <div class="pos" style="top:clamp(80px,9vh,150px);left:clamp(20px,2.5vw,48px);right:clamp(20px,2.5vw,48px);bottom:clamp(20px,2.5vh,40px);z-index:5">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(8px,.6vw,16px);height:100%;max-width:700px;margin:0 auto">
       <div id="pair-left" style="display:grid;grid-template-rows:1fr 1fr 1fr 1fr;gap:clamp(6px,.5vh,10px)">
-        <div class="pair-l" data-pair-id="0" data-no-advance style="border:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.3);padding:clamp(6px,.6vh,12px);display:flex;align-items:center;gap:clamp(6px,.6vw,10px)"><img class="pair-thumb" src="https://images.unsplash.com/photo-1598300042247-3feaa84e41e0?w=120&q=80" alt="" /><span style="font-size:clamp(16px,.9vw,22px);color:rgba(255,255,255,.75)">蜘蛛结网</span></div>
-        <div class="pair-l" data-pair-id="1" data-no-advance style="border:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.3);padding:clamp(6px,.6vh,12px);display:flex;align-items:center;gap:clamp(6px,.6vw,10px)"><img class="pair-thumb" src="https://images.unsplash.com/photo-1499002238440-d264edd596ec?w=120&q=80" alt="" /><span style="font-size:clamp(16px,.9vw,22px);color:rgba(255,255,255,.75)">蒲公英种子飘</span></div>
-        <div class="pair-l" data-pair-id="2" data-no-advance style="border:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.3);padding:clamp(6px,.6vh,12px);display:flex;align-items:center;gap:clamp(6px,.6vw,10px)"><img class="pair-thumb" src="https://images.unsplash.com/photo-1444464666168-49d633b86797?w=120&q=80" alt="" /><span style="font-size:clamp(16px,.9vw,22px);color:rgba(255,255,255,.75)">鸟在天空飞</span></div>
-        <div class="pair-l" data-pair-id="3" data-no-advance style="border:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.3);padding:clamp(6px,.6vh,12px);display:flex;align-items:center;gap:clamp(6px,.6vw,10px)"><img class="pair-thumb" src="https://images.unsplash.com/photo-1544551763-77ef2ddebfc0?w=120&q=80" alt="" /><span style="font-size:clamp(16px,.9vw,22px);color:rgba(255,255,255,.75)">螺旋贝壳</span></div>
+        <div class="pair-l" data-pair-id="0" data-no-advance style="border:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.3);padding:clamp(6px,.6vh,12px);display:flex;align-items:center;gap:clamp(6px,.6vw,10px)"><img class="pair-thumb" src="assets/thumbs/spider.jpg" alt="" /><span style="font-size:clamp(16px,.9vw,22px);color:rgba(255,255,255,.75)">蜘蛛结网</span></div>
+        <div class="pair-l" data-pair-id="1" data-no-advance style="border:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.3);padding:clamp(6px,.6vh,12px);display:flex;align-items:center;gap:clamp(6px,.6vw,10px)"><img class="pair-thumb" src="assets/thumbs/dandelion.jpg" alt="" /><span style="font-size:clamp(16px,.9vw,22px);color:rgba(255,255,255,.75)">蒲公英种子飘</span></div>
+        <div class="pair-l" data-pair-id="2" data-no-advance style="border:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.3);padding:clamp(6px,.6vh,12px);display:flex;align-items:center;gap:clamp(6px,.6vw,10px)"><img class="pair-thumb" src="assets/thumbs/bird.jpg" alt="" /><span style="font-size:clamp(16px,.9vw,22px);color:rgba(255,255,255,.75)">鸟在天空飞</span></div>
+        <div class="pair-l" data-pair-id="3" data-no-advance style="border:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.3);padding:clamp(6px,.6vh,12px);display:flex;align-items:center;gap:clamp(6px,.6vw,10px)"><img class="pair-thumb" src="assets/thumbs/shell.jpg" alt="" /><span style="font-size:clamp(16px,.9vw,22px);color:rgba(255,255,255,.75)">螺旋贝壳</span></div>
       </div>
       <div id="pair-right" style="display:grid;grid-template-rows:1fr 1fr 1fr 1fr;gap:clamp(6px,.5vh,10px)"></div>
     </div>
@@ -395,45 +553,45 @@ h2 .o{color:#FF6B35}
   </div>
   <div class="pgn"></div>
 </section>
-<!-- 西番莲与长翅蝶 — 自然界的共同进化 -->
-<section class="slide">
-  <div class="pb"><img src="https://images.unsplash.com/photo-1504630083234-14187a9df0f5?w=1920&q=80" alt="" /></div>
-  <div class="od"></div>
+<!-- 故事3：蚁群找路 -->
+<section class="slide" data-title="蚁群找路" data-chapter="nature">
+  <div class="pb"><img src="assets/bg/ants.jpg" alt="" /></div>
+  <div class="ol od-strong"></div>
   <div class="mode ms">故事</div>
-  <div class="sh">
-    <div class="num">NATURE</div>
-    <h2 style="font-size:clamp(28px,3vw,52px)">花与蝴蝶的<span class="o">秘密约定</span></h2>
-    <div class="p" style="max-width:500px;margin:clamp(4px,.4vh,8px) auto">花蜜藏得很深 → 只有长翅蝶的嘴够长。<b>几千年来，它们一起进化。</b></div>
-    <div class="story-illus-row">
-      <figure style="text-align:center;max-width:200px"><img class="story-illus" src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=400&q=80" alt="西番莲花" /><figcaption class="p-sm" style="margin-top:4px">西番莲 · 花蜜很深</figcaption></figure>
-      <figure style="text-align:center;max-width:200px"><img class="story-illus" src="https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=400&q=80" alt="蝴蝶" /><figcaption class="p-sm" style="margin-top:4px">长翅蝶 · 嘴够长才能吃到</figcaption></figure>
+  <div class="slide-panel story-panel">
+    <h2>蚁群找路 — 跟蚂蚁学<span class="o">找路</span></h2>
+    <p class="lead">蚂蚁不会说话，却帮人类解决了「快递怎么送最快」——也是体验 → 观察 → 思考 → 实践。</p>
+    <div class="kolb-table">
+      <div class="k-row"><div class="k-label">体验</div><p class="k-text">一只蚂蚁出洞找食物，东爬西爬，<b>完全随机。</b></p></div>
+      <div class="k-row k-obs"><div class="k-label">观察</div><p class="k-text">找到食物后留下「气味路」。别的蚂蚁跟着走，<b>走的人越多气味越浓——最短的路人气最旺。</b></p></div>
+      <div class="k-row k-think"><div class="k-label">思考</div><p class="k-text">整群蚂蚁像一个大脑——<b>用气味「投票」出最佳路线。这就是群体智慧。</b></p></div>
+      <div class="k-row k-do"><div class="k-label">实践</div><p class="k-text">科学家写成「蚁群算法」→ <b>快递公司规划路线，互联网找最快路径。</b></p></div>
     </div>
-    <div class="kc story-card" style="border:1px solid rgba(255,255,255,.06);background:rgba(0,0,0,.3);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);padding:clamp(8px,.8vh,12px) clamp(10px,1vw,16px);max-width:520px;margin:clamp(8px,.8vh,14px) auto;text-align:left">
-      <div class="kt"><div class="ktl" style="font-size:clamp(18px,1vw,26px);color:#fff">🔬 科学家发现的秘密</div></div>
-      <div class="kb"><p style="margin-top:6px;padding-top:6px;border-top:1px solid rgba(255,255,255,.06)">西番莲的叶子会模仿蝴蝶卵——蝴蝶看到"已经有卵了"，就不在这产毛毛虫了。<b>植物会"骗人"！</b>这是大自然里的共同进化——<b>你变我也变。</b></p></div>
-    </div>
-    <div class="bridge">花和蝴蝶改了很多年——<b>AI 也会根据新例子不断改答案。</b></div>
+    <p class="story-foot"><b>科学家把自然写进计算机</b> —— 这就是通向 AI 的路。</p>
   </div>
   <div class="pgn"></div>
 </section>
 
-<!-- 大自然还教会了科学家（蚂蚁+鸟群合并） -->
-<section class="slide">
-  <div class="pb"><img src="https://images.unsplash.com/photo-1534961885233-fa4f3e1b23f6?w=1920&q=80" alt="" /></div>
-  <div class="ol"></div>
+<!-- 故事4：西番莲与长翅蝶 — 共同进化 -->
+<section class="slide" data-title="花蝶毒战" data-chapter="nature">
+  <div class="pb"><img src="assets/bg/butterfly.jpg" alt="" /></div>
+  <div class="od od-strong"></div>
   <div class="mode ms">故事</div>
-  <div class="pos" style="top:clamp(70px,8vh,140px);left:clamp(32px,3.5vw,60px);right:clamp(32px,3.5vw,60px);bottom:clamp(50px,5vh,90px);z-index:5">
-    <div class="kh"><h2 style="font-size:clamp(26px,2.8vw,48px)">大自然还教会了<span class="o">科学家</span></h2></div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,1.2vw,24px);margin-top:clamp(10px,1vh,18px);max-width:800px">
-      <div class="lab-box"><img class="nature-col-img" src="https://images.unsplash.com/photo-1534515866308-1df517cc18a0?w=500&q=80" alt="蚂蚁路径示意" /><div style="font-size:clamp(20px,1.4vw,28px);margin-bottom:6px">🐜 跟蚂蚁学送快递</div><p class="p-sm" style="margin:0">蚂蚁走的路越多，气味越浓。科学家写成算法——<b>快递公司用它找最快路线。</b>就像外卖骑手会绕开堵车。</p></div>
-      <div class="lab-box"><img class="nature-col-img" src="https://images.unsplash.com/photo-1444464666168-49d633b86797?w=500&q=80" alt="鸟群飞行" /><div style="font-size:clamp(20px,1.4vw,28px);margin-bottom:6px">🐦 跟鸟群学找最优</div><p class="p-sm" style="margin:0">每只鸟看周围怎么飞。科学家写成算法——<b>帮火箭设计更省燃料的轨道。</b>就像导航会选更省油的路。</p></div>
+  <div class="slide-panel story-panel">
+    <h2>西番莲与长翅蝶 — <span class="o">毒与攻防</span></h2>
+    <p class="lead">植物和昆虫之间长达千万年的<b>共同进化</b>——你变，我也得变。（不是「花蜜很深」那种简单故事。）</p>
+    <div class="kolb-table">
+      <div class="k-row"><div class="k-label">体验</div><p class="k-text">毛毛虫趴在毒叶子上大吃一顿——<b>叶子含氰化物，别的虫吃了会死。</b></p></div>
+      <div class="k-row k-obs"><div class="k-label">观察</div><p class="k-text">吃了毒叶不但没事，自己也有毒了。变成蝴蝶后，<b>翅膀鲜艳得像在喊「别吃我」。</b></p></div>
+      <div class="k-row k-think"><div class="k-label">思考</div><p class="k-text">西番莲产毒 → 蝴蝶解毒并存毒 → 西番莲长出「假卵」 → 蝴蝶进化更长产卵器……<b>一轮轮「我变你也得变」，这就是共同进化。</b></p></div>
+      <div class="k-row k-do"><div class="k-label">实践</div><p class="k-text">每一次产卵、每一口叶子都是自然实验。千万年来两物种互相塑造——<b>植物不思考，但进化在替它思考。</b></p></div>
     </div>
-    <div class="bridge" style="margin-top:clamp(12px,1.2vh,20px)"><b>科学家把自然写进计算机</b> —— 这就是通向 AI 的路。</div>
+    <p class="story-foot">大自然里的攻防——<b>AI 也会根据新例子不断改答案。</b></p>
   </div>
   <div class="pgn"></div>
 </section>
 <!-- GAME: AI还是人？速答挑战 -->
-<section class="slide" style="background:#0c0c0c" data-slide-interactive>
+<section class="slide" style="background:#0c0c0c" data-slide-interactive data-title="AI还是人" data-chapter="ai">
   <div class="mode mh">游戏</div>
   <div class="pos" style="top:clamp(14px,1.5vh,28px);left:50%;transform:translateX(-50%);z-index:10;text-align:center;width:90%">
     <h2 style="font-size:clamp(28px,3vw,52px)"><span class="o">AI</span>还是人？速答挑战</h2>
@@ -476,8 +634,8 @@ h2 .o{color:#FF6B35}
 
 <!-- ═══ AI LEARNING ═══ -->
 
-<section class="slide">
-  <div class="pb"><img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=1920&q=80" alt="" /></div>
+<section class="slide" data-title="AI怎么学" data-chapter="ai">
+  <div class="pb"><img src="assets/bg/ai-intro.jpg" alt="" /></div>
   <div class="ol"></div>
   <div class="mode mt">讲解</div>
   <div class="sh">
@@ -494,24 +652,24 @@ h2 .o{color:#FF6B35}
   <div class="pgn"></div>
 </section>
 
-<section class="slide">
-  <div class="pb"><img src="https://images.unsplash.com/photo-1531746790095-e5cb1572b398?w=1920&q=80" alt="" /></div>
+<section class="slide" data-title="AI·数据" data-chapter="ai">
+  <div class="pb"><img src="assets/bg/ai-data.jpg" alt="" /></div>
   <div class="ol"></div>
   <div class="mode mt">讲解</div>
   <div class="kw"><div class="kh"><h2 style="color:#FF6B35">AI的"体验"</h2><span class="ke" style="color:rgba(255,255,255,.15);font-size:clamp(9px,.55vw,11px)">数据就是AI的眼睛</span></div><div class="p" style="max-width:600px">人类用眼睛看世界。AI没有眼睛——但人类给了它<b>几百万张猫的照片</b>，每张标着"这是猫"。AI读完后，没"见过"活猫，但知道猫有尖耳朵、圆脸、胡须——<b>从数据中"体验"到了猫长什么样。</b></div></div>
   <div class="pgn"></div>
 </section>
 
-<section class="slide">
-  <div class="pb"><img src="https://images.unsplash.com/photo-1517077304055-7e89b6f8e87b?w=1920&q=80" alt="" /></div>
+<section class="slide" data-title="AI·统计" data-chapter="ai">
+  <div class="pb"><img src="assets/bg/ai-stats.jpg" alt="" /></div>
   <div class="ol"></div>
   <div class="mode mt">讲解</div>
   <div class="kw"><div class="kh"><h2 style="color:#457B9D">AI的"观察"</h2><span class="ke" style="color:rgba(255,255,255,.15);font-size:clamp(11px,.65vw,14px)">从数据里找规律</span></div><div class="p" style="max-width:600px">AI 读了海量文字和图片，发现规律：比如"今天"后面常跟"天气""去""上学"。<b>它从数据里统计出规律——就像你从三段猫视频里发现细节。</b></div></div>
   <div class="pgn"></div>
 </section>
 
-<section class="slide">
-  <div class="pb"><img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=80" alt="" /></div>
+<section class="slide" data-title="AI·调参" data-chapter="ai">
+  <div class="pb"><img src="assets/bg/roadmap.jpg" alt="" /></div>
   <div class="ol"></div>
   <div class="mode mt">讲解</div>
   <div class="kw"><div class="kh"><h2 style="color:#2A9D8F">AI的"思考"</h2><span class="ke" style="color:rgba(255,255,255,.15);font-size:clamp(11px,.65vw,14px)">调参 · 改一改再试</span></div><div class="p" style="max-width:600px">AI 第一次答错了怎么办？<b>人多给几个例子、改一改提示词</b>，让它再学一次——这叫"调参"。就像你修正"真猫的标准"，AI 也在修正自己的答案。</div>
@@ -524,7 +682,7 @@ h2 .o{color:#FF6B35}
 </section>
 
 <!-- 分类游戏：猜猜它是什么 -->
-<section class="slide" style="background:#0c0c0c" data-slide-interactive>
+<section class="slide" style="background:#0c0c0c" data-slide-interactive data-title="猜猜是什么" data-chapter="ai">
   <div class="mode mh">游戏</div>
   <div class="pos" style="top:clamp(14px,1.5vh,28px);left:50%;transform:translateX(-50%);z-index:10;text-align:center;width:90%">
     <h2 style="font-size:clamp(28px,3vw,52px)">猜猜它是<span class="o">什么</span>？</h2>
@@ -556,8 +714,8 @@ h2 .o{color:#FF6B35}
 </section>
 
 
-<section class="slide">
-  <div class="pb"><img src="https://images.unsplash.com/photo-1531746790095-e5cb1572b398?w=1920&q=80" alt="" /></div>
+<section class="slide" data-title="AI·模型" data-chapter="ai">
+  <div class="pb"><img src="assets/bg/ai-data.jpg" alt="" /></div>
   <div class="ol"></div>
   <div class="mode mt">讲解</div>
   <div class="kw"><div class="kh"><h2 style="color:#D62828">AI的"实践"</h2><span class="ke" style="color:rgba(255,255,255,.15);font-size:clamp(11px,.65vw,14px)">模型就是AI的经验</span></div><div class="p" style="max-width:600px">人类把经验写成书。AI把"学会"的全部存在一个巨大的<b>模型</b>里。再给它一张新图片，几毫秒判断"这是一只橘猫"——<b>不是因为它聪明，而是几百万张猫图的经验全压缩进了模型。</b></div></div>
@@ -565,8 +723,8 @@ h2 .o{color:#FF6B35}
 </section>
 
 <!-- AI超能力vs盲区 -->
-<section class="slide">
-  <div class="pb"><img src="https://images.unsplash.com/photo-1531746790095-e5cb1572b398?w=1920&q=80" alt="" /></div>
+<section class="slide" data-title="超能力与盲区" data-chapter="ai">
+  <div class="pb"><img src="assets/bg/ai-data.jpg" alt="" /></div>
   <div class="ol"></div>
   <div class="mode ms">讨论</div>
   <div class="pos t"><h2 style="font-size:clamp(28px,3vw,52px)">AI的<span class="o">超能力</span>vs盲区</h2></div>
@@ -596,7 +754,7 @@ h2 .o{color:#FF6B35}
   <div class="pgn"></div>
 </section>
 <!-- GAME: AI错题本 -->
-<section class="slide" style="background:#0c0c0c" data-slide-interactive>
+<section class="slide" style="background:#0c0c0c" data-slide-interactive data-title="AI错题本" data-chapter="ai">
   <div class="mode mh">游戏</div>
   <div class="pos" style="top:clamp(14px,1.5vh,28px);left:50%;transform:translateX(-50%);z-index:10;text-align:center;width:90%">
     <h2 style="font-size:clamp(28px,3vw,52px)">AI<span class="o">错题本</span></h2>
@@ -619,7 +777,7 @@ h2 .o{color:#FF6B35}
   <div class="pgn"></div>
 </section>
 <!-- GAME: Prompt擂台 -->
-<section class="slide" style="background:#0c0c0c" data-slide-interactive>
+<section class="slide" style="background:#0c0c0c" data-slide-interactive data-title="Prompt擂台" data-chapter="ai">
   <div class="mode mh">游戏</div>
   <div class="pos" style="top:clamp(14px,1.5vh,28px);left:50%;transform:translateX(-50%);z-index:10;text-align:center;width:90%">
     <h2 style="font-size:clamp(28px,3vw,52px)">Prompt <span class="o">擂台</span></h2>
@@ -654,8 +812,8 @@ h2 .o{color:#FF6B35}
 </section>
 
 <!-- AI 动手实验室：老师演示 -->
-<section class="slide" data-slide-interactive>
-  <div class="pb"><img src="https://images.unsplash.com/photo-1516321318423-f06f0e504ba3?w=1920&q=80" alt="" /></div>
+<section class="slide" data-slide-interactive data-title="实验室演示" data-chapter="lab">
+  <div class="pb"><img src="assets/bg/lab.jpg" alt="" /></div>
   <div class="ol"></div>
   <div class="mode mh">实验室</div>
   <div class="pos t"><h2 style="font-size:clamp(28px,3vw,52px)">AI <span class="o">动手实验室</span></h2><div class="p">老师投屏演示 · 课堂任选其一：<b>豆包 / 通义千问 / Kimi</b></div></div>
@@ -669,8 +827,8 @@ h2 .o{color:#FF6B35}
 </section>
 
 <!-- AI 动手实验室：学生跟做 -->
-<section class="slide" data-slide-interactive>
-  <div class="pb"><img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1920&q=80" alt="" /></div>
+<section class="slide" data-slide-interactive data-title="跟做任务单" data-chapter="lab">
+  <div class="pb"><img src="assets/bg/task.jpg" alt="" /></div>
   <div class="ol"></div>
   <div class="mode mh">实验室</div>
   <div class="sh" style="width:92%;max-width:720px">
@@ -689,8 +847,8 @@ h2 .o{color:#FF6B35}
 
 <!-- ═══ PROJECT ═══ -->
 
-<section class="slide" data-slide-interactive>
-  <div class="pb"><img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80" alt="" /></div>
+<section class="slide" data-slide-interactive data-title="项目挑战" data-chapter="project">
+  <div class="pb"><img src="assets/bg/project.jpg" alt="" /></div>
   <div class="ol"></div>
   <div class="mode mh">动手</div>
   <div class="pos t"><h2>项目挑战</h2><div class="p">分组选一个问题，用 AI 设计一个方案（约 25 分钟）。</div></div>
@@ -717,41 +875,80 @@ h2 .o{color:#FF6B35}
 
 <!-- ═══ S26: CLOSING ═══ -->
 
-<section class="slide">
-  <div class="pb"><img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1920&q=80" alt="" /></div>
+<section class="slide" data-title="结业" data-chapter="end">
+  <div class="pb"><img src="assets/bg/close.jpg" alt="" /></div>
   <div class="ol"></div>
   <div class="pos" style="top:50%;transform:translateY(-50%);left:clamp(32px,3.5vw,60px);right:clamp(32px,3.5vw,60px);z-index:5">
     <h1 style="font-size:clamp(48px,5vw,90px)">AI不是魔法<br/><span class="o">是一个超级学习工具</span></h1>
     <div class="p" style="font-size:clamp(16px,1vw,24px);max-width:400px;margin-top:clamp(6px,.6vh,12px)">你体验了科尔布学习循环，看懂了AI的学习原理——而且用AI设计了一个解决真问题的方案。</div>
   </div>
-  <div class="pos sc" style="left:clamp(32px,3.5vw,60px);bottom:clamp(24px,2.5vh,40px);right:clamp(32px,3.5vw,60px);z-index:5;border-top:1px solid rgba(255,255,255,.04);padding-top:clamp(4px,.4vh,8px)">
-    <div><div style="font-size:clamp(10px,.6vw,14px);text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.2)">学会了</div><div style="font-size:clamp(12px,.7vw,16px);color:rgba(255,255,255,.35);margin-top:1px;line-height:1.4">人类怎么学习<br/>AI怎么学习</div></div>
-    <div><div style="font-size:clamp(10px,.6vw,14px);text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.2)">体验了</div><div style="font-size:clamp(12px,.7vw,16px);color:rgba(255,255,255,.35);margin-top:1px;line-height:1.4">猫挑战 · 速答 · 擂台<br/>AI 实验室 · 真问题</div></div>
-    <div><div style="font-size:clamp(10px,.6vw,14px);text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.2)">做到了</div><div style="font-size:clamp(12px,.7vw,16px);color:rgba(255,255,255,.35);margin-top:1px;line-height:1.4">用AI设计了一个<br/>解决真问题的方案</div></div>
+  <div class="pos sc close-footer" style="left:clamp(32px,3.5vw,60px);bottom:clamp(24px,2.5vh,40px);right:clamp(32px,3.5vw,60px);z-index:5;border-top:1px solid rgba(255,255,255,.04);padding-top:clamp(4px,.4vh,8px)">
+    <div><div class="sc-label">学会了</div><div class="sc-body">人类怎么学习<br/>AI怎么学习</div></div>
+    <div><div class="sc-label">体验了</div><div class="sc-body">猫挑战 · 速答 · 擂台<br/>AI 实验室 · 真问题</div></div>
+    <div><div class="sc-label">做到了</div><div class="sc-body">用AI设计了一个<br/>解决真问题的方案</div></div>
   </div>
   <div class="pos" style="right:clamp(20px,2.5vw,40px);top:clamp(20px,2.5vh,40px);z-index:5;text-align:right"><div style="font-family:'Big Shoulders Display','Noto Sans SC',sans-serif;font-weight:900;font-size:clamp(30px,3vw,56px);color:#FF6B35;line-height:.85">结业</div><div style="font-size:clamp(10px,.6vw,14px);color:rgba(255,255,255,.15);letter-spacing:.12em;text-transform:uppercase">CERTIFICATE</div></div>
   <div class="pgn"></div>
 </section>
 
 </div></div>
-<div class="nh">空格翻页 · ← → 前后</div>
+<div class="nh">空格翻页 · ← → · G 目录 · E 编辑文字</div>
 <script>
 const S=Array.from(document.querySelectorAll('.slide'));let c=0;
+const CHAPTER_NAMES={intro:'开场',cat:'猫与 Kolb',human:'人的故事',nature:'自然',ai:'AI 怎么学',lab:'实验室',project:'项目',end:'结业'};
 // 猫挑战：与原版一致，直接嵌入 YouTube（需教室能访问 YouTube）
 const CAT_YT=['g6dhJx_GXaA','k8DzLwHWIbk','_fbiQUff82w'];
 function updatePageNumbers(){S.forEach((el,i)=>{const p=el.querySelector('.pgn');if(p)p.textContent=String(i+1).padStart(2,'0')+' / '+S.length});}
-function sh(i){if(i<0)i=0;if(i>=S.length)i=S.length-1;S[c].classList.remove('active');S[i].classList.add('active');c=i}
+function updateNav(){
+  const page=document.getElementById('nav-page');
+  const title=document.getElementById('nav-title');
+  if(page)page.textContent=String(c+1).padStart(2,'0')+' / '+S.length;
+  if(title)title.textContent=S[c].dataset.title||'';
+  document.querySelectorAll('#nav-panel .ni').forEach(btn=>{
+    btn.classList.toggle('cur',parseInt(btn.dataset.navI,10)===c);
+  });
+}
+function openNav(){document.getElementById('nav-panel')?.classList.add('open');document.getElementById('nav-backdrop')?.classList.add('open');}
+function closeNav(){document.getElementById('nav-panel')?.classList.remove('open');document.getElementById('nav-backdrop')?.classList.remove('open');}
+function toggleNav(){const p=document.getElementById('nav-panel');if(p?.classList.contains('open'))closeNav();else openNav();}
+function buildNav(){
+  const panel=document.getElementById('nav-panel');
+  if(!panel)return;
+  let html='',lastCh='';
+  S.forEach((el,i)=>{
+    const ch=el.dataset.chapter||'';
+    const title=el.dataset.title||('第'+(i+1)+'页');
+    if(ch&&ch!==lastCh){html+='<div class="ng">'+(CHAPTER_NAMES[ch]||ch)+'</div>';lastCh=ch;}
+    html+='<button type="button" class="ni" data-nav-i="'+i+'" data-no-advance>'+String(i+1).padStart(2,'0')+' · '+title+'</button>';
+  });
+  panel.innerHTML=html;
+  panel.querySelectorAll('.ni').forEach(btn=>{
+    btn.addEventListener('click',e=>{e.stopPropagation();sh(parseInt(btn.dataset.navI,10));closeNav();});
+  });
+}
+function sh(i){if(i<0)i=0;if(i>=S.length)i=S.length-1;S[c].classList.remove('active');S[i].classList.add('active');c=i;updateNav();}
 function isInteractiveTarget(t){
-  return t.closest('.qb,.cgb,.cc,.vb,.pt,.kc,.pair-l,.pair-r,#ereveal,#enext,#pa,#pb,#pbox,#cgbox,#ebox,#qbox,[data-no-advance]');
+  return t.closest('.qb,.cgb,.cc,.play-hit,.vb,.pt,.kc,.pair-l,.pair-r,#ereveal,#enext,#pa,#pb,#pbox,#cgbox,#ebox,#qbox,.nav-bar,.nav-panel,.nav-btn,.ni,.nav-backdrop,[data-no-advance],[contenteditable="true"]');
+}
+function isTypingInEditor(){
+  const a=document.activeElement;
+  return a&&(a.isContentEditable||a.tagName==='INPUT'||a.tagName==='TEXTAREA');
 }
 function canClickAdvance(){
+  if(document.body.classList.contains('edit-mode'))return false;
   return !S[c].hasAttribute('data-slide-interactive');
 }
 document.addEventListener('keydown',e=>{
+  if(e.key==='e'||e.key==='E'){if(!isTypingInEditor()){e.preventDefault();toggleEditMode();}return;}
+  if(isTypingInEditor())return;
   if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key==='PageDown'||e.key===' '){e.preventDefault();sh(c+1)}
   else if(e.key==='ArrowLeft'||e.key==='ArrowUp'||e.key==='PageUp'){e.preventDefault();sh(c-1)}
   else if(e.key==='Home')sh(0);else if(e.key==='End')sh(S.length-1);
+  else if(e.key==='g'||e.key==='G'){e.preventDefault();toggleNav();}
+  else if(e.key==='Escape'){if(document.body.classList.contains('edit-mode')){toggleEditMode(false);}else closeNav();}
 });
+document.getElementById('nav-toggle')?.addEventListener('click',e=>{e.stopPropagation();toggleNav();});
+document.getElementById('nav-backdrop')?.addEventListener('click',closeNav);
 let tx=null;
 document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{passive:true});
 document.addEventListener('click',function(e){
@@ -762,7 +959,8 @@ document.addEventListener('click',function(e){
 document.addEventListener('touchend',e=>{if(tx==null)return;const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>40)sh(c+(dx<0?1:-1));tx=null});
 
 let activeCat=-1;
-function playCat(i){
+function playCat(i,e){
+  if(e){e.preventDefault();e.stopPropagation();}
   const cell=document.getElementById('c'+i);
   const pl=document.getElementById('cp'+i);
   const iframe=pl&&pl.querySelector('iframe');
@@ -778,8 +976,21 @@ function playCat(i){
     if(oc)oc.classList.remove('playing');
   }
   pl.style.display='block';cell.classList.add('playing');
-  iframe.src='https://www.youtube.com/embed/'+CAT_YT[i]+'?autoplay=1&mute=1&rel=0&controls=1';
+  iframe.src='https://www.youtube-nocookie.com/embed/'+CAT_YT[i]+'?autoplay=1&mute=1&rel=0&playsinline=1';
   activeCat=i;
+}
+function initCatPage(){
+  document.querySelectorAll('.play-hit').forEach(btn=>{
+    btn.addEventListener('click',e=>{
+      const card=btn.closest('.cc');
+      const i=card?parseInt(card.dataset.catI,10):NaN;
+      if(!isNaN(i))playCat(i,e);
+    });
+  });
+  document.querySelectorAll('[data-vote]').forEach(btn=>{
+    btn.addEventListener('click',e=>{e.stopPropagation();cv(parseInt(btn.dataset.vote,10));});
+  });
+  document.getElementById('vote-reset')?.addEventListener('click',e=>{e.stopPropagation();resetVote();});
 }
 let vt=false;
 function cv(i){if(vt)return;vt=true;const ls=['01 日常猫','02 上班猫','03 上学猫'];
@@ -801,12 +1012,12 @@ function selectProject(el){
   el.classList.add('sel');
 }
 
-// 古人发明配对
+// 古人配对
 const PAIR_RIGHT=[
-  {id:0,emoji:'🎣',label:'渔网',img:'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=120&q=80'},
-  {id:1,emoji:'🪂',label:'降落伞',img:'https://images.unsplash.com/photo-1522168537927-0d5bb3c3b6bb?w=120&q=80'},
-  {id:2,emoji:'✈️',label:'飞机',img:'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=120&q=80'},
-  {id:3,emoji:'🔄',label:'螺旋楼梯',img:'https://images.unsplash.com/photo-1518005020951-ecc994a271d1?w=120&q=80'}
+  {id:0,emoji:'🎣',label:'渔网',img:'assets/thumbs/net.jpg'},
+  {id:1,emoji:'🪂',label:'降落伞',img:'assets/thumbs/parachute.jpg'},
+  {id:2,emoji:'✈️',label:'飞机',img:'assets/thumbs/plane.jpg'},
+  {id:3,emoji:'🔄',label:'螺旋楼梯',img:'assets/thumbs/stairs.jpg'}
 ];
 let pairSelL=null,pairDone=0;
 function initPairGame(){
@@ -841,11 +1052,11 @@ function initPairGame(){
 
 // 猜猜它是什么
 const cgData=[
-  {img:'https://images.unsplash.com/photo-1514881248726-9d14b2ca7ad4?w=800&q=80',alt:'猫',h:'毛茸茸，会喵喵叫',a:0,e:' AI 在看：尖耳朵、圆脸、胡须、竖尾巴。'},
-  {img:'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=800&q=80',alt:'狗',h:'人类最好的朋友，会汪汪叫',a:1,e:' AI 在看：垂耳朵、长鼻子、四腿站立的姿势。'},
-  {img:'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800&q=80',alt:'汽车',h:'四个轮子，在马路上跑',a:2,e:' AI 在看：轮子、车窗、金属光泽、长方形车身。'},
-  {img:'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&q=80',alt:'房子',h:'有屋顶，人们住在里面',a:3,e:' AI 在看：方盒子、三角形屋顶、门和窗户。'},
-  {img:'https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800&q=80',alt:'花',h:'有花瓣，春天开放',a:4,e:' AI 在看：花瓣颜色、层数、茎和叶子。'}
+  {img:'assets/thumbs/cg-cat.jpg',alt:'猫',h:'毛茸茸，会喵喵叫',a:0,e:' AI 在看：尖耳朵、圆脸、胡须、竖尾巴。'},
+  {img:'assets/thumbs/cg-dog.jpg',alt:'狗',h:'人类最好的朋友，会汪汪叫',a:1,e:' AI 在看：垂耳朵、长鼻子、四腿站立的姿势。'},
+  {img:'assets/thumbs/cg-car.jpg',alt:'汽车',h:'四个轮子，在马路上跑',a:2,e:' AI 在看：轮子、车窗、金属光泽、长方形车身。'},
+  {img:'assets/thumbs/cg-house.jpg',alt:'房子',h:'有屋顶，人们住在里面',a:3,e:' AI 在看：方盒子、三角形屋顶、门和窗户。'},
+  {img:'assets/thumbs/cg-flower.jpg',alt:'花',h:'有花瓣，春天开放',a:4,e:' AI 在看：花瓣颜色、层数、茎和叶子。'}
 ];
 let cgQi=0,cgAnswered=false;
 function renderCg(){
@@ -941,13 +1152,181 @@ function pn(){pi++;if(pi>=pd.length){
   document.getElementById('pb').style.borderColor='rgba(42,157,143,.15)';
   document.getElementById('prfb').style.display='none';document.getElementById('pnbtn').style.display='none';}
 
+function initBgFallback(){
+  document.querySelectorAll('.pb img, .bg img').forEach(img=>{
+    img.addEventListener('error',()=>{img.dataset.failed='1';},{once:true});
+  });
+}
+
+/* —— 页内编辑 & 本地保存 —— */
+const EDIT_STORE_KEY='kids-deck-edits-v1';
+const EDIT_SKIP='.pgn,.mode,button,iframe,.play-hit,.play-btn,.nav-bar,.nav-panel,.nh,.cg-emoji,.phint,.vreset,.pair-thumb,.th,.edit-skip';
+let editNodes=[],editDefaults={},editDirty=false,editSaveTimer=null;
+
+function editShouldSkip(el){
+  if(!el||el.closest(EDIT_SKIP))return true;
+  if(el.closest('.nav-bar,.nav-panel,.nav-backdrop'))return true;
+  const tag=el.tagName;
+  if(tag==='SCRIPT'||tag==='STYLE'||tag==='IMG')return true;
+  if(el.classList&&el.classList.contains('edit-skip'))return true;
+  return false;
+}
+
+const EDIT_SEL='h1,h2,h3,h4,p,li,.lead,.teacher-cue,.k-text,.k-label,.lb,.bridge,.story-foot,.ps,.p,.p-sm,.tps,.sb,.clues li,.rg .rn,.rg .rm,.fs,.sc-body,.sc-label,.goal-item h3,.goal-item p,.lab-box,.tune-box .tx,.tune-box .tl,.vb,.rb,.pair-l span:last-child,.pair-r span:nth-child(2),#qt,#et,#cgh,#cga,#pwinner,#pwhy,#rb,.vr,.sb';
+
+function collectEditNodes(){
+  editNodes=[];
+  const seen=new Set();
+  S.forEach((slide,si)=>{
+    slide.querySelectorAll(EDIT_SEL).forEach(el=>{
+      if(editShouldSkip(el)||seen.has(el))return;
+      const text=(el.innerText||'').trim();
+      if(!text)return;
+      seen.add(el);
+      const id=el.dataset.editId||('e-'+si+'-'+editNodes.length);
+      el.dataset.editId=id;
+      if(editDefaults[id]==null)editDefaults[id]=el.innerHTML;
+      editNodes.push(el);
+    });
+  });
+}
+
+function getEditPayload(){
+  const edits={};
+  editNodes.forEach(el=>{edits[el.dataset.editId]=el.innerHTML;});
+  return{version:1,savedAt:new Date().toISOString(),edits};
+}
+
+function loadEditPayload(data){
+  if(!data||!data.edits)return;
+  Object.entries(data.edits).forEach(([id,html])=>{
+    const el=document.querySelector('[data-edit-id="'+id+'"]');
+    if(el)el.innerHTML=html;
+  });
+  syncSlideTitlesFromEdits();
+}
+
+function syncSlideTitlesFromEdits(){
+  S.forEach(slide=>{
+    const h=slide.querySelector('h2[data-edit-id],h1[data-edit-id]');
+    if(!h)return;
+    const plain=(h.innerText||'').replace(/\s+/g,' ').trim();
+    if(plain&&slide.dataset.title){
+      const short=plain.length>24?plain.slice(0,24)+'…':plain;
+      slide.dataset.title=short;
+    }
+  });
+  buildNav();
+  updateNav();
+}
+
+function saveEditsNow(){
+  try{
+    localStorage.setItem(EDIT_STORE_KEY,JSON.stringify(getEditPayload()));
+    editDirty=false;
+    const st=document.getElementById('edit-status');
+    if(st){st.textContent='已保存';st.classList.remove('dirty');}
+  }catch(err){
+    const st=document.getElementById('edit-status');
+    if(st){st.textContent='保存失败';st.classList.add('dirty');}
+  }
+}
+
+function scheduleSaveEdits(){
+  editDirty=true;
+  const st=document.getElementById('edit-status');
+  if(st){st.textContent='保存中…';st.classList.add('dirty');}
+  clearTimeout(editSaveTimer);
+  editSaveTimer=setTimeout(saveEditsNow,400);
+}
+
+function applyEditMode(on){
+  document.body.classList.toggle('edit-mode',on);
+  document.getElementById('nav-edit')?.classList.toggle('on',on);
+  editNodes.forEach(el=>{
+    if(on){
+      el.setAttribute('contenteditable','true');
+      el.setAttribute('spellcheck','false');
+    }else{
+      el.removeAttribute('contenteditable');
+    }
+  });
+}
+
+function toggleEditMode(force){
+  const on=typeof force==='boolean'?force:!document.body.classList.contains('edit-mode');
+  if(on){collectEditNodes();bindEditListeners();}
+  applyEditMode(on);
+  if(!on&&editDirty)saveEditsNow();
+}
+
+function bindEditListeners(){
+  editNodes.forEach(el=>{
+    if(el.dataset.editBound)return;
+    el.dataset.editBound='1';
+    el.addEventListener('input',scheduleSaveEdits);
+    el.addEventListener('blur',()=>{scheduleSaveEdits();syncSlideTitlesFromEdits();});
+  });
+}
+
+function initEditor(){
+  document.getElementById('nav-edit')?.addEventListener('click',e=>{e.stopPropagation();toggleEditMode();});
+  document.getElementById('edit-export')?.addEventListener('click',e=>{
+    e.stopPropagation();
+    const blob=new Blob([JSON.stringify(getEditPayload(),null,2)],{type:'application/json'});
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download='kids-deck-edits.json';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  });
+  document.getElementById('edit-import')?.addEventListener('click',e=>{e.stopPropagation();document.getElementById('edit-file-input')?.click();});
+  document.getElementById('edit-file-input')?.addEventListener('change',ev=>{
+    const f=ev.target.files&&ev.target.files[0];
+    if(!f)return;
+    const r=new FileReader();
+    r.onload=()=>{
+      try{
+        loadEditPayload(JSON.parse(r.result));
+        saveEditsNow();
+        alert('导入成功，文字已更新。');
+      }catch(err){alert('导入失败：文件格式不对');}
+      ev.target.value='';
+    };
+    r.readAsText(f);
+  });
+  document.getElementById('edit-reset')?.addEventListener('click',e=>{
+    e.stopPropagation();
+    if(!confirm('确定恢复全部页内文字为最初版本？本地保存的修改会清空。'))return;
+    editNodes.forEach(el=>{
+      const id=el.dataset.editId;
+      if(editDefaults[id]!=null)el.innerHTML=editDefaults[id];
+    });
+    localStorage.removeItem(EDIT_STORE_KEY);
+    editDirty=false;
+    syncSlideTitlesFromEdits();
+    saveEditsNow();
+  });
+}
+
 updatePageNumbers();
+buildNav();
+updateNav();
+initBgFallback();
+initEditor();
+initCatPage();
 initPairGame();
 setTimeout(()=>{
   const qt=document.getElementById('qt');if(qt)qt.textContent=qd[0].t;
   const t0=document.getElementById('pt0');if(t0){t0.textContent=pd[0].p[0];document.getElementById('pt1').textContent=pd[0].p[1];}
   const et=document.getElementById('et');if(et)et.textContent=ed[0].t;
   renderCg();
+  collectEditNodes();
+  try{
+    const raw=localStorage.getItem(EDIT_STORE_KEY);
+    if(raw)loadEditPayload(JSON.parse(raw));
+  }catch(e){}
+  bindEditListeners();
 },50);
 </script>
 </body>
