@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8" />
-<title>超级AI一日营 — 孩子版课件</title>
+<title>超级AI三日营 — 孩子版课件</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -247,11 +247,45 @@ h2 .o{color:#FF6B35}
 .story-dual figure{flex:1;min-width:140px;max-width:220px}
 .story-dual img{width:100%;height:clamp(72px,10vh,100px);object-fit:cover;border-radius:4px;border:1px solid rgba(255,255,255,.15)}
 .story-dual figcaption{font-size:clamp(14px,.8vw,17px);color:rgba(255,255,255,.5);margin-top:4px}
+.day-badge{position:absolute;top:clamp(52px,5.5vh,56px);right:clamp(32px,3.5vw,60px);z-index:6;padding:clamp(4px,.35vh,6px) clamp(12px,1vw,18px);border:1px solid rgba(255,107,53,.35);background:rgba(255,107,53,.1);color:#FF6B35;font-weight:800;font-size:clamp(16px,.95vw,22px);letter-spacing:.06em}
+.day-block{display:none}
+.day-block.active{display:block}
+.road.day-road{grid-template-columns:repeat(4,1fr)}
+.cc .cp video{width:100%;height:100%;object-fit:cover;background:#000}
+.cc .video-err{display:none;position:absolute;inset:0;z-index:9;place-items:center;padding:12px;text-align:center;font-size:clamp(14px,.8vw,18px);color:rgba(255,255,255,.55);background:rgba(0,0,0,.85)}
+.cc .video-err.sh{display:grid}
+.outdoor-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,.9vw,14px);max-width:720px}
+.outdoor-card{border:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.45);overflow:hidden}
+.outdoor-card img{width:100%;height:clamp(88px,12vh,130px);object-fit:cover;display:block}
+.outdoor-card .oc-body{padding:clamp(10px,1vh,14px)}
+.outdoor-card .oc-title{font-family:'Big Shoulders Display','Noto Sans SC',sans-serif;font-weight:800;font-size:clamp(20px,1.2vw,26px);margin-bottom:4px}
+.outdoor-card .oc-text{font-size:clamp(16px,.9vw,20px);color:rgba(255,255,255,.72);line-height:1.4}
+.kolb-compact{display:grid;grid-template-columns:1fr 1fr;gap:clamp(8px,.7vw,12px);max-width:720px}
+.kolb-compact .kc-step{padding:clamp(10px,1vh,14px);border:1px solid rgba(255,255,255,.1);background:rgba(0,0,0,.45);border-left:4px solid var(--kc,#FF6B35)}
+.kolb-compact .kc-step h3{font-size:clamp(18px,1.1vw,24px);color:var(--kc,#FF6B35);margin:0 0 4px}
+.kolb-compact .kc-step p{font-size:clamp(16px,.9vw,20px);color:rgba(255,255,255,.78);margin:0;line-height:1.4}
+.ai-four{display:grid;grid-template-columns:1fr 1fr;gap:clamp(8px,.7vw,12px);max-width:720px;margin-top:clamp(10px,1vh,14px)}
+.ai-four .af-cell{padding:clamp(10px,1vh,14px);border:1px solid rgba(255,255,255,.1);background:rgba(0,0,0,.4);border-left:4px solid var(--af,#FF6B35)}
+.ai-four .af-cell h3{font-size:clamp(17px,1vw,22px);color:var(--af);margin:0 0 4px}
+.ai-four .af-cell p{font-size:clamp(15px,.85vw,19px);color:rgba(255,255,255,.72);margin:0;line-height:1.4}
+.workshop-flow{display:flex;gap:clamp(6px,.5vw,10px);flex-wrap:wrap;margin:clamp(8px,.8vh,12px) 0}
+.workshop-flow .wf-step{flex:1;min-width:100px;text-align:center;padding:clamp(8px,.7vh,10px);border:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.4)}
+.workshop-flow .wf-step b{display:block;color:#FF6B35;font-size:clamp(14px,.8vw,17px);margin-bottom:2px}
+.track-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(8px,.7vw,12px);max-width:780px}
+.track-card{border:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.4);overflow:hidden}
+.track-card img{width:100%;height:clamp(72px,10vh,100px);object-fit:cover}
+.track-card .tc-body{padding:clamp(8px,.8vh,12px)}
+.track-card h3{font-size:clamp(18px,1.1vw,24px);color:#fff;margin:0 0 4px}
+.track-card p{font-size:clamp(15px,.85vw,19px);color:rgba(255,255,255,.7);margin:0;line-height:1.4}
+.pitch-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,1vw,18px);max-width:760px}
+.pitch-line{padding:clamp(14px,1.2vh,20px);border:1px solid rgba(255,255,255,.1);background:rgba(0,0,0,.45);font-size:clamp(22px,1.4vw,32px);font-weight:700;color:#fff;line-height:1.35}
+.pitch-line span{color:#FF6B35;font-size:clamp(14px,.8vw,18px);font-weight:600;display:block;margin-bottom:6px;letter-spacing:.04em}
+@media(max-width:768px){.outdoor-grid,.track-grid,.pitch-grid,.kolb-compact,.ai-four{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <header class="nav-bar" id="nav-bar">
-  <div class="nav-info"><span id="nav-page">01 / 29</span><b id="nav-title">封面</b></div>
+  <div class="nav-info"><span id="nav-page">01 / 25</span><b id="nav-title">封面</b></div>
   <div class="nav-actions">
     <div class="edit-tools" id="edit-tools">
       <span class="edit-status" id="edit-status">已保存</span>
@@ -269,15 +303,16 @@ h2 .o{color:#FF6B35}
 <div class="deck"><div class="stage">
 
 <!-- S1: COVER -->
-<section class="slide active" data-title="封面" data-chapter="intro">
+<section class="slide active" data-title="封面" data-chapter="intro" data-day="1">
   <div class="pb"><img src="assets/bg/cover.jpg" alt="" /></div>
   <div class="od"></div>
+  <div class="day-badge" id="day-badge">第 1 天</div>
   <div class="pos" style="top:clamp(56px,7vh,120px);left:clamp(32px,3.5vw,60px);z-index:5">
-    <h1>超级<br/>AI<span class="o">一日营</span></h1>
+    <h1>超级<br/>AI<span class="o">三日营</span></h1>
     <div class="p" style="font-size:clamp(20px,1.4vw,32px);color:rgba(255,255,255,.5);max-width:clamp(260px,30vw,480px);margin-top:clamp(6px,.6vh,12px)">教孩子 <b>用AI解决真问题</b></div>
   </div>
   <div class="pos" style="left:clamp(32px,3.5vw,60px);bottom:clamp(24px,2.5vh,40px);z-index:5;display:flex;align-items:center;gap:clamp(12px,1.5vw,24px);border-top:1px solid rgba(255,255,255,.04);padding-top:clamp(6px,.6vh,10px)">
-    <span style="font-size:clamp(12px,.7vw,16px);color:rgba(255,255,255,.2)">夏令营 · 线下 · 3-5h</span>
+    <span style="font-size:clamp(12px,.7vw,16px);color:rgba(255,255,255,.2)">夏令营 · 线下 · 每日 90–120 分钟</span>
     <span style="display:flex;gap:4px">
       <span style="padding:1px 6px;border:1px solid rgba(255,255,255,.08);font-size:clamp(10px,.6vw,14px);color:rgba(255,255,255,.35);font-weight:600;letter-spacing:.06em">体验</span>
       <span style="padding:1px 6px;border:1px solid rgba(255,255,255,.08);font-size:clamp(10px,.6vw,14px);color:rgba(255,255,255,.35);font-weight:600;letter-spacing:.06em">观察</span>
@@ -289,34 +324,37 @@ h2 .o{color:#FF6B35}
 </section>
 
 <!-- S2: OBJECTIVES -->
-<section class="slide" data-title="学习目标" data-chapter="intro">
+<section class="slide" data-title="学习目标" data-chapter="intro" data-day="1">
   <div class="pb"><img src="assets/bg/goals.jpg" alt="" /></div>
   <div class="ol od-strong"></div>
   <div class="mode mt">讲解</div>
-  <div class="slide-panel">
-    <h2>今天结束，你能讲清楚<span class="o">四件事</span></h2>
-    <p class="lead">今天不是背概念，是<b>玩明白、做明白</b>。下面四件事，用你自己的话就能说给同桌听。</p>
-    <div class="goal-list">
-      <article class="goal-item" style="border-left:4px solid #FF6B35">
-        <div class="goal-num" style="color:#FF6B35">1</div>
-        <div><h3>人是怎么学会一件事的？</h3>
-        <p>体验 → 观察 → 思考 → 实践。后面有<b>学骑车</b>的完整故事。</p></div>
-      </article>
-      <article class="goal-item" style="border-left:4px solid #457B9D">
-        <div class="goal-num" style="color:#457B9D">2</div>
-        <div><h3>AI 没有身体，怎么「上学」？</h3>
-        <p>数据 → 统计 → 调参 → 模型。<b>AI 不是魔法，是特别会学习。</b></p></div>
-      </article>
-      <article class="goal-item" style="border-left:4px solid #2A9D8F">
-        <div class="goal-num" style="color:#2A9D8F">3</div>
-        <div><h3>怎么分辨真的和 AI 做的？</h3>
-        <p>猫视频闯关，学会找破绽。<b>刷视频时多留心一眼。</b></p></div>
-      </article>
-      <article class="goal-item" style="border-left:4px solid #D62828">
-        <div class="goal-num" style="color:#D62828">4</div>
-        <div><h3>用 AI 解决一个真问题</h3>
-        <p>分组选题，用豆包/通义/Kimi 想主意，画海报展示。<b>AI 出点子，你们拍板。</b></p></div>
-      </article>
+  <div class="slide-panel" id="goals-panel">
+    <div class="day-block active" data-day-goals="1">
+      <h2>Day 1 · 今天你能讲清<span class="o">三件事</span></h2>
+      <p class="lead">人、自然、AI 三种「聪明」——<b>玩明白、做明白</b>。</p>
+      <div class="goal-list">
+        <article class="goal-item" style="border-left:4px solid #FF6B35"><div class="goal-num" style="color:#FF6B35">1</div><div><h3>人怎么学会一件事？</h3><p>体验→观察→思考→实践。<b>户外三站 + 学骑车故事。</b></p></div></article>
+        <article class="goal-item" style="border-left:4px solid #2A9D8F"><div class="goal-num" style="color:#2A9D8F">2</div><div><h3>自然里藏着什么规律？</h3><p>观星、贝壳螺旋、蚁群找路。<b>古人从自然发明。</b></p></div></article>
+        <article class="goal-item" style="border-left:4px solid #457B9D"><div class="goal-num" style="color:#457B9D">3</div><div><h3>怎么分辨 AI 做的？</h3><p>猫视频闯关找破绽。<b>刷视频多留心一眼。</b></p></div></article>
+      </div>
+    </div>
+    <div class="day-block" data-day-goals="2">
+      <h2>Day 2 · 今天你能<span class="o">用 AI 创作</span></h2>
+      <p class="lead">最新 AI 工具 + 好 Prompt + 小组作品。</p>
+      <div class="goal-list">
+        <article class="goal-item" style="border-left:4px solid #457B9D"><div class="goal-num" style="color:#457B9D">1</div><div><h3>AI 怎么「上学」？</h3><p>数据→统计→调参→模型。<b>对照人的四步。</b></p></div></article>
+        <article class="goal-item" style="border-left:4px solid #FF6B35"><div class="goal-num" style="color:#FF6B35">2</div><div><h3>怎么写好 Prompt？</h3><p>越具体 AI 越懂你。<b>擂台 + 错题本。</b></p></div></article>
+        <article class="goal-item" style="border-left:4px solid #2A9D8F"><div class="goal-num" style="color:#2A9D8F">3</div><div><h3>做出一件作品</h3><p>网页 / 歌词 / 视频脚本。<b>AI 出稿，人来改。</b></p></div></article>
+      </div>
+    </div>
+    <div class="day-block" data-day-goals="3">
+      <h2>Day 3 · 今天你能<span class="o">解决真问题</span></h2>
+      <p class="lead">选营地里的真烦恼，用 AI 想主意，上台路演。</p>
+      <div class="goal-list">
+        <article class="goal-item" style="border-left:4px solid #D62828"><div class="goal-num" style="color:#D62828">1</div><div><h3>什么是真问题？</h3><p>天气、分组、山路安全……<b>身边能改的事。</b></p></div></article>
+        <article class="goal-item" style="border-left:4px solid #FF6B35"><div class="goal-num" style="color:#FF6B35">2</div><div><h3>AI 帮什么、人改什么</h3><p>问 AI 列主意，<b>你们拍板、画海报。</b></p></div></article>
+        <article class="goal-item" style="border-left:4px solid #2A9D8F"><div class="goal-num" style="color:#2A9D8F">3</div><div><h3>四句话路演</h3><p>问题→方案→AI帮了啥→人改了啥。<b>小组展示。</b></p></div></article>
+      </div>
     </div>
     <p class="teacher-cue">跟同桌说一句：你最期待哪一件？</p>
   </div>
@@ -324,26 +362,47 @@ h2 .o{color:#FF6B35}
 </section>
 
 <!-- S3: ROADMAP -->
-<section class="slide" data-title="今日路线" data-chapter="intro">
+<section class="slide" data-title="今日路线" data-chapter="intro" data-day="1">
   <div class="pb"><img src="assets/bg/roadmap.jpg" alt="" /></div>
   <div class="ol od-strong"></div>
   <div class="mode mt">路线</div>
-  <div class="slide-panel roadmap-wrap">
-    <h2>今日<span class="o">路线</span></h2>
-    <p class="lead">全程约 <b>3.5 小时</b>。老师带着走，不用记页码——想跳哪一段，点顶栏「目录」。</p>
-    <div class="road">
-      <div class="rg"><div class="rt">①</div><div class="rn">识破AI猫</div><div class="rm">25分</div></div>
-      <div class="rg"><div class="rt">②</div><div class="rn">人怎么学</div><div class="rm">50分</div></div>
-      <div class="rg"><div class="rt">③</div><div class="rn">自然四故事</div><div class="rm">40分</div></div>
-      <div class="rg"><div class="rt">④</div><div class="rn">AI+实验</div><div class="rm">70分</div></div>
-      <div class="rg"><div class="rt">⑤</div><div class="rn">真问题</div><div class="rm">45分</div></div>
+  <div class="slide-panel roadmap-wrap" id="roadmap-panel">
+    <div class="day-block active" data-day-road="1">
+      <h2>Day 1 · 今日<span class="o">路线</span></h2>
+      <p class="lead">约 <b>90–120 分钟</b>。点顶栏「目录」按 Day 跳转。</p>
+      <div class="road day-road">
+        <div class="rg"><div class="rt">①</div><div class="rn">识破 AI 猫</div><div class="rm">25分</div></div>
+        <div class="rg"><div class="rt">②</div><div class="rn">户外三站</div><div class="rm">20分</div></div>
+        <div class="rg"><div class="rt">③</div><div class="rn">人的故事</div><div class="rm">35分</div></div>
+        <div class="rg"><div class="rt">④</div><div class="rn">自然故事</div><div class="rm">30分</div></div>
+      </div>
+    </div>
+    <div class="day-block" data-day-road="2">
+      <h2>Day 2 · 今日<span class="o">路线</span></h2>
+      <p class="lead">约 <b>90–120 分钟</b>。工具演示 + 创作工坊。</p>
+      <div class="road day-road">
+        <div class="rg"><div class="rt">①</div><div class="rn">AI 怎么学</div><div class="rm">30分</div></div>
+        <div class="rg"><div class="rt">②</div><div class="rn">游戏闯关</div><div class="rm">25分</div></div>
+        <div class="rg"><div class="rt">③</div><div class="rn">工具演示</div><div class="rm">10分</div></div>
+        <div class="rg"><div class="rt">④</div><div class="rn">创作工坊</div><div class="rm">40分</div></div>
+      </div>
+    </div>
+    <div class="day-block" data-day-road="3">
+      <h2>Day 3 · 今日<span class="o">路线</span></h2>
+      <p class="lead">约 <b>90–120 分钟</b>。真问题 + 路演 + 结业。</p>
+      <div class="road day-road">
+        <div class="rg"><div class="rt">①</div><div class="rn">选真问题</div><div class="rm">15分</div></div>
+        <div class="rg"><div class="rt">②</div><div class="rn">问 AI 做海报</div><div class="rm">50分</div></div>
+        <div class="rg"><div class="rt">③</div><div class="rn">小组路演</div><div class="rm">25分</div></div>
+        <div class="rg"><div class="rt">④</div><div class="rn">三日结业</div><div class="rm">10分</div></div>
+      </div>
     </div>
   </div>
   <div class="pgn"></div>
 </section>
 
 <!-- S4: CAT CHALLENGE -->
-<section class="slide slide-cat" style="background:#0a0a0a" data-slide-interactive data-title="猫挑战" data-chapter="cat">
+<section class="slide slide-cat" style="background:#0a0a0a" data-slide-interactive data-title="猫挑战" data-chapter="cat" data-day="1">
   <div class="pb"><img src="assets/bg/cat-challenge.jpg" alt="" /></div>
   <div class="od"></div>
   <div class="mode mh">动手</div>
@@ -356,24 +415,24 @@ h2 .o{color:#FF6B35}
       <div class="cg">
         <div class="cc" id="c0" data-cat-i="0">
           <button type="button" class="play-hit" data-no-advance aria-label="播放视频1"></button>
-          <img class="th" src="https://img.youtube.com/vi/g6dhJx_GXaA/hqdefault.jpg" alt="可爱的日常猫"/>
+          <img class="th" src="assets/cats/cat_daily.jpg" alt="可爱的日常猫"/>
           <div class="play-btn">▶</div>
           <div class="lb">01 · 可爱的日常猫</div>
-          <div class="cp" id="cp0"><iframe src="" allow="autoplay; encrypted-media; fullscreen" allowfullscreen title="01 日常猫"></iframe></div>
+          <div class="cp" id="cp0"><video playsinline muted loop preload="metadata" src="assets/cats/cat_daily.mp4" title="01 日常猫"></video><iframe src="" allow="autoplay; encrypted-media; fullscreen" allowfullscreen title="01 日常猫" style="display:none"></iframe><div class="video-err">请检查视频文件 assets/cats/cat_daily.mp4</div></div>
         </div>
         <div class="cc" id="c1" data-cat-i="1">
           <button type="button" class="play-hit" data-no-advance aria-label="播放视频2"></button>
-          <img class="th" src="https://img.youtube.com/vi/k8DzLwHWIbk/hqdefault.jpg" alt="穿西装上班的猫"/>
+          <img class="th" src="assets/cats/cat_office.jpg" alt="穿西装上班的猫"/>
           <div class="play-btn">▶</div>
           <div class="lb">02 · 穿西装上班的猫</div>
-          <div class="cp" id="cp1"><iframe src="" allow="autoplay; encrypted-media; fullscreen" allowfullscreen title="02 上班猫"></iframe></div>
+          <div class="cp" id="cp1"><video playsinline muted loop preload="metadata" src="assets/cats/cat_office.mp4" title="02 上班猫"></video><iframe src="" allow="autoplay; encrypted-media; fullscreen" allowfullscreen title="02 上班猫" style="display:none"></iframe><div class="video-err">请检查视频文件 assets/cats/cat_office.mp4</div></div>
         </div>
         <div class="cc" id="c2" data-cat-i="2">
           <button type="button" class="play-hit" data-no-advance aria-label="播放视频3"></button>
-          <img class="th" src="https://img.youtube.com/vi/_fbiQUff82w/hqdefault.jpg" alt="背书包上学的猫"/>
+          <img class="th" src="assets/cats/cat_school.jpg" alt="背书包上学的猫"/>
           <div class="play-btn">▶</div>
           <div class="lb">03 · 背书包上学的猫</div>
-          <div class="cp" id="cp2"><iframe src="" allow="autoplay; encrypted-media; fullscreen" allowfullscreen title="03 上学猫"></iframe></div>
+          <div class="cp" id="cp2"><video playsinline muted loop preload="metadata" src="assets/cats/cat_school.mp4" title="03 上学猫"></video><iframe src="" allow="autoplay; encrypted-media; fullscreen" allowfullscreen title="03 上学猫" style="display:none"></iframe><div class="video-err">请检查视频文件 assets/cats/cat_school.mp4</div></div>
         </div>
       </div>
     </div>
@@ -397,85 +456,44 @@ h2 .o{color:#FF6B35}
 
 
 <!-- S5: Outdoor experiential learning -->
-<section class="slide" data-title="户外体验" data-chapter="cat">
+<section class="slide" data-title="户外体验" data-chapter="cat" data-day="1">
   <div class="pb"><img src="assets/bg/nature.jpg" alt="" /></div>
   <div class="ol od-strong"></div>
   <div class="mode ms">活动</div>
   <div class="slide-panel">
     <h2>山野草地 · <span class="o">真的</span>来学四步</h2>
-    <p class="lead">我们在户外——用<b>星星、贝壳、玩具</b>练 <b>体验 → 观察 → 思考 → 实践</b>。不是做手势，是真的看一看、摸一摸、想一想。</p>
-    <div class="gesture-grid">
-      <div class="gesture-card"><div class="g-label" style="color:#457B9D">星空与节气</div><div class="g-action">抬头认星座方位，做简易星盘；想想星星和二十四节气有什么关系</div></div>
-      <div class="gesture-card"><div class="g-label" style="color:#2A9D8F">贝壳与螺旋</div><div class="g-action">摸螺线纹路，找阿基米德螺旋；楼梯、漩涡、花瓣里也有同款规律</div></div>
-      <div class="gesture-card"><div class="g-label" style="color:#FF6B35">挑战玩具</div><div class="g-action">玩一件有点难的小玩具——怎么动、哪里卡、结构长什么样</div></div>
-      <div class="gesture-card"><div class="g-label" style="color:#D62828">每组 1 句</div><div class="g-action">选一站，用四步各说 1 句：体验 / 观察 / 思考 / 实践</div></div>
+    <p class="lead">用<b>星星、贝壳、玩具</b>练体验→观察→思考→实践。</p>
+    <div class="outdoor-grid">
+      <div class="outdoor-card"><img src="assets/day1/stars.jpg" alt="星空与节气"/><div class="oc-body"><div class="oc-title" style="color:#457B9D">星空与节气</div><div class="oc-text">认星座方位，想星星和二十四节气</div></div></div>
+      <div class="outdoor-card"><img src="assets/day1/shell-spiral.jpg" alt="贝壳与螺旋"/><div class="oc-body"><div class="oc-title" style="color:#2A9D8F">贝壳与螺旋</div><div class="oc-text">摸螺线，找阿基米德螺旋同款规律</div></div></div>
+      <div class="outdoor-card"><img src="assets/day1/toy.jpg" alt="挑战玩具"/><div class="oc-body"><div class="oc-title" style="color:#FF6B35">挑战玩具</div><div class="oc-text">玩难一点的玩具，说清怎么动、哪里卡</div></div></div>
     </div>
-    <p class="teacher-cue">老师分组轮转三站，每站约 6 分钟；回教室后会对上「古人观星」的故事。</p>
+    <p class="teacher-cue">三站轮转，每站约 6 分钟；每组用四步各说 1 句。</p>
   </div>
   <div class="pgn"></div>
 </section>
 
-<!-- S6-S9: 4 steps -->
-<section class="slide" data-title="体验·猫视频" data-chapter="cat">
+<!-- S6: 猫练四步（合并） -->
+<section class="slide" data-title="猫练四步" data-chapter="cat" data-day="1">
   <div class="pb"><img src="assets/bg/cat-exp.jpg" alt="" /></div>
   <div class="ol"></div>
-  <div class="mode ms">活动</div>
-  <div class="kw" style="justify-content:center">
-    <div class="kh"><h2 style="color:#FF6B35">体验</h2></div>
-    <div class="p" style="max-width:550px;margin-bottom:clamp(4px,.4vh,8px)"><b>亲手做。</b>点开看→听→感受</div>
-    <div class="ks" style="grid-template-columns:1fr;max-width:550px">
-      <div class="kc" style="cursor:default;border-color:rgba(255,107,53,.12)"><div class="kt"><div class="kn" style="background:#FF6B35;color:#fff">例</div><div class="ktl">回看刚才的 AI 猫视频</div></div><div class="kb" style="display:block"><p>你点开一段视频：猫在动、有声音、毛茸茸的。<b>你不需要别人先告诉你"猫是什么"——你亲眼看到了。这就是"体验"。</b></p></div></div>
+  <div class="mode ms">总结</div>
+  <div class="slide-panel">
+    <h2>猫视频 · <span class="o">练四步</span></h2>
+    <p class="lead">回到 p4 投票——用四步串起刚才的经历。</p>
+    <div class="kolb-compact">
+      <div class="kc-step" style="--kc:#FF6B35"><h3>体验</h3><p>点开看、听、感受——<b>亲手「遇到」猫视频</b></p></div>
+      <div class="kc-step" style="--kc:#457B9D"><h3>观察</h3><p>爪子飘、毛太齐、背景假——<b>回放挑细节</b></p></div>
+      <div class="kc-step" style="--kc:#2A9D8F"><h3>思考</h3><p>总结「真猫标准」——<b>有重量感、毛不完美</b></p></div>
+      <div class="kc-step" style="--kc:#D62828"><h3>实践</h3><p>投票揭晓——<b>三段全是 AI，标准要改</b></p></div>
     </div>
+    <p class="teacher-cue">跟同桌说：你投的那一段，为什么觉得最像真的？</p>
   </div>
-  <div class="pgn"></div>
-</section>
-
-<section class="slide" data-title="观察·猫视频" data-chapter="cat">
-  <div class="pb"><img src="assets/bg/cat-obs.jpg" alt="" /></div>
-  <div class="ol"></div>
-  <div class="mode md">讨论</div>
-  <div class="kw" style="justify-content:center">
-    <div class="kh"><h2 style="color:#457B9D">观察</h2></div>
-    <div class="p" style="max-width:550px;margin-bottom:clamp(4px,.4vh,8px)"><b>退后一步。</b>你注意到了什么细节？</div>
-    <div class="ks" style="grid-template-columns:1fr;max-width:550px">
-      <div class="kc" style="cursor:default;border-color:rgba(69,123,157,.12)"><div class="kt"><div class="kn" style="background:#457B9D;color:#fff">例</div><div class="ktl">回想三段猫视频</div></div><div class="kb" style="display:block"><p>"爪子落地有点飘、毛太整齐、背景有点假……"<b>你在脑子里回放，挑出细节——这就是"观察"。</b></p></div></div>
-    </div>
-  </div>
-  <div class="tps"><b>跟同桌说：</b>你看猫视频时，发现了什么奇怪的地方？</div>
-  <div class="pgn"></div>
-</section>
-
-<section class="slide" data-title="思考·猫视频" data-chapter="cat">
-  <div class="pb"><img src="assets/bg/cat-think.jpg" alt="" /></div>
-  <div class="ol"></div>
-  <div class="mode mt">讲解</div>
-  <div class="kw" style="justify-content:center">
-    <div class="kh"><h2 style="color:#2A9D8F">思考</h2></div>
-    <div class="p" style="max-width:550px;margin-bottom:clamp(4px,.4vh,8px)"><b>总结规律。</b>变成知识。</div>
-    <div class="ks" style="grid-template-columns:1fr;max-width:550px">
-      <div class="kc" style="cursor:default;border-color:rgba(42,157,143,.12)"><div class="kt"><div class="kn" style="background:#2A9D8F;color:#fff">例</div><div class="ktl">你总结"真猫长什么样"</div></div><div class="kb" style="display:block"><p>"真猫走路有重量感，毛不会一直完美，背景会和环境对得上……"<b>你在脑子里建了一个"真猫的标准"——这就是"思考"。</b></p></div></div>
-    </div>
-  </div>
-  <div class="pgn"></div>
-</section>
-
-<section class="slide" data-title="实践·投票" data-chapter="cat">
-  <div class="pb"><img src="assets/bg/cat-do.jpg" alt="" /></div>
-  <div class="ol"></div>
-  <div class="mode mh">动手</div>
-  <div class="kw" style="justify-content:center">
-    <div class="kh"><h2 style="color:#D62828">实践</h2></div>
-    <div class="p" style="max-width:550px;margin-bottom:clamp(4px,.4vh,8px)"><b>用起来。</b>投票验证，揭晓答案。</div>
-    <div class="ks" style="grid-template-columns:1fr;max-width:550px">
-      <div class="kc" style="cursor:default;border-color:rgba(214,40,40,.12)"><div class="kt"><div class="kn" style="background:#D62828;color:#fff">例</div><div class="ktl">投票：哪段最像真的？</div></div><div class="kb" style="display:block"><p>你投了一票，以为找到了真的——结果老师揭晓：<b>三段全是 AI 生成的！</b>你的"真猫标准"要改一改了。这就是"实践"——试了才知道对不对。</p></div></div>
-    </div>
-  </div>
-  <div class="tps"><b>跟同桌说：</b>你投的那一段，为什么你觉得它最像真的？</div>
   <div class="pgn"></div>
 </section>
 
 <!-- S10: Summary -->
-<section class="slide" data-title="科尔布总结" data-chapter="human">
+<section class="slide" data-title="科尔布总结" data-chapter="human" data-day="1">
   <div class="pb"><img src="assets/bg/nature.jpg" alt="" /></div>
   <div class="ol"></div>
   <div class="mode ms">总结</div>
@@ -493,44 +511,44 @@ h2 .o{color:#FF6B35}
 </section>
 
 <!-- 故事1：学骑车 -->
-<section class="slide" data-title="学骑车" data-chapter="human">
+<section class="slide" data-title="学骑车" data-chapter="human" data-day="1">
   <div class="pb"><img src="assets/bg/bike.jpg" alt="" /></div>
   <div class="ol od-strong"></div>
   <div class="mode ms">故事</div>
   <div class="slide-panel story-panel">
     <h2>学骑车 — <span class="o">你自己的</span> Kolb 故事</h2>
-    <p class="lead">很多同学都学过骑车。用四步讲完整——这也是<b>人类</b>怎么学会一件事的样板。</p>
+    <p class="lead">人类怎么学会一件事？用四步讲完整。</p>
     <div class="kolb-table">
-      <div class="k-row"><div class="k-label">体验</div><p class="k-text">第一次跨上车，脚一踩就晃，摔了。<b>膝盖擦破皮。</b> 疼，但你真实感受到了什么叫「平衡」。</p></div>
-      <div class="k-row k-obs"><div class="k-label">观察</div><p class="k-text">看别人骑——<b>速度快反而更稳。</b> 眼睛要看前方，不是死盯着车轮。</p></div>
-      <div class="k-row k-think"><div class="k-label">思考</div><p class="k-text">「速度 = 稳定。越紧张越容易倒，放松反而稳。看哪里，车就往哪里走。」——<b>你把体验变成了口诀。</b></p></div>
-      <div class="k-row k-do"><div class="k-label">实践</div><p class="k-text">再骑一次，加速，看远方——<b>骑出 10 米没倒！</b> 转弯又摔了。修正：转弯要倾斜。再试——成功了！</p></div>
+      <div class="k-row"><div class="k-label">体验</div><p class="k-text">跨上车就晃，<b>摔了擦破皮</b>——真实感受平衡</p></div>
+      <div class="k-row k-obs"><div class="k-label">观察</div><p class="k-text"><b>速度快更稳</b>，眼睛看前方不是车轮</p></div>
+      <div class="k-row k-think"><div class="k-label">思考</div><p class="k-text">「速度=稳定，看哪里车往哪里」——<b>变成口诀</b></p></div>
+      <div class="k-row k-do"><div class="k-label">实践</div><p class="k-text">再骑 <b>10 米没倒</b>；转弯摔了再改——成功了</p></div>
     </div>
-    <p class="story-foot"><b>跟同桌说：</b>你学一样东西时，哪一步最难？</p>
+    <p class="story-foot"><b>跟同桌说：</b>你学本领时，哪一步最难？</p>
   </div>
   <div class="pgn"></div>
 </section>
 
 <!-- 故事2：古人观星 -->
-<section class="slide" data-title="古人观星" data-chapter="human">
+<section class="slide" data-title="古人观星" data-chapter="human" data-day="1">
   <div class="pb"><img src="assets/bg/stars.jpg" alt="" /></div>
   <div class="od od-strong"></div>
   <div class="mode mt">讲解</div>
   <div class="slide-panel story-panel">
     <h2>古人观星 — 从星星到<span class="o">日历</span></h2>
-    <p class="lead">古人没有手机日历，却从同一片星空里读出了季节——体验 → 观察 → 思考 → 实践。</p>
+    <p class="lead">没有手机日历，却从星空读出季节。</p>
     <div class="kolb-table">
-      <div class="k-row"><div class="k-label">体验</div><p class="k-text">每晚躺在草地上看星星。<b>位置一直在变。</b></p></div>
-      <div class="k-row k-obs"><div class="k-label">观察</div><p class="k-text">记了几年——<b>北斗春天在东方，夏天在头顶，秋天在西方。</b> 它像大钟的指针，在慢慢转。</p></div>
-      <div class="k-row k-think"><div class="k-label">思考</div><p class="k-text">「斗柄指东，天下皆春。斗柄指南，天下皆夏……」<b>星星的规律 = 季节的规律。</b></p></div>
-      <div class="k-row k-do"><div class="k-label">实践</div><p class="k-text">用星空日历种地——北斗指东时播种，<b>收成更好了。</b> 一代代传下去，这是最早的农业科学。</p></div>
+      <div class="k-row"><div class="k-label">体验</div><p class="k-text">每晚看星星，<b>位置一直在变</b></p></div>
+      <div class="k-row k-obs"><div class="k-label">观察</div><p class="k-text"><b>北斗春东夏顶秋西</b>——像大钟指针在转</p></div>
+      <div class="k-row k-think"><div class="k-label">思考</div><p class="k-text">斗柄指东天下皆春……<b>星星规律=季节规律</b></p></div>
+      <div class="k-row k-do"><div class="k-label">实践</div><p class="k-text">按星空日历种地，<b>收成更好</b>——最早农业科学</p></div>
     </div>
-    <p class="story-foot"><b>古人用眼睛观察；AI 用成千上万张照片。</b> 大自然 → 数学 → 代码 → AI</p>
+    <p class="story-foot"><b>古人用眼睛；AI 用成千上万张照片。</b></p>
   </div>
   <div class="pgn"></div>
 </section>
 <!-- GAME: 古人发明的秘密 — 配对互动（上一页：古人观星故事） -->
-<section class="slide" style="background:#0c0c0c" data-slide-interactive id="slide-pair" data-title="古人配对" data-chapter="nature">
+<section class="slide" style="background:#0c0c0c" data-slide-interactive id="slide-pair" data-title="古人配对" data-chapter="nature" data-day="1">
   <div class="mode mh">游戏</div>
   <div class="pos" style="top:clamp(14px,1.5vh,28px);left:50%;transform:translateX(-50%);z-index:10;text-align:center;width:90%">
     <h2 style="font-size:clamp(28px,3vw,52px)">古人发明的<span class="o">秘密</span></h2>
@@ -554,44 +572,44 @@ h2 .o{color:#FF6B35}
   <div class="pgn"></div>
 </section>
 <!-- 故事3：蚁群找路 -->
-<section class="slide" data-title="蚁群找路" data-chapter="nature">
+<section class="slide" data-title="蚁群找路" data-chapter="nature" data-day="1">
   <div class="pb"><img src="assets/bg/ants.jpg" alt="" /></div>
   <div class="ol od-strong"></div>
   <div class="mode ms">故事</div>
   <div class="slide-panel story-panel">
     <h2>蚁群找路 — 跟蚂蚁学<span class="o">找路</span></h2>
-    <p class="lead">蚂蚁不会说话，却帮人类解决了「快递怎么送最快」——也是体验 → 观察 → 思考 → 实践。</p>
+    <p class="lead">蚂蚁帮人类解决「快递怎么送最快」。</p>
     <div class="kolb-table">
-      <div class="k-row"><div class="k-label">体验</div><p class="k-text">一只蚂蚁出洞找食物，东爬西爬，<b>完全随机。</b></p></div>
-      <div class="k-row k-obs"><div class="k-label">观察</div><p class="k-text">找到食物后留下「气味路」。别的蚂蚁跟着走，<b>走的人越多气味越浓——最短的路人气最旺。</b></p></div>
-      <div class="k-row k-think"><div class="k-label">思考</div><p class="k-text">整群蚂蚁像一个大脑——<b>用气味「投票」出最佳路线。这就是群体智慧。</b></p></div>
-      <div class="k-row k-do"><div class="k-label">实践</div><p class="k-text">科学家写成「蚁群算法」→ <b>快递公司规划路线，互联网找最快路径。</b></p></div>
+      <div class="k-row"><div class="k-label">体验</div><p class="k-text">出洞找食，<b>东爬西爬完全随机</b></p></div>
+      <div class="k-row k-obs"><div class="k-label">观察</div><p class="k-text">留气味路，<b>走的人越多气味越浓</b></p></div>
+      <div class="k-row k-think"><div class="k-label">思考</div><p class="k-text">整群像大脑——<b>用气味投票出最佳路线</b></p></div>
+      <div class="k-row k-do"><div class="k-label">实践</div><p class="k-text">写成蚁群算法 → <b>快递路线、互联网寻路</b></p></div>
     </div>
-    <p class="story-foot"><b>科学家把自然写进计算机</b> —— 这就是通向 AI 的路。</p>
+    <p class="story-foot"><b>科学家把自然写进计算机</b> —— 通向 AI 的路。</p>
   </div>
   <div class="pgn"></div>
 </section>
 
 <!-- 故事4：西番莲与长翅蝶 — 共同进化 -->
-<section class="slide" data-title="花蝶毒战" data-chapter="nature">
+<section class="slide" data-title="花蝶毒战" data-chapter="nature" data-day="1">
   <div class="pb"><img src="assets/bg/butterfly.jpg" alt="" /></div>
   <div class="od od-strong"></div>
   <div class="mode ms">故事</div>
   <div class="slide-panel story-panel">
     <h2>西番莲与长翅蝶 — <span class="o">毒与攻防</span></h2>
-    <p class="lead">植物和昆虫之间长达千万年的<b>共同进化</b>——你变，我也得变。（不是「花蜜很深」那种简单故事。）</p>
+    <p class="lead">植物和昆虫千万年的<b>共同进化</b>。</p>
     <div class="kolb-table">
-      <div class="k-row"><div class="k-label">体验</div><p class="k-text">毛毛虫趴在毒叶子上大吃一顿——<b>叶子含氰化物，别的虫吃了会死。</b></p></div>
-      <div class="k-row k-obs"><div class="k-label">观察</div><p class="k-text">吃了毒叶不但没事，自己也有毒了。变成蝴蝶后，<b>翅膀鲜艳得像在喊「别吃我」。</b></p></div>
-      <div class="k-row k-think"><div class="k-label">思考</div><p class="k-text">西番莲产毒 → 蝴蝶解毒并存毒 → 西番莲长出「假卵」 → 蝴蝶进化更长产卵器……<b>一轮轮「我变你也得变」，这就是共同进化。</b></p></div>
-      <div class="k-row k-do"><div class="k-label">实践</div><p class="k-text">每一次产卵、每一口叶子都是自然实验。千万年来两物种互相塑造——<b>植物不思考，但进化在替它思考。</b></p></div>
+      <div class="k-row"><div class="k-label">体验</div><p class="k-text">毛毛虫吃毒叶，<b>别的虫吃了会死</b></p></div>
+      <div class="k-row k-obs"><div class="k-label">观察</div><p class="k-text">没事还存毒，蝴蝶<b>翅膀鲜艳喊「别吃我」</b></p></div>
+      <div class="k-row k-think"><div class="k-label">思考</div><p class="k-text">产毒→解毒→假卵→更长产卵器……<b>我变你也得变</b></p></div>
+      <div class="k-row k-do"><div class="k-label">实践</div><p class="k-text">每一口叶子都是自然实验——<b>进化在替它思考</b></p></div>
     </div>
-    <p class="story-foot">大自然里的攻防——<b>AI 也会根据新例子不断改答案。</b></p>
+    <p class="story-foot">大自然攻防——<b>AI 也会根据新例子改答案。</b></p>
   </div>
   <div class="pgn"></div>
 </section>
 <!-- GAME: AI还是人？速答挑战 -->
-<section class="slide" style="background:#0c0c0c" data-slide-interactive data-title="AI还是人" data-chapter="ai">
+<section class="slide" style="background:#0c0c0c" data-slide-interactive data-title="AI还是人" data-chapter="ai" data-day="2">
   <div class="mode mh">游戏</div>
   <div class="pos" style="top:clamp(14px,1.5vh,28px);left:50%;transform:translateX(-50%);z-index:10;text-align:center;width:90%">
     <h2 style="font-size:clamp(28px,3vw,52px)"><span class="o">AI</span>还是人？速答挑战</h2>
@@ -634,55 +652,32 @@ h2 .o{color:#FF6B35}
 
 <!-- ═══ AI LEARNING ═══ -->
 
-<section class="slide" data-title="AI怎么学" data-chapter="ai">
+<section class="slide" data-title="AI怎么学" data-chapter="ai" data-day="2">
   <div class="pb"><img src="assets/bg/ai-intro.jpg" alt="" /></div>
   <div class="ol"></div>
   <div class="mode mt">讲解</div>
-  <div class="sh">
-    <div class="num">AI</div>
+  <div class="slide-panel">
+    <div class="num" style="font-family:'Big Shoulders Display','Noto Sans SC',sans-serif;font-weight:900;font-size:clamp(40px,4vw,72px);color:rgba(255,255,255,.06);line-height:1;margin-bottom:4px">AI</div>
     <h2>AI怎么<span class="o">学习</span>？</h2>
-    <div class="p" style="max-width:500px;margin:0 auto"><b>体验→观察→思考→实践</b> 对应 <b>数据→统计→调参→模型</b></div>
-    <div class="fw" style="margin-top:clamp(10px,1vh,16px)">
+    <p class="lead"><b>体验→观察→思考→实践</b> 对应 <b>数据→统计→调参→模型</b></p>
+    <div class="fw" style="margin:clamp(8px,.8vh,12px) 0">
       <div class="fs" style="border-color:#FF6B35;color:#FF6B35">数据</div><span class="fa">→</span>
       <div class="fs" style="border-color:#457B9D;color:#457B9D">统计</div><span class="fa">→</span>
       <div class="fs" style="border-color:#2A9D8F;color:#2A9D8F">调参</div><span class="fa">→</span>
       <div class="fs" style="border-color:#D62828;color:#D62828">模型</div>
     </div>
+    <div class="ai-four">
+      <div class="af-cell" style="--af:#FF6B35"><h3>数据 · AI 的「体验」</h3><p>百万张标好「这是猫」的图——<b>没身体也能「见到」猫</b></p></div>
+      <div class="af-cell" style="--af:#457B9D"><h3>统计 · AI 的「观察」</h3><p>从海量文字找规律——<b>像你从猫视频挑细节</b></p></div>
+      <div class="af-cell" style="--af:#2A9D8F"><h3>调参 · AI 的「思考」</h3><p>答错了就多给例子、改 Prompt——<b>修正自己的答案</b></p></div>
+      <div class="af-cell" style="--af:#D62828"><h3>模型 · AI 的「实践」</h3><p>学会的全压缩进模型——<b>几毫秒判断新图片</b></p></div>
+    </div>
   </div>
   <div class="pgn"></div>
 </section>
 
-<section class="slide" data-title="AI·数据" data-chapter="ai">
-  <div class="pb"><img src="assets/bg/ai-data.jpg" alt="" /></div>
-  <div class="ol"></div>
-  <div class="mode mt">讲解</div>
-  <div class="kw"><div class="kh"><h2 style="color:#FF6B35">AI的"体验"</h2><span class="ke" style="color:rgba(255,255,255,.15);font-size:clamp(9px,.55vw,11px)">数据就是AI的眼睛</span></div><div class="p" style="max-width:600px">人类用眼睛看世界。AI没有眼睛——但人类给了它<b>几百万张猫的照片</b>，每张标着"这是猫"。AI读完后，没"见过"活猫，但知道猫有尖耳朵、圆脸、胡须——<b>从数据中"体验"到了猫长什么样。</b></div></div>
-  <div class="pgn"></div>
-</section>
-
-<section class="slide" data-title="AI·统计" data-chapter="ai">
-  <div class="pb"><img src="assets/bg/ai-stats.jpg" alt="" /></div>
-  <div class="ol"></div>
-  <div class="mode mt">讲解</div>
-  <div class="kw"><div class="kh"><h2 style="color:#457B9D">AI的"观察"</h2><span class="ke" style="color:rgba(255,255,255,.15);font-size:clamp(11px,.65vw,14px)">从数据里找规律</span></div><div class="p" style="max-width:600px">AI 读了海量文字和图片，发现规律：比如"今天"后面常跟"天气""去""上学"。<b>它从数据里统计出规律——就像你从三段猫视频里发现细节。</b></div></div>
-  <div class="pgn"></div>
-</section>
-
-<section class="slide" data-title="AI·调参" data-chapter="ai">
-  <div class="pb"><img src="assets/bg/roadmap.jpg" alt="" /></div>
-  <div class="ol"></div>
-  <div class="mode mt">讲解</div>
-  <div class="kw"><div class="kh"><h2 style="color:#2A9D8F">AI的"思考"</h2><span class="ke" style="color:rgba(255,255,255,.15);font-size:clamp(11px,.65vw,14px)">调参 · 改一改再试</span></div><div class="p" style="max-width:600px">AI 第一次答错了怎么办？<b>人多给几个例子、改一改提示词</b>，让它再学一次——这叫"调参"。就像你修正"真猫的标准"，AI 也在修正自己的答案。</div>
-    <div class="tune-cols">
-      <div class="tune-box bad"><div class="tl">改之前 · 太模糊</div><div class="tx">「画一只猫」</div></div>
-      <div class="tune-box good"><div class="tl">改之后 · 更具体</div><div class="tx">「橘色胖猫坐在窗台上，夕阳照在它身上」</div></div>
-    </div>
-    <p class="p-sm" style="margin-top:10px;max-width:600px"><b>改提示词 = AI 的调参。</b> 你说得越清楚，AI 越不容易画错。</p></div>
-  <div class="pgn"></div>
-</section>
-
 <!-- 分类游戏：猜猜它是什么 -->
-<section class="slide" style="background:#0c0c0c" data-slide-interactive data-title="猜猜是什么" data-chapter="ai">
+<section class="slide" style="background:#0c0c0c" data-slide-interactive data-title="猜猜是什么" data-chapter="ai" data-day="2">
   <div class="mode mh">游戏</div>
   <div class="pos" style="top:clamp(14px,1.5vh,28px);left:50%;transform:translateX(-50%);z-index:10;text-align:center;width:90%">
     <h2 style="font-size:clamp(28px,3vw,52px)">猜猜它是<span class="o">什么</span>？</h2>
@@ -714,16 +709,8 @@ h2 .o{color:#FF6B35}
 </section>
 
 
-<section class="slide" data-title="AI·模型" data-chapter="ai">
-  <div class="pb"><img src="assets/bg/ai-data.jpg" alt="" /></div>
-  <div class="ol"></div>
-  <div class="mode mt">讲解</div>
-  <div class="kw"><div class="kh"><h2 style="color:#D62828">AI的"实践"</h2><span class="ke" style="color:rgba(255,255,255,.15);font-size:clamp(11px,.65vw,14px)">模型就是AI的经验</span></div><div class="p" style="max-width:600px">人类把经验写成书。AI把"学会"的全部存在一个巨大的<b>模型</b>里。再给它一张新图片，几毫秒判断"这是一只橘猫"——<b>不是因为它聪明，而是几百万张猫图的经验全压缩进了模型。</b></div></div>
-  <div class="pgn"></div>
-</section>
-
 <!-- AI超能力vs盲区 -->
-<section class="slide" data-title="超能力与盲区" data-chapter="ai">
+<section class="slide" data-title="超能力与盲区" data-chapter="ai" data-day="2">
   <div class="pb"><img src="assets/bg/ai-data.jpg" alt="" /></div>
   <div class="ol"></div>
   <div class="mode ms">讨论</div>
@@ -754,7 +741,7 @@ h2 .o{color:#FF6B35}
   <div class="pgn"></div>
 </section>
 <!-- GAME: AI错题本 -->
-<section class="slide" style="background:#0c0c0c" data-slide-interactive data-title="AI错题本" data-chapter="ai">
+<section class="slide" style="background:#0c0c0c" data-slide-interactive data-title="AI错题本" data-chapter="ai" data-day="2">
   <div class="mode mh">游戏</div>
   <div class="pos" style="top:clamp(14px,1.5vh,28px);left:50%;transform:translateX(-50%);z-index:10;text-align:center;width:90%">
     <h2 style="font-size:clamp(28px,3vw,52px)">AI<span class="o">错题本</span></h2>
@@ -777,7 +764,7 @@ h2 .o{color:#FF6B35}
   <div class="pgn"></div>
 </section>
 <!-- GAME: Prompt擂台 -->
-<section class="slide" style="background:#0c0c0c" data-slide-interactive data-title="Prompt擂台" data-chapter="ai">
+<section class="slide" style="background:#0c0c0c" data-slide-interactive data-title="Prompt擂台" data-chapter="ai" data-day="2">
   <div class="mode mh">游戏</div>
   <div class="pos" style="top:clamp(14px,1.5vh,28px);left:50%;transform:translateX(-50%);z-index:10;text-align:center;width:90%">
     <h2 style="font-size:clamp(28px,3vw,52px)">Prompt <span class="o">擂台</span></h2>
@@ -812,82 +799,143 @@ h2 .o{color:#FF6B35}
 </section>
 
 <!-- AI 动手实验室：老师演示 -->
-<section class="slide" data-slide-interactive data-title="实验室演示" data-chapter="lab">
+<section class="slide" data-slide-interactive data-title="实验室演示" data-chapter="lab" data-day="2">
   <div class="pb"><img src="assets/bg/lab.jpg" alt="" /></div>
   <div class="ol"></div>
   <div class="mode mh">实验室</div>
-  <div class="pos t"><h2 style="font-size:clamp(28px,3vw,52px)">AI <span class="o">动手实验室</span></h2><div class="p">老师投屏演示 · 课堂任选其一：<b>豆包 / 通义千问 / Kimi</b></div></div>
-  <div class="pos" style="top:clamp(100px,12vh,200px);left:clamp(32px,3.5vw,60px);right:clamp(32px,3.5vw,60px);bottom:clamp(50px,5vh,80px);z-index:5;overflow:auto">
-    <div class="lab-box"><div style="font-weight:700;color:#FF6B35;margin-bottom:6px">任务</div><p class="p-sm" style="margin:0">帮全班想 <b>3 个解决食堂排队</b> 的主意。</p></div>
-    <div class="lab-box" style="margin-top:8px"><div style="font-weight:700;color:#fff;margin-bottom:6px">三步走</div><p class="p-sm" style="margin:0;line-height:1.6">① <b>写清楚问题</b>（谁、在哪、什么烦恼）<br/>② 让 AI <b>列 3 个主意</b><br/>③ 全班 <b>选 1 个</b>，说说为什么</p></div>
-    <div class="lab-mock">豆包 / 通义 / Kimi 聊天界面示意<br/><span style="font-size:clamp(14px,.8vw,17px);opacity:.7">老师投屏演示输入框与回答区</span></div>
-    <div class="tps" style="position:static;margin-top:10px;max-width:100%"><b>安全提醒：</b>不要输入真实姓名、电话、家庭地址。</div>
+  <div class="slide-panel">
+    <h2>AI <span class="o">动手实验室</span></h2>
+    <p class="lead">老师投屏演示 · 课堂任选：<b>豆包 / 通义千问 / Kimi</b></p>
+    <div class="lab-box"><div style="font-weight:700;color:#FF6B35;margin-bottom:6px">示例任务</div><p class="p-sm" style="margin:0">帮全班想 <b>3 个「幻想乐园」网页</b> 的创意段落。</p></div>
+    <div class="lab-box" style="margin-top:8px"><div style="font-weight:700;color:#fff;margin-bottom:6px">三步走</div><p class="p-sm" style="margin:0;line-height:1.6">① <b>写清楚要什么</b>（谁看、什么风格）<br/>② 让 AI <b>列 3 段文案</b><br/>③ 全班 <b>选 1 段</b>，说说要改哪里</p></div>
+    <img src="assets/day2/tools.jpg" alt="豆包通义示意" style="width:100%;max-width:620px;height:clamp(100px,14vh,160px);object-fit:cover;border-radius:4px;border:1px solid rgba(255,255,255,.1);margin-top:8px"/>
+    <p class="teacher-cue" style="margin-top:8px"><b>安全提醒：</b>不要输入真实姓名、电话、家庭地址。</p>
+  </div>
+  <div class="pgn"></div>
+</section>
+
+<!-- 创作工坊总览 -->
+<section class="slide" data-title="创作工坊" data-chapter="lab" data-day="2">
+  <div class="pb"><img src="assets/bg/project.jpg" alt="" /></div>
+  <div class="ol od-strong"></div>
+  <div class="mode mh">工坊</div>
+  <div class="slide-panel">
+    <h2>创作<span class="o">工坊</span></h2>
+    <p class="lead">三赛道择一 · AI 出稿 · <b>人来改</b></p>
+    <div class="workshop-flow">
+      <div class="wf-step"><b>5 分</b>选题</div>
+      <div class="wf-step"><b>15 分</b>问 AI</div>
+      <div class="wf-step"><b>15 分</b>人改</div>
+      <div class="wf-step"><b>5 分</b>排练</div>
+    </div>
+    <div class="track-grid">
+      <div class="track-card"><img src="assets/day2/track-web.jpg" alt="网页"/><div class="tc-body"><h3>🌐 Website</h3><p>幻想乐园一页文案</p></div></div>
+      <div class="track-card"><img src="assets/day2/track-song.jpg" alt="歌词"/><div class="tc-body"><h3>🎵 Song</h3><p>约 8 行歌词 + 副歌</p></div></div>
+      <div class="track-card"><img src="assets/day2/track-video.jpg" alt="视频"/><div class="tc-body"><h3>🎬 Video</h3><p>30 秒分镜脚本</p></div></div>
+    </div>
+    <p class="teacher-cue">3–4 人一组，必须记录 AI 帮了什么、人改了什么。</p>
+  </div>
+  <div class="pgn"></div>
+</section>
+
+<!-- 三赛道说明 -->
+<section class="slide" data-title="三赛道说明" data-chapter="lab" data-day="2">
+  <div class="pb"><img src="assets/bg/task.jpg" alt="" /></div>
+  <div class="ol od-strong"></div>
+  <div class="mode mt">工坊</div>
+  <div class="slide-panel">
+    <h2>三赛道 · <span class="o">产出标准</span></h2>
+    <p class="lead">每组只选一条赛道，做到可展示即可。</p>
+    <div class="goal-list">
+      <article class="goal-item" style="border-left:4px solid #457B9D"><div class="goal-num" style="color:#457B9D">W</div><div><h3>网页文案</h3><p>标题 + 3 段介绍 + 1 句口号。<b>人改语气与细节。</b></p></div></article>
+      <article class="goal-item" style="border-left:4px solid #FF6B35"><div class="goal-num" style="color:#FF6B35">S</div><div><h3>歌词</h3><p>主歌 4 行 + 副歌 4 行，押韵更好。<b>人改押韵和情感。</b></p></div></article>
+      <article class="goal-item" style="border-left:4px solid #2A9D8F"><div class="goal-num" style="color:#2A9D8F">V</div><div><h3>视频分镜</h3><p>5–6 个镜头，每镜 1 句画面描述。<b>人改节奏和笑点。</b></p></div></article>
+    </div>
   </div>
   <div class="pgn"></div>
 </section>
 
 <!-- AI 动手实验室：学生跟做 -->
-<section class="slide" data-slide-interactive data-title="跟做任务单" data-chapter="lab">
+<section class="slide" data-slide-interactive data-title="跟做任务单" data-chapter="lab" data-day="2">
   <div class="pb"><img src="assets/bg/task.jpg" alt="" /></div>
   <div class="ol"></div>
   <div class="mode mh">实验室</div>
   <div class="sh" style="width:92%;max-width:720px">
-    <h2 style="font-size:clamp(26px,2.8vw,48px)">轮到你了 — <span class="o">跟做任务单</span></h2>
-    <div class="p" style="margin-bottom:10px">打开豆包 / 通义 / Kimi（任选），抄写到纸上或平板：</div>
+    <h2 style="font-size:clamp(26px,2.8vw,48px)">Day 2 · <span class="o">创作清单</span></h2>
+    <div class="p" style="margin-bottom:10px">打开豆包 / 通义 / Kimi，抄写到纸上或平板：</div>
     <div class="lab-box" style="text-align:left">
-      <p class="p-sm" style="margin:0 0 10px">☐ <b>我们的问题：</b> ________________________________</p>
+      <p class="p-sm" style="margin:0 0 10px">☐ <b>我们的赛道：</b> 网页 / 歌词 / 视频</p>
       <p class="p-sm" style="margin:0 0 10px">☐ <b>我写的 Prompt：</b> ________________________________</p>
-      <p class="p-sm" style="margin:0 0 10px">☐ <b>AI 说了什么：</b> ________________________________</p>
-      <p class="p-sm" style="margin:0">☐ <b>我们改了什么：</b> ________________________________</p>
+      <p class="p-sm" style="margin:0 0 10px">☐ <b>AI 初稿：</b> ________________________________</p>
+      <p class="p-sm" style="margin:0">☐ <b>人改了什么：</b> ________________________________</p>
     </div>
-    <div class="act" style="position:static;margin-top:10px"><b>约 15 分钟</b> — 做完举手，准备进入项目挑战！</div>
+    <div class="act" style="position:static;margin-top:10px"><b>约 40 分钟</b> — 做完举手，准备 Day 3 真问题！</div>
   </div>
   <div class="pgn"></div>
 </section>
 
 <!-- ═══ PROJECT ═══ -->
 
-<section class="slide" data-slide-interactive data-title="项目挑战" data-chapter="project">
+<section class="slide" data-slide-interactive data-title="项目挑战" data-chapter="project" data-day="3">
   <div class="pb"><img src="assets/bg/project.jpg" alt="" /></div>
   <div class="ol"></div>
   <div class="mode mh">动手</div>
-  <div class="pos t"><h2>项目挑战</h2><div class="p">分组选一个问题，用 AI 设计一个方案（约 25 分钟）。</div></div>
+  <div class="pos t"><h2>项目挑战</h2><div class="p">分组选营地里的真问题，用 AI 设计方案（约 50 分钟）。</div></div>
   <div class="pos" style="top:clamp(82px,10vh,160px);left:clamp(32px,3.5vw,60px);right:clamp(32px,3.5vw,60px);bottom:clamp(100px,11vh,170px);z-index:5;overflow:auto">
     <div class="pc">
-      <div class="pt" data-no-advance onclick="selectProject(this)"><div class="ph" style="background:#D62828"></div><h3>校园</h3><p>食堂排错窗口？作业不会安排？跑步偷懒？</p><div class="pd"><b>例：</b>中午食堂总排错窗口。<br/><b>海报：</b>大标题 + 一张示意图 + AI 帮想了哪 3 条主意</div><div class="pi">点击选中本题</div></div>
-      <div class="pt" data-no-advance onclick="selectProject(this)"><div class="ph" style="background:#E76F51"></div><h3>社区</h3><p>流浪猫太多？老人买菜难？垃圾分类乱？</p><div class="pd"><b>例：</b>小区流浪猫越来越多怎么办。<br/><b>海报：</b>问题一句话 + 人改了 AI 的哪条主意</div><div class="pi">点击选中本题</div></div>
-      <div class="pt" data-no-advance onclick="selectProject(this)"><div class="ph" style="background:#457B9D"></div><h3>生活</h3><p>晚饭吃什么？养什么宠物？零花钱不够？</p><div class="pd"><b>例：</b>零花钱不够，想省着花。<br/><b>海报：</b>3 个主意对比 + 我们选了哪一个</div><div class="pi">点击选中本题</div></div>
-      <div class="pt" data-no-advance onclick="selectProject(this)"><div class="ph" style="background:#2A9D8F"></div><h3>天马行空</h3><p>保护独角兽？外星人来了？<br/><span style="color:#FF6B35">你的创意！</span></p><div class="pd"><b>例：</b>如果外星人来了，学校要先做什么。<br/><b>海报：</b>画最酷的一张图 + AI 帮了什么</div><div class="pi">点击选中本题</div></div>
+      <div class="pt" data-no-advance onclick="selectProject(this)"><div class="ph" style="background:#D62828"></div><h3>营地</h3><p>突然下雨？分组走散？山路安全？</p><div class="pd"><b>例：</b>午后雷阵雨，户外活动怎么调整。<br/><b>海报：</b>问题 + 3 条主意 + 人选哪条</div><div class="pi">点击选中本题</div></div>
+      <div class="pt" data-no-advance onclick="selectProject(this)"><div class="ph" style="background:#E76F51"></div><h3>户外</h3><p>装备太重？迷路风险？蚊虫太多？</p><div class="pd"><b>例：</b>夜观星时手电筒太晃眼。<br/><b>海报：</b>AI 帮了什么 + 人改了什么</div><div class="pi">点击选中本题</div></div>
+      <div class="pt" data-no-advance onclick="selectProject(this)"><div class="ph" style="background:#457B9D"></div><h3>班级</h3><p>作业不会安排？同学矛盾？</p><div class="pd"><b>例：</b>小组合作总有人不发言。<br/><b>海报：</b>3 个主意对比 + 我们选了哪一个</div><div class="pi">点击选中本题</div></div>
+      <div class="pt" data-no-advance onclick="selectProject(this)"><div class="ph" style="background:#2A9D8F"></div><h3>天马行空</h3><p>保护独角兽？外星人来了？<br/><span style="color:#FF6B35">你的创意！</span></p><div class="pd"><b>例：</b>如果营地来了会说话的松鼠。<br/><b>海报：</b>画最酷的一张图 + AI 帮了什么</div><div class="pi">点击选中本题</div></div>
     </div>
     <div class="lab-box" style="margin-top:clamp(8px,.8vh,12px)">
       <div style="font-size:clamp(16px,.85vw,20px);color:rgba(255,107,53,.9);font-weight:700;margin-bottom:6px">Prompt 模板（抄进 AI）</div>
-      <p class="p-sm" style="margin:0">我们是__年级。问题是：________。请给 3 个主意，每个说优点和缺点。</p>
+      <p class="p-sm" style="margin:0">我们是__年级夏令营。问题是：________。请给 3 个主意，每个说优点和缺点。</p>
     </div>
     <p class="p-sm" style="margin-top:8px;color:rgba(255,255,255,.45)"><b>展示要说：</b> ① 问题是什么 ② AI 帮了什么 ③ 人改了什么</p>
   </div>
   <div class="pos steps" style="bottom:clamp(20px,2.2vh,36px);left:clamp(32px,3.5vw,60px);right:clamp(32px,3.5vw,60px);z-index:5">
     <div class="step"><div class="sn r">1</div><p><b>选问题</b><br/>每组选一个</p></div>
     <div class="step"><div class="sn o">2</div><p><b>问AI</b><br/>用模板</p></div>
-    <div class="step"><div class="sn g">3</div><p><b>画海报</b><br/>上台展示</p></div>
+    <div class="step"><div class="sn g">3</div><p><b>画海报</b><br/>上台路演</p></div>
+  </div>
+  <div class="pgn"></div>
+</section>
+
+<!-- 路演模板 -->
+<section class="slide" data-title="路演模板" data-chapter="project" data-day="3">
+  <div class="pb"><img src="assets/bg/close.jpg" alt="" /></div>
+  <div class="ol od-strong"></div>
+  <div class="mode mt">路演</div>
+  <div class="slide-panel">
+    <h2>四句话<span class="o">路演</span></h2>
+    <p class="lead">上台每人说 1 句，或一人代说——<b>大字海报</b>放旁边。</p>
+    <div class="pitch-grid">
+      <div class="pitch-line"><span>第 1 句</span>我们的问题是 ________</div>
+      <div class="pitch-line"><span>第 2 句</span>我们选的方案是 ________</div>
+      <div class="pitch-line"><span>第 3 句</span>AI 帮我们想出了 ________</div>
+      <div class="pitch-line"><span>第 4 句</span>我们改成了 ________</div>
+    </div>
+    <p class="teacher-cue">每组约 2 分钟 · 说完请下一组</p>
   </div>
   <div class="pgn"></div>
 </section>
 
 <!-- ═══ S26: CLOSING ═══ -->
 
-<section class="slide" data-title="结业" data-chapter="end">
+<section class="slide" data-title="结业" data-chapter="end" data-day="3">
   <div class="pb"><img src="assets/bg/close.jpg" alt="" /></div>
   <div class="ol"></div>
   <div class="pos" style="top:50%;transform:translateY(-50%);left:clamp(32px,3.5vw,60px);right:clamp(32px,3.5vw,60px);z-index:5">
     <h1 style="font-size:clamp(48px,5vw,90px)">AI不是魔法<br/><span class="o">是一个超级学习工具</span></h1>
-    <div class="p" style="font-size:clamp(16px,1vw,24px);max-width:400px;margin-top:clamp(6px,.6vh,12px)">你体验了科尔布学习循环，看懂了AI的学习原理——而且用AI设计了一个解决真问题的方案。</div>
+    <div class="p" style="font-size:clamp(16px,1vw,24px);max-width:480px;margin-top:clamp(6px,.6vh,12px)">三天里你体验了科尔布循环、练了 AI 工具、还解决了营地里的真问题。</div>
   </div>
   <div class="pos sc close-footer" style="left:clamp(32px,3.5vw,60px);bottom:clamp(24px,2.5vh,40px);right:clamp(32px,3.5vw,60px);z-index:5;border-top:1px solid rgba(255,255,255,.04);padding-top:clamp(4px,.4vh,8px)">
-    <div><div class="sc-label">学会了</div><div class="sc-body">人类怎么学习<br/>AI怎么学习</div></div>
-    <div><div class="sc-label">体验了</div><div class="sc-body">猫挑战 · 速答 · 擂台<br/>AI 实验室 · 真问题</div></div>
-    <div><div class="sc-label">做到了</div><div class="sc-body">用AI设计了一个<br/>解决真问题的方案</div></div>
+    <div><div class="sc-label">Day 1</div><div class="sc-body">理解人、自然、AI<br/>怎么「聪明」</div></div>
+    <div><div class="sc-label">Day 2</div><div class="sc-body">会用 AI 工具<br/>做出小组作品</div></div>
+    <div><div class="sc-label">Day 3</div><div class="sc-body">解决真问题<br/>完成路演展示</div></div>
   </div>
-  <div class="pos" style="right:clamp(20px,2.5vw,40px);top:clamp(20px,2.5vh,40px);z-index:5;text-align:right"><div style="font-family:'Big Shoulders Display','Noto Sans SC',sans-serif;font-weight:900;font-size:clamp(30px,3vw,56px);color:#FF6B35;line-height:.85">结业</div><div style="font-size:clamp(10px,.6vw,14px);color:rgba(255,255,255,.15);letter-spacing:.12em;text-transform:uppercase">CERTIFICATE</div></div>
+  <div class="pos" style="right:clamp(20px,2.5vw,40px);top:clamp(20px,2.5vh,40px);z-index:5;text-align:right"><div style="font-family:'Big Shoulders Display','Noto Sans SC',sans-serif;font-weight:900;font-size:clamp(30px,3vw,56px);color:#FF6B35;line-height:.85">结业</div><div style="font-size:clamp(10px,.6vw,14px);color:rgba(255,255,255,.15);letter-spacing:.12em;text-transform:uppercase">3-DAY CAMP</div></div>
   <div class="pgn"></div>
 </section>
 
@@ -896,8 +944,22 @@ h2 .o{color:#FF6B35}
 <script>
 const S=Array.from(document.querySelectorAll('.slide'));let c=0;
 const CHAPTER_NAMES={intro:'开场',cat:'猫与 Kolb',human:'人的故事',nature:'自然',ai:'AI 怎么学',lab:'实验室',project:'项目',end:'结业'};
-// 猫挑战：与原版一致，直接嵌入 YouTube（需教室能访问 YouTube）
+const DAY_NAMES={1:'Day 1',2:'Day 2',3:'Day 3'};
+const CAMP_DAY=(()=>{const m=location.search.match(/[?&]day=(\d)/);const d=m?parseInt(m[1],10):1;return d>=1&&d<=3?d:1;})();
 const CAT_YT=['g6dhJx_GXaA','k8DzLwHWIbk','_fbiQUff82w'];
+const CAT_MP4=['assets/cats/cat_daily.mp4','assets/cats/cat_office.mp4','assets/cats/cat_school.mp4'];
+function applyCampDay(){
+  const badge=document.getElementById('day-badge');
+  if(badge)badge.textContent='第 '+CAMP_DAY+' 天';
+  document.querySelectorAll('[data-day-goals]').forEach(el=>{
+    el.classList.toggle('active',parseInt(el.dataset.dayGoals,10)===CAMP_DAY);
+  });
+  document.querySelectorAll('[data-day-road]').forEach(el=>{
+    el.classList.toggle('active',parseInt(el.dataset.dayRoad,10)===CAMP_DAY);
+  });
+  const first=S.findIndex(el=>parseInt(el.dataset.day,10)===CAMP_DAY);
+  if(first>=0&&location.search.includes('day='))sh(first);
+}
 function updatePageNumbers(){S.forEach((el,i)=>{const p=el.querySelector('.pgn');if(p)p.textContent=String(i+1).padStart(2,'0')+' / '+S.length});}
 function updateNav(){
   const page=document.getElementById('nav-page');
@@ -914,11 +976,11 @@ function toggleNav(){const p=document.getElementById('nav-panel');if(p?.classLis
 function buildNav(){
   const panel=document.getElementById('nav-panel');
   if(!panel)return;
-  let html='',lastCh='';
+  let html='',lastDay='';
   S.forEach((el,i)=>{
-    const ch=el.dataset.chapter||'';
+    const day=el.dataset.day||'';
     const title=el.dataset.title||('第'+(i+1)+'页');
-    if(ch&&ch!==lastCh){html+='<div class="ng">'+(CHAPTER_NAMES[ch]||ch)+'</div>';lastCh=ch;}
+    if(day&&day!==lastDay){html+='<div class="ng">'+(DAY_NAMES[day]||('Day '+day))+'</div>';lastDay=day;}
     html+='<button type="button" class="ni" data-nav-i="'+i+'" data-no-advance>'+String(i+1).padStart(2,'0')+' · '+title+'</button>';
   });
   panel.innerHTML=html;
@@ -959,24 +1021,51 @@ document.addEventListener('click',function(e){
 document.addEventListener('touchend',e=>{if(tx==null)return;const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>40)sh(c+(dx<0?1:-1));tx=null});
 
 let activeCat=-1;
+function stopCatPlayback(i){
+  const pl=document.getElementById('cp'+i);
+  const cell=document.getElementById('c'+i);
+  if(!pl||!cell)return;
+  pl.style.display='none';
+  cell.classList.remove('playing');
+  const vid=pl.querySelector('video');
+  const iframe=pl.querySelector('iframe');
+  const err=pl.querySelector('.video-err');
+  if(vid){vid.pause();vid.currentTime=0;}
+  if(iframe)iframe.src='';
+  if(err)err.classList.remove('sh');
+}
 function playCat(i,e){
   if(e){e.preventDefault();e.stopPropagation();}
   const cell=document.getElementById('c'+i);
   const pl=document.getElementById('cp'+i);
-  const iframe=pl&&pl.querySelector('iframe');
-  if(!cell||!pl||!iframe)return;
-  if(activeCat===i){
-    pl.style.display='none';cell.classList.remove('playing');
-    iframe.src='';activeCat=-1;return;
-  }
-  if(activeCat>=0){
-    const o=document.getElementById('cp'+activeCat);
-    const oc=document.getElementById('c'+activeCat);
-    if(o){o.style.display='none';const oi=o.querySelector('iframe');if(oi)oi.src='';}
-    if(oc)oc.classList.remove('playing');
-  }
+  if(!cell||!pl)return;
+  if(activeCat===i){stopCatPlayback(i);activeCat=-1;return;}
+  if(activeCat>=0)stopCatPlayback(activeCat);
   pl.style.display='block';cell.classList.add('playing');
-  iframe.src='https://www.youtube-nocookie.com/embed/'+CAT_YT[i]+'?autoplay=1&mute=1&rel=0&playsinline=1';
+  const vid=pl.querySelector('video');
+  const iframe=pl.querySelector('iframe');
+  const err=pl.querySelector('.video-err');
+  if(err)err.classList.remove('sh');
+  if(vid){
+    vid.style.display='block';
+    if(iframe)iframe.style.display='none';
+    const tryPlay=()=>{vid.play().catch(()=>{});};
+    if(vid.readyState>=2)tryPlay();
+    else{
+      vid.onloadeddata=tryPlay;
+      vid.onerror=()=>{
+        vid.style.display='none';
+        if(iframe){
+          iframe.style.display='block';
+          iframe.src='https://www.youtube-nocookie.com/embed/'+CAT_YT[i]+'?autoplay=1&mute=1&rel=0&playsinline=1';
+        }else if(err)err.classList.add('sh');
+      };
+      vid.load();
+    }
+  }else if(iframe){
+    iframe.style.display='block';
+    iframe.src='https://www.youtube-nocookie.com/embed/'+CAT_YT[i]+'?autoplay=1&mute=1&rel=0&playsinline=1';
+  }else if(err)err.classList.add('sh');
   activeCat=i;
 }
 function initCatPage(){
@@ -1311,6 +1400,7 @@ function initEditor(){
 
 updatePageNumbers();
 buildNav();
+applyCampDay();
 updateNav();
 initBgFallback();
 initEditor();

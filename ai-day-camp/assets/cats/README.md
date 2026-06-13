@@ -1,24 +1,27 @@
-# 猫挑战 — 封面图（可选）
+# 猫挑战 — 本地 MP4 + 封面
 
-课件**直接播放 YouTube**，与改版前相同，**不需要**准备 MP4。
+课件**优先播放本地 MP4**（山里可离线），YouTube 作有网时的备用。
 
-| 格子 | YouTube 视频 ID |
-|------|-----------------|
-| 01 · 可爱的日常猫 | `g6dhJx_GXaA` |
-| 02 · 穿西装上班的猫 | `k8DzLwHWIbk` |
-| 03 · 背书包上学的猫 | `_fbiQUff82w` |
+| 格子 | 本地视频 | YouTube ID（备用） |
+|------|----------|-------------------|
+| 01 · 可爱的日常猫 | `cat_daily.mp4` | `g6dhJx_GXaA` |
+| 02 · 穿西装上班的猫 | `cat_office.mp4` | `k8DzLwHWIbk` |
+| 03 · 背书包上学的猫 | `cat_school.mp4` | `_fbiQUff82w` |
 
 ## 封面图
 
-课件默认使用 **YouTube 缩略图**：`https://img.youtube.com/vi/{视频ID}/hqdefault.jpg`
-
-本目录下的 JPG 仅作离线备用（可选），点击 ▶ 后仍播 YouTube：
+课件使用本目录 JPG：
 
 - `cat_daily.jpg`
 - `cat_office.jpg`
 - `cat_school.jpg`
 
-## 课堂注意
+## 更新视频
 
-- 教室网络需能访问 **YouTube**（与原先线下面授一致）。
-- 若无法访问 YouTube，需自行下载 MP4 并改课件逻辑，或换用可访问的国内视频链接（需开发改代码）。
+若需替换为真实短视频片段，可用 `yt-dlp` 下载低分辨率 MP4 后覆盖同名文件（建议每段 &lt;5MB）：
+
+```bash
+yt-dlp -f "worst[ext=mp4]/worst" -o "cat_daily.%(ext)s" "https://www.youtube.com/watch?v=g6dhJx_GXaA"
+```
+
+当前仓库内 MP4 为基于封面图的短循环片段，保证离线可播。
