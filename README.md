@@ -28,7 +28,7 @@ ai-day-camp/
   design.html    # 三日营教师教案
   parent.html    # 家长版
   assets/bg/     # 本地背景图
-  assets/cats/   # 猫挑战备用素材（课件主用 assets/bg/cat-*.jpg）
+  assets/cats/   # 猫挑战离线 MP4 素材（Day1 p4）
   assets/day1/   # Day1 户外示意
   assets/day2/   # Day2 工坊示意
 ```

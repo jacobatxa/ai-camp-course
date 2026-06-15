@@ -1,55 +1,42 @@
-# assets/cats/ — AI猫视频素材
+# assets/cats/ — Day 1 猫挑战离线视频
 
 ## 当前状态
 
-当前 MP4 为 ffmpeg 从 JPG 图片转换的占位文件（单帧静止，约 30 KB），
-播放器检测到 `duration < 1.5s` 时会自动降级：
-1. 尝试本地 MP4
-2. 若检测为静止帧 → 尝试 YouTube 嵌入（需网络）
-3. 若 YouTube 也不可用 → 显示友好提示
+`kids.html` 的 Day 1 第 4 页使用本目录 3 个本地 MP4，点击卡片即可播放：
 
-## 替换为真实 AI 视频（推荐）
+- `cat_daily.mp4`
+- `cat_office.mp4`
+- `cat_school.mp4`
 
-### 方法一：yt-dlp 下载 YouTube
+播放器策略为「仅本地离线播放」，不依赖外网。
 
-```bash
-pip install yt-dlp
+## 推荐素材规格
 
-# 日常猫（AI生成）
-yt-dlp -o "assets/cats/cat_daily.mp4" -f "mp4[height<=720]" "https://www.youtube.com/watch?v=g6dhJx_GXaA"
+- 编码：H.264（`libx264`）+ `yuv420p`
+- 分辨率：1280x720（或 720p 等效）
+- 时长：8–20 秒
+- 音频：可无音轨（课堂演示不受环境噪音影响）
+- 内容：建议保留 AI 痕迹，便于课堂讨论
 
-# 上班猫（AI生成）
-yt-dlp -o "assets/cats/cat_office.mp4" -f "mp4[height<=720]" "https://www.youtube.com/watch?v=k8DzLwHWIbk"
-
-# 上学猫（AI生成）
-yt-dlp -o "assets/cats/cat_school.mp4" -f "mp4[height<=720]" "https://www.youtube.com/watch?v=_fbiQUff82w"
-```
-
-### 方法二：从 B 站下载（内容质量更好）
+## 快速替换命令
 
 ```bash
-pip install yt-dlp
-
-# 替换 BV 号为你找到的AI生成猫视频
-yt-dlp -o "assets/cats/cat_daily.mp4" "https://www.bilibili.com/video/BVxxxxxxxx"
+# 进入仓库根目录执行
+ffmpeg -y -i "你的源视频.mp4" \
+  -vf "scale=1280:720:force_original_aspect_ratio=cover,crop=1280:720,format=yuv420p" \
+  -r 30 -c:v libx264 -profile:v high -level 4.0 -movflags +faststart -an \
+  "ai-day-camp/assets/cats/cat_daily.mp4"
 ```
 
-B 站搜索关键词：`AI生成 猫` / `Sora 猫` / `Kling 猫咪` / `可灵 AI猫`
+按同样方式替换 `cat_office.mp4`、`cat_school.mp4` 即可。
 
-### 视频规格建议
-
-- 时长：15–45 秒
-- 分辨率：720p 以上
-- 内容：明显带有 AI 生成痕迹（爪子变形、毛发不自然、背景失真等）
-- 主题：三段须明显区分（日常 / 职场 / 校园 场景）
-
-## 文件列表
+## 文件说明
 
 | 文件 | 说明 |
 |------|------|
 | `cat_daily.jpg` | 日常猫封面图 |
-| `cat_daily.mp4` | 日常猫视频（需替换） |
+| `cat_daily.mp4` | 日常猫离线视频 |
 | `cat_office.jpg` | 上班猫封面图 |
-| `cat_office.mp4` | 上班猫视频（需替换） |
+| `cat_office.mp4` | 上班猫离线视频 |
 | `cat_school.jpg` | 上学猫封面图 |
-| `cat_school.mp4` | 上学猫视频（需替换） |
+| `cat_school.mp4` | 上学猫离线视频 |

@@ -88,13 +88,14 @@ h2 .o{color:#FF6B35}
 .act b{color:#FF6B35;font-weight:600}
 /* Section header (centered) */
 .sh{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:5;text-align:center;width:80%;max-width:700px}
-/* Cat grid — image reveal (no broken video) */
+/* Cat grid — offline MP4 challenge */
 .cg{display:grid;grid-template-columns:1fr 1fr 1fr;gap:clamp(10px,1vw,16px);width:100%;max-width:860px}
 .cc{position:relative;overflow:hidden;cursor:pointer;border-radius:var(--radius);aspect-ratio:4/3;box-shadow:0 8px 28px rgba(0,0,0,.45);transition:transform .3s,box-shadow .3s}
 .cc:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(0,0,0,.55)}
-.cc .th{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;transition:transform .4s}
-.cc.playing .th{animation:kenburns 10s ease-in-out infinite alternate}
-@keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.14) translate(-2%,-1%)}}
+.cc .th,.cc .cv{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.cc .cv{display:none;background:#000}
+.cc.playing .cv{display:block}
+.cc.playing .th{display:none}
 .cc .lb{position:absolute;bottom:0;left:0;right:0;padding:clamp(10px,1vh,14px);background:linear-gradient(transparent,rgba(0,0,0,.85));color:#fff;text-align:center;font-size:clamp(13px,.78vw,17px);font-weight:600}
 .cc .play-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:clamp(44px,3.5vw,64px);height:clamp(44px,3.5vw,64px);border-radius:50%;background:rgba(255,107,53,.85);display:grid;place-items:center;color:#fff;font-size:clamp(14px,1vw,20px);font-weight:700;z-index:6;box-shadow:0 4px 20px rgba(255,107,53,.4);transition:transform .25s}
 .cc:hover .play-btn{transform:translate(-50%,-50%) scale(1.08)}
@@ -102,6 +103,8 @@ h2 .o{color:#FF6B35}
 .cc .play-hit{position:absolute;inset:0;z-index:8;border:none;background:transparent;cursor:pointer}
 .cc .reveal-tag{position:absolute;top:clamp(8px,.8vh,12px);left:50%;transform:translateX(-50%);z-index:7;padding:4px 12px;background:rgba(255,107,53,.9);color:#fff;font-size:clamp(10px,.6vw,13px);font-weight:700;border-radius:999px;opacity:0;transition:opacity .3s;white-space:nowrap}
 .cc.playing .reveal-tag{opacity:1}
+.cc .video-err{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:9;display:none;padding:8px 12px;border-radius:999px;background:rgba(214,40,40,.9);font-size:clamp(11px,.68vw,14px);color:#fff;white-space:nowrap}
+.cc.error .video-err{display:inline-block}
 .vreset{font-size:clamp(10px,.6vw,13px);color:rgba(255,255,255,.2);cursor:pointer;margin-top:4px;border:none;background:none;font-family:inherit}
 .vreset:hover{color:rgba(255,107,53,.6)}
 /* Vote */
@@ -258,6 +261,7 @@ h2 .o{color:#FF6B35}
 .slide-cat .slide-head{flex-shrink:0;text-align:center;width:100%}
 .slide-cat .cat-stage{width:100%;display:flex;justify-content:center}
 .slide-cat .vote-area{flex-shrink:0;width:100%;max-width:720px;text-align:center}
+.slide-cat .video-hint{font-size:clamp(12px,.72vw,16px);color:rgba(255,255,255,.55)}
 /* Intelligence grid (P2) */
 .intel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,1vw,18px);width:100%;max-width:820px}
 .intel-card{padding:clamp(16px,1.4vh,22px);text-align:left}
@@ -309,6 +313,7 @@ h2 .o{color:#FF6B35}
   .vocab-grid,.kolb-compact,.ai-four,.nature-two,.pitch-grid,.power-blind,.prompt-duel{grid-template-columns:1fr}
   .kendama-steps{grid-template-columns:1fr 1fr}
   .pc,.sc{grid-template-columns:1fr}
+  .cg{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -458,48 +463,59 @@ h2 .o{color:#FF6B35}
   <div class="slide-panel slide-cat">
     <div class="slide-head">
       <h2>AI 能做<span class="o">这些</span></h2>
-      <p class="lead">点一下画面，放大观察细节——猜猜哪段是真实拍摄的？</p>
+      <p class="lead">点卡片播放短视频，观察细节后投票：哪段最像真实拍摄？</p>
     </div>
     <div class="ai-caps">
-      <div class="ai-cap glass-card"><div class="cap-label">生成视频</div><div class="cap-note">让猫穿西装开会</div></div>
-      <div class="ai-cap glass-card"><div class="cap-label">写文章</div><div class="cap-note">几秒写出百字</div></div>
-      <div class="ai-cap glass-card"><div class="cap-label">描述作画</div><div class="cap-note">任意画风</div></div>
-      <div class="ai-cap glass-card"><div class="cap-label">识别翻译</div><div class="cap-note">百种语言</div></div>
+      <div class="ai-cap glass-card"><div class="cap-label">生成视频</div><div class="cap-note">文字就能出画面</div></div>
+      <div class="ai-cap glass-card"><div class="cap-label">改写内容</div><div class="cap-note">快速出多版本</div></div>
+      <div class="ai-cap glass-card"><div class="cap-label">识别翻译</div><div class="cap-note">多语言即时处理</div></div>
     </div>
     <div class="cat-stage">
       <div class="cg">
         <div class="cc" id="c0" data-cat-i="0">
-          <button type="button" class="play-hit" data-no-advance aria-label="放大观察1"></button>
+          <button type="button" class="play-hit" data-no-advance aria-label="播放视频1"></button>
           <img class="th" src="assets/bg/cat-exp.jpg" alt="日常生活猫" />
-          <div class="play-btn">观察</div>
-          <div class="reveal-tag">AI 生成 · 找破绽</div>
+          <video id="cv0" class="cv" controls playsinline preload="metadata" poster="assets/bg/cat-exp.jpg" data-no-advance>
+            <source src="assets/cats/cat_daily.mp4" type="video/mp4" />
+          </video>
+          <div class="play-btn">播放</div>
+          <div class="reveal-tag">观察细节</div>
+          <div class="video-err">视频加载失败</div>
           <div class="lb">01 · 日常生活猫</div>
         </div>
         <div class="cc" id="c1" data-cat-i="1">
-          <button type="button" class="play-hit" data-no-advance aria-label="放大观察2"></button>
+          <button type="button" class="play-hit" data-no-advance aria-label="播放视频2"></button>
           <img class="th" src="assets/bg/cat-do.jpg" alt="穿西装上班的猫" />
-          <div class="play-btn">观察</div>
-          <div class="reveal-tag">AI 生成 · 找破绽</div>
+          <video id="cv1" class="cv" controls playsinline preload="metadata" poster="assets/bg/cat-do.jpg" data-no-advance>
+            <source src="assets/cats/cat_office.mp4" type="video/mp4" />
+          </video>
+          <div class="play-btn">播放</div>
+          <div class="reveal-tag">观察细节</div>
+          <div class="video-err">视频加载失败</div>
           <div class="lb">02 · 穿西装上班猫</div>
         </div>
         <div class="cc" id="c2" data-cat-i="2">
-          <button type="button" class="play-hit" data-no-advance aria-label="放大观察3"></button>
+          <button type="button" class="play-hit" data-no-advance aria-label="播放视频3"></button>
           <img class="th" src="assets/bg/cat-obs.jpg" alt="背书包上学的猫" />
-          <div class="play-btn">观察</div>
-          <div class="reveal-tag">AI 生成 · 找破绽</div>
+          <video id="cv2" class="cv" controls playsinline preload="metadata" poster="assets/bg/cat-obs.jpg" data-no-advance>
+            <source src="assets/cats/cat_school.mp4" type="video/mp4" />
+          </video>
+          <div class="play-btn">播放</div>
+          <div class="reveal-tag">观察细节</div>
+          <div class="video-err">视频加载失败</div>
           <div class="lb">03 · 背书包上学猫</div>
         </div>
       </div>
     </div>
     <div class="vote-area">
       <div class="rb" id="rb">全部由 AI 生成 —— 每一段都是！</div>
-      <p class="lead" style="font-size:clamp(14px,.82vw,18px)"><b>跟同桌说：</b>你觉得哪段最像真实拍摄的？</p>
+      <p class="video-hint"><b>提示：</b>看爪子、毛发边缘、背景文字是否自然。</p>
       <div class="va" id="va">
         <div class="vb" data-no-advance data-vote="0">01 日常猫</div>
         <div class="vb" data-no-advance data-vote="1">02 上班猫</div>
         <div class="vb" data-no-advance data-vote="2">03 上学猫</div>
       </div>
-      <div class="vr" id="vr">大家觉得 <span id="vw"></span> 最像真的！<div class="sb">其实全部是 AI 生成的，没有一段是真实拍摄</div><ul class="clues"><li>爪子有时会「融化」或穿进地板</li><li>毛的方向、光影不统一</li><li>背景里的字、门把手会变形</li></ul></div>
+      <div class="vr" id="vr">大家觉得 <span id="vw"></span> 最像真的！<div class="sb">其实全部是 AI 生成的，没有一段是真实拍摄</div><ul class="clues"><li>爪子和毛边会出现不连续或融合</li><li>背景里的字、门把手、透视关系会变形</li></ul></div>
       <button type="button" class="vreset" data-no-advance id="vote-reset">老师：重新投票</button>
     </div>
   </div>
@@ -623,12 +639,12 @@ h2 .o{color:#FF6B35}
       <div class="af-cell glass-card" style="--af:#2A9D8F"><h3>调参 · AI 的「思考」</h3><p>答错了就多给例子、改 Prompt——<b>修正自己的答案</b></p></div>
       <div class="af-cell glass-card" style="--af:#D62828"><h3>模型 · AI 的「实践」</h3><p>学会的全压缩进模型——<b>几毫秒判断新图片</b></p></div>
     </div>
-    <p class="ps" style="color:rgba(255,255,255,.5);margin-top:2px">认识几个 AI 词汇</p>
+    <p class="ps" style="color:rgba(255,255,255,.5);margin-top:2px">认识四个核心词</p>
     <div class="vocab-grid">
-      <div class="vocab-card glass-card" style="--vc:#FF6B35"><div class="vc-term">算法</div><p class="vc-def">解题步骤说明书</p><p class="vc-eg">你做饭用的菜谱就是算法</p></div>
-      <div class="vocab-card glass-card" style="--vc:#52a8ff"><div class="vc-term">大模型</div><p class="vc-def">学过海量信息的超大 AI</p><p class="vc-eg">豆包、Kimi 就是大模型</p></div>
-      <div class="vocab-card glass-card" style="--vc:#2A9D8F"><div class="vc-term">机器学习</div><p class="vc-def">让 AI 从例子里找规律</p><p class="vc-eg">猫挑战背后的技术</p></div>
-      <div class="vocab-card glass-card" style="--vc:#D62828"><div class="vc-term">幻觉</div><p class="vc-def">AI 编出来的「假事实」</p><p class="vc-eg">AI说今天是周一，其实是周三</p></div>
+      <div class="vocab-card glass-card" style="--vc:#FF6B35"><div class="vc-term">算法</div><p class="vc-def">解题步骤说明书</p><p class="vc-eg">比如做饭菜谱</p></div>
+      <div class="vocab-card glass-card" style="--vc:#52a8ff"><div class="vc-term">大模型</div><p class="vc-def">学过海量信息的 AI</p><p class="vc-eg">豆包、Kimi</p></div>
+      <div class="vocab-card glass-card" style="--vc:#2A9D8F"><div class="vc-term">机器学习</div><p class="vc-def">从例子里找规律</p><p class="vc-eg">猫挑战背后的技术</p></div>
+      <div class="vocab-card glass-card" style="--vc:#D62828"><div class="vc-term">幻觉</div><p class="vc-def">看似对，其实错</p><p class="vc-eg">把日期说错</p></div>
     </div>
   </div>
   <div class="pgn"></div>
@@ -1070,15 +1086,31 @@ document.addEventListener('touchend',e=>{if(tx==null)return;const dx=e.changedTo
 /* —— Cat challenge —— */
 let activeCat=-1;
 function stopCatPlayback(i){
-  document.getElementById('c'+i)?.classList.remove('playing');
+  const cell=document.getElementById('c'+i);
+  const vid=document.getElementById('cv'+i);
+  if(!cell)return;
+  cell.classList.remove('playing','error');
+  if(vid){
+    vid.pause();
+    try{vid.currentTime=0;}catch(e){}
+  }
 }
 function playCat(i,e){
   if(e){e.preventDefault();e.stopPropagation();}
   const cell=document.getElementById('c'+i);
-  if(!cell)return;
+  const vid=document.getElementById('cv'+i);
+  if(!cell||!vid)return;
   if(activeCat===i){stopCatPlayback(i);activeCat=-1;return;}
   if(activeCat>=0)stopCatPlayback(activeCat);
+  cell.classList.remove('error');
   cell.classList.add('playing');
+  const onFail=()=>{
+    cell.classList.remove('playing');
+    cell.classList.add('error');
+    activeCat=-1;
+  };
+  const p=vid.play();
+  if(p&&typeof p.catch==='function')p.catch(onFail);
   activeCat=i;
 }
 function initCatPage(){
@@ -1088,6 +1120,9 @@ function initCatPage(){
       const i=card?parseInt(card.dataset.catI,10):NaN;
       if(!isNaN(i))playCat(i,e);
     });
+  });
+  document.querySelectorAll('.cc .cv').forEach((vid,idx)=>{
+    vid.addEventListener('error',()=>{document.getElementById('c'+idx)?.classList.add('error');});
   });
   document.querySelectorAll('[data-vote]').forEach(btn=>{
     btn.addEventListener('click',e=>{e.stopPropagation();cv(parseInt(btn.dataset.vote,10));});
