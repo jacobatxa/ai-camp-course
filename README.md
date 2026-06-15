@@ -24,11 +24,11 @@
 
 ```
 ai-day-camp/
-  kids.html      # 孩子版幻灯（25 页，三日营）
+  kids.html      # 孩子版幻灯（23 页，三日营）
   design.html    # 三日营教师教案
   parent.html    # 家长版
   assets/bg/     # 本地背景图
-  assets/cats/   # 猫挑战 MP4 + 封面（离线可播）
+  assets/cats/   # 猫挑战备用素材（课件主用 assets/bg/cat-*.jpg）
   assets/day1/   # Day1 户外示意
   assets/day2/   # Day2 工坊示意
 ```

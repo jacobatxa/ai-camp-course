@@ -8,9 +8,19 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;800;900&family=Albert+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@200;300;400;500;700;900&display=swap" rel="stylesheet" />
 <style>
+:root{
+  --camp-bg:#0c1210;
+  --camp-forest:#1e4d38;
+  --camp-sunset:#FF6B35;
+  --camp-sky:#457B9D;
+  --camp-teal:#2A9D8F;
+  --glass:rgba(14,22,18,.72);
+  --glass-light:rgba(255,255,255,.06);
+  --radius:14px;
+}
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;background:#000}
-body{font-family:'Albert Sans','Noto Sans SC',sans-serif;overflow:hidden;-webkit-font-smoothing:antialiased}
+html,body{height:100%;background:var(--camp-bg)}
+body{font-family:'Albert Sans','Noto Sans SC',sans-serif;overflow:hidden;-webkit-font-smoothing:antialiased;color:#fff}
 .deck{position:fixed;inset:0;display:grid;place-items:center}
 .stage{position:relative;width:100vw;height:100vh;overflow:hidden}
 .slide{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity 500ms cubic-bezier(.4,0,.2,1);z-index:2}
@@ -78,32 +88,27 @@ h2 .o{color:#FF6B35}
 .act b{color:#FF6B35;font-weight:600}
 /* Section header (centered) */
 .sh{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:5;text-align:center;width:80%;max-width:700px}
-/* Cat grid */
-.cg{display:grid;grid-template-columns:1fr 1fr 1fr;gap:clamp(6px,.6vw,12px);height:100%}
-.cc{position:relative;overflow:hidden;cursor:pointer;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);transition:all .25s}
-.cc:hover{border-color:rgba(255,255,255,.18);transform:translateY(-1px)}
-.cc .th{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
-.cc .lb{position:absolute;bottom:0;left:0;right:0;padding:clamp(6px,.6vh,12px) clamp(8px,.8vw,14px);background:linear-gradient(transparent,rgba(0,0,0,.88));color:#fff;text-align:center;font-size:clamp(13px,.78vw,18px);font-weight:600;letter-spacing:.02em}
-.cc .play-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:clamp(28px,2.4vw,40px);height:clamp(28px,2.4vw,40px);border-radius:50%;background:rgba(255,255,255,.12);display:grid;place-items:center;color:#fff;font-size:clamp(10px,.8vw,14px);transition:all .3s;z-index:6}
-.cc:hover .play-btn{background:rgba(255,255,255,.2);transform:translate(-50%,-50%) scale(1.1)}
-.cc .cp{position:absolute;inset:0;z-index:7;display:none;background:#000}
-.cc .cp iframe{width:100%;height:100%;border:none}
-.cc .cp video{width:100%;height:100%;object-fit:cover;background:#000}
+/* Cat grid — image reveal (no broken video) */
+.cg{display:grid;grid-template-columns:1fr 1fr 1fr;gap:clamp(10px,1vw,16px);width:100%;max-width:860px}
+.cc{position:relative;overflow:hidden;cursor:pointer;border-radius:var(--radius);aspect-ratio:4/3;box-shadow:0 8px 28px rgba(0,0,0,.45);transition:transform .3s,box-shadow .3s}
+.cc:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(0,0,0,.55)}
+.cc .th{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;transition:transform .4s}
+.cc.playing .th{animation:kenburns 10s ease-in-out infinite alternate}
+@keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.14) translate(-2%,-1%)}}
+.cc .lb{position:absolute;bottom:0;left:0;right:0;padding:clamp(10px,1vh,14px);background:linear-gradient(transparent,rgba(0,0,0,.85));color:#fff;text-align:center;font-size:clamp(13px,.78vw,17px);font-weight:600}
+.cc .play-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:clamp(44px,3.5vw,64px);height:clamp(44px,3.5vw,64px);border-radius:50%;background:rgba(255,107,53,.85);display:grid;place-items:center;color:#fff;font-size:clamp(14px,1vw,20px);font-weight:700;z-index:6;box-shadow:0 4px 20px rgba(255,107,53,.4);transition:transform .25s}
+.cc:hover .play-btn{transform:translate(-50%,-50%) scale(1.08)}
 .cc.playing .play-btn{display:none}
 .cc .play-hit{position:absolute;inset:0;z-index:8;border:none;background:transparent;cursor:pointer}
-.cc.playing .th{opacity:0}
-.cc.playing .play-hit{pointer-events:none;visibility:hidden}
-.cc .video-err{display:none;position:absolute;inset:0;z-index:9;place-items:center;padding:12px;text-align:center;font-size:clamp(12px,.7vw,16px);color:rgba(255,255,255,.55);background:rgba(0,0,0,.85)}
-.cc .video-err.sh{display:grid}
-.cc .video-loading{display:none;position:absolute;inset:0;z-index:9;place-items:center;background:rgba(0,0,0,.7);font-size:clamp(12px,.7vw,16px);color:rgba(255,255,255,.55)}
-.cc .video-loading.sh{display:grid}
+.cc .reveal-tag{position:absolute;top:clamp(8px,.8vh,12px);left:50%;transform:translateX(-50%);z-index:7;padding:4px 12px;background:rgba(255,107,53,.9);color:#fff;font-size:clamp(10px,.6vw,13px);font-weight:700;border-radius:999px;opacity:0;transition:opacity .3s;white-space:nowrap}
+.cc.playing .reveal-tag{opacity:1}
 .vreset{font-size:clamp(10px,.6vw,13px);color:rgba(255,255,255,.2);cursor:pointer;margin-top:4px;border:none;background:none;font-family:inherit}
 .vreset:hover{color:rgba(255,107,53,.6)}
 /* Vote */
-.va{display:flex;gap:clamp(6px,.6vw,12px);justify-content:center;padding:clamp(4px,.4vh,8px) 0}
-.vb{display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;border:1px solid rgba(255,255,255,.1);padding:clamp(5px,.5vh,10px) clamp(8px,.8vw,14px);background:rgba(255,255,255,.02);transition:all .2s;color:rgba(255,255,255,.5);font-size:clamp(12px,.78vw,17px);font-weight:600}
-.vb:hover{border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.05);color:#fff}
-.vb.vd{border-color:#FF6B35;background:rgba(255,107,53,.08);color:#FF6B35}
+.va{display:flex;gap:clamp(8px,.8vw,14px);justify-content:center;padding:clamp(6px,.5vh,10px) 0;flex-wrap:wrap}
+.vb{cursor:pointer;padding:clamp(8px,.7vh,12px) clamp(16px,1.4vw,28px);background:var(--glass);border-radius:999px;transition:all .2s;color:rgba(255,255,255,.7);font-size:clamp(13px,.78vw,17px);font-weight:700;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.vb:hover{background:rgba(255,255,255,.12);color:#fff;transform:translateY(-1px)}
+.vb.vd{background:rgba(255,107,53,.2);color:var(--camp-sunset);box-shadow:0 0 0 2px rgba(255,107,53,.4)}
 .vr{text-align:center;font-size:clamp(18px,1.3vw,30px);font-weight:700;color:#FF6B35;padding:clamp(3px,.3vh,6px);display:none}
 .vr.sh{display:block}
 .vr .sb{font-size:clamp(14px,.78vw,18px);font-weight:400;color:rgba(255,255,255,.55);margin-top:4px;line-height:1.45}
@@ -138,25 +143,70 @@ h2 .o{color:#FF6B35}
 /* Close footer */
 .close-footer .sc-label{font-size:clamp(11px,.65vw,14px);text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.35)}
 .close-footer .sc-body{font-size:clamp(14px,.78vw,18px);color:rgba(255,255,255,.55);margin-top:4px;line-height:1.45}
-/* Main slide panel */
-.slide-panel{position:absolute;top:clamp(52px,5.5vh,56px);left:clamp(32px,3.5vw,60px);right:clamp(32px,3.5vw,60px);bottom:clamp(40px,4vh,48px);z-index:5;overflow-y:auto;display:flex;flex-direction:column;gap:clamp(8px,.8vh,12px);text-align:left;max-width:900px}
-.slide-panel h2{margin:0;line-height:1.05}
-.slide-panel .lead{font-size:clamp(18px,.98vw,24px);line-height:1.55;color:rgba(255,255,255,.78);max-width:700px}
-.slide-panel .teacher-cue{font-size:clamp(16px,.88vw,21px);color:rgba(255,107,53,.9);font-weight:600;margin-top:clamp(4px,.4vh,8px)}
+/* Main slide panel — centered camp layout */
+.slide-panel{position:absolute;top:clamp(52px,5.5vh,56px);left:50%;transform:translateX(-50%);width:min(920px,92vw);bottom:clamp(40px,4vh,48px);z-index:5;overflow-y:auto;display:flex;flex-direction:column;align-items:center;gap:clamp(10px,1vh,16px);text-align:center}
+.slide-panel h2{margin:0;line-height:1.05;text-align:center;width:100%}
+.slide-panel .lead{font-size:clamp(17px,.95vw,22px);line-height:1.55;color:rgba(255,255,255,.78);max-width:640px;text-align:center}
+.slide-panel .teacher-cue{font-size:clamp(15px,.85vw,19px);color:var(--camp-sunset);font-weight:600;margin-top:clamp(4px,.4vh,8px);padding:clamp(8px,1vh,12px) clamp(16px,1.5vw,24px);background:rgba(255,107,53,.08);border-radius:999px;max-width:560px}
+.slide-cover{position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;justify-content:center;padding:clamp(56px,7vh,120px) clamp(32px,4vw,72px) clamp(48px,5vh,80px)}
+.slide-cover h1{max-width:640px}
+.slide-cover .cover-sub{color:rgba(255,255,255,.55);max-width:420px;margin-top:clamp(8px,.8vh,14px)}
+.slide-cover .cover-foot{position:absolute;left:clamp(32px,4vw,72px);right:clamp(32px,4vw,72px);bottom:clamp(28px,3vh,48px);display:flex;align-items:center;justify-content:space-between;gap:16px;border-top:1px solid rgba(255,255,255,.06);padding-top:clamp(10px,1vh,14px)}
+.glass-card{background:var(--glass);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-radius:var(--radius);box-shadow:0 8px 32px rgba(0,0,0,.35);border:none}
 /* Day badge */
 .day-badge{position:absolute;top:clamp(52px,5.5vh,56px);right:clamp(32px,3.5vw,60px);z-index:6;padding:clamp(3px,.3vh,5px) clamp(10px,.9vw,16px);border:1px solid rgba(255,107,53,.35);background:rgba(255,107,53,.1);color:#FF6B35;font-weight:800;font-size:clamp(14px,.85vw,19px);letter-spacing:.06em}
 .day-block{display:none}
 .day-block.active{display:block}
 /* Roadmap */
-.road{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(6px,.6vw,10px);max-width:900px;margin:clamp(12px,1.2vh,20px) auto 0}
-.road .rg{border:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.35);padding:clamp(8px,.8vh,12px);text-align:center}
-.road .rg .rt{font-size:clamp(10px,.6vw,13px);color:rgba(255,255,255,.25);margin-bottom:4px}
+.road{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(10px,.9vw,14px);width:100%;max-width:820px;margin:clamp(12px,1.2vh,20px) auto 0}
+.road .rg{padding:clamp(12px,1.1vh,18px);text-align:center;border-radius:var(--radius)}
+.road .rg .rt{font-size:clamp(10px,.6vw,13px);color:rgba(255,255,255,.35);margin-bottom:4px}
 .road .rg .rn{font-size:clamp(14px,.82vw,20px);font-weight:700;color:#fff;line-height:1.3}
 .road .rg .rm{font-size:clamp(12px,.6vw,15px);color:#FF6B35;margin-top:4px}
-.road.day-road{grid-template-columns:repeat(4,1fr)}
-/* Learning objectives */
-.goal-list{display:flex;flex-direction:column;gap:clamp(8px,.75vh,11px)}
-.goal-item{display:grid;grid-template-columns:clamp(32px,2.6vw,44px) 1fr;gap:clamp(10px,.9vw,16px);align-items:start;padding:clamp(12px,1.1vh,16px);border:1px solid rgba(255,255,255,.1);background:rgba(0,0,0,.55);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.goal-list{display:flex;flex-direction:column;gap:clamp(8px,.75vh,11px);width:100%;max-width:720px}
+.goal-item{display:grid;grid-template-columns:clamp(32px,2.6vw,44px) 1fr;gap:clamp(10px,.9vw,16px);align-items:start;padding:clamp(14px,1.2vh,18px);text-align:left;border-radius:var(--radius)}
+.kolb-table .k-row{padding:clamp(12px,1.1vh,16px);border-radius:var(--radius);border:none;border-left:4px solid var(--k-accent,#FF6B35);text-align:left}
+.kolb-compact{display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,.8vw,14px);width:100%;max-width:720px}
+.kolb-compact .kc-step{padding:clamp(12px,1.1vh,16px);border-radius:var(--radius);border:none;border-top:3px solid var(--kc,#FF6B35);text-align:left}
+.nature-two{width:100%;max-width:860px}
+.nature-col{padding:clamp(14px,1.2vh,18px);border-radius:var(--radius);border:none;border-top:3px solid var(--nc,#FF6B35);text-align:left}
+.tool-grid{width:100%;max-width:680px}
+.tool-card{padding:clamp(16px,1.4vh,22px);border-radius:var(--radius);text-align:center}
+.tool-card .tl-badge{display:inline-block;width:clamp(40px,3.5vw,56px);height:clamp(40px,3.5vw,56px);line-height:clamp(40px,3.5vw,56px);border-radius:50%;background:rgba(255,107,53,.15);color:var(--camp-sunset);font-family:'Big Shoulders Display','Noto Sans SC',sans-serif;font-weight:900;font-size:clamp(18px,1.3vw,26px);margin-bottom:8px}
+.vocab-grid{width:100%;max-width:760px}
+.vocab-card{padding:clamp(12px,1.1vh,16px);border-radius:var(--radius);border:none;border-left:4px solid var(--vc,#FF6B35);text-align:left}
+.kendama-steps{width:100%;max-width:820px}
+.kd-step{padding:clamp(12px,1.1vh,16px);border-radius:var(--radius);border:none;border-top:3px solid var(--kd,#FF6B35);text-align:center}
+.ai-four{width:100%;max-width:720px}
+.ai-four .af-cell{padding:clamp(12px,1.1vh,16px);border-radius:var(--radius);border:none;border-left:4px solid var(--af,#FF6B35);text-align:left}
+.lab-box{border-radius:var(--radius);padding:clamp(14px,1.2vh,20px);text-align:left;width:100%;max-width:620px}
+.act{border-radius:var(--radius);text-align:center;max-width:560px}
+/* Game slides — no more black void */
+.slide-game .pb img{opacity:.35}
+.slide-game .slide-panel{justify-content:center}
+.game-stage{width:100%;max-width:680px;padding:clamp(24px,2.5vh,40px);border-radius:var(--radius);min-height:clamp(160px,22vh,280px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.game-btns{display:flex;gap:clamp(12px,1.2vw,24px);justify-content:center;flex-wrap:wrap;margin-top:clamp(10px,1vh,16px)}
+.game-btn{padding:clamp(10px,1vh,16px) clamp(24px,2.2vw,48px);border-radius:999px;font-size:clamp(15px,1vw,24px);font-weight:800;cursor:pointer;transition:transform .2s;border:none;font-family:inherit}
+.game-btn:hover{transform:scale(1.04)}
+.game-btn.ai-btn{background:rgba(214,40,40,.15);color:#D62828}
+.game-btn.human-btn{background:rgba(42,157,143,.15);color:#2A9D8F}
+.game-btn.reveal-btn{background:rgba(214,40,40,.12);color:#D62828;border:1px solid rgba(214,40,40,.25)}
+.power-blind{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,1vw,18px);width:100%;max-width:820px;text-align:left}
+.pb-col{padding:clamp(14px,1.2vh,18px);border-radius:var(--radius)}
+.pb-head{font-family:'Big Shoulders Display','Noto Sans SC',sans-serif;font-weight:900;font-size:clamp(18px,1.15vw,24px);margin-bottom:clamp(8px,.7vh,12px)}
+.pb-list{display:flex;flex-direction:column;gap:clamp(6px,.55vh,9px)}
+.pb-item{border-left:3px solid rgba(255,255,255,.12);padding-left:clamp(8px,.7vw,12px)}
+.pb-title{font-size:clamp(15px,.88vw,20px);color:#fff;font-weight:600}
+.pb-item .ps{color:rgba(255,255,255,.45);margin-top:2px}
+.prompt-duel{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,1vw,18px);width:100%;max-width:700px}
+.prompt-card{padding:clamp(12px,1.1vh,18px);text-align:left;cursor:pointer;transition:transform .2s,box-shadow .2s;border:2px solid rgba(255,255,255,.08);background:var(--glass);border-radius:var(--radius);font-family:inherit;color:inherit;width:100%}
+.prompt-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.35)}
+.prompt-side{font-size:clamp(11px,.65vw,14px);color:rgba(255,255,255,.35);margin-bottom:clamp(4px,.4vh,8px);font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.prompt-text{font-size:clamp(14px,.85vw,22px);color:#fff;font-weight:500;line-height:1.45;text-align:left}
+.track-card{border-radius:var(--radius)}
+.goal-item.glass-card{text-align:left}
+.cgb{padding:clamp(6px,.55vh,10px) clamp(14px,1.1vw,22px);border-radius:999px;font-size:clamp(13px,.8vw,18px);cursor:pointer;background:var(--glass);color:rgba(255,255,255,.7);font-weight:600;transition:all .2s;border:none;font-family:inherit}
+.cgb:hover{background:rgba(255,255,255,.12);color:#fff}
 .goal-num{font-family:'Big Shoulders Display','Noto Sans SC',sans-serif;font-weight:900;font-size:clamp(24px,1.8vw,36px);line-height:1;color:rgba(255,255,255,.25)}
 .goal-item h3{font-family:'Big Shoulders Display','Noto Sans SC',sans-serif;font-weight:800;font-size:clamp(19px,1.25vw,26px);color:#fff;margin:0 0 5px;line-height:1.1}
 .goal-item p{font-size:clamp(15px,.88vw,20px);line-height:1.5;color:rgba(255,255,255,.8);margin:0}
@@ -199,23 +249,21 @@ h2 .o{color:#FF6B35}
 .pitch-line{padding:clamp(14px,1.2vh,20px);border:1px solid rgba(255,255,255,.1);background:rgba(0,0,0,.45);font-size:clamp(20px,1.3vw,28px);font-weight:700;color:#fff;line-height:1.35}
 .pitch-line span{color:#FF6B35;font-size:clamp(12px,.72vw,16px);font-weight:600;display:block;margin-bottom:6px;letter-spacing:.04em}
 /* AI showcase caps (P4) */
-.ai-caps{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(4px,.4vw,7px);flex-shrink:0}
-.ai-cap{padding:clamp(6px,.55vh,10px);border:1px solid rgba(255,255,255,.06);background:rgba(0,0,0,.45);text-align:center}
-.ai-cap .cap-icon{font-size:clamp(20px,1.6vw,32px);display:block;margin-bottom:3px}
-.ai-cap .cap-label{font-size:clamp(12px,.68vw,15px);font-weight:700;color:rgba(255,255,255,.88)}
-.ai-cap .cap-note{font-size:clamp(10px,.55vw,12px);color:rgba(255,255,255,.4);margin-top:2px;line-height:1.3}
+.ai-caps{display:flex;gap:clamp(8px,.7vw,12px);flex-wrap:wrap;justify-content:center;width:100%;max-width:720px}
+.ai-cap{padding:clamp(8px,.7vh,12px) clamp(14px,1.2vw,20px);background:var(--glass);border-radius:999px;text-align:center;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.ai-cap .cap-label{font-size:clamp(12px,.72vw,15px);font-weight:700;color:rgba(255,255,255,.9)}
+.ai-cap .cap-note{font-size:clamp(10px,.58vw,12px);color:rgba(255,255,255,.45);margin-top:1px}
 /* Slide-cat specific (P4) */
-.slide-cat.slide-panel{max-width:none;left:clamp(24px,2.5vw,48px);right:clamp(24px,2.5vw,48px)}
-.slide-cat .slide-head{flex-shrink:0;text-align:center;align-items:center}
-.slide-cat .cat-stage{flex:1;min-height:0;display:flex;flex-direction:column;min-height:clamp(130px,20vh,260px)}
-.slide-cat .cg{flex:1;min-height:clamp(130px,20vh,260px)}
-.slide-cat .vote-area{flex-shrink:0}
+.slide-cat.slide-panel{width:min(960px,94vw)}
+.slide-cat .slide-head{flex-shrink:0;text-align:center;width:100%}
+.slide-cat .cat-stage{width:100%;display:flex;justify-content:center}
+.slide-cat .vote-area{flex-shrink:0;width:100%;max-width:720px;text-align:center}
 /* Intelligence grid (P2) */
-.intel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(8px,.7vw,14px)}
-.intel-card{padding:clamp(12px,1.1vh,18px);border:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.5);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
-.intel-card .ic-title{font-family:'Big Shoulders Display','Noto Sans SC',sans-serif;font-weight:800;font-size:clamp(22px,1.5vw,30px);margin-bottom:clamp(6px,.5vh,10px)}
-.intel-card .ic-items{list-style:none;display:flex;flex-direction:column;gap:clamp(5px,.45vh,8px)}
-.intel-card .ic-items li{font-size:clamp(14px,.82vw,18px);color:rgba(255,255,255,.72);padding-left:clamp(10px,.8vw,14px);border-left:2px solid rgba(255,255,255,.12);line-height:1.4}
+.intel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,1vw,18px);width:100%;max-width:820px}
+.intel-card{padding:clamp(16px,1.4vh,22px);text-align:left}
+.intel-card .ic-title{font-family:'Big Shoulders Display','Noto Sans SC',sans-serif;font-weight:800;font-size:clamp(20px,1.4vw,28px);margin-bottom:clamp(8px,.6vh,12px)}
+.intel-card .ic-items{list-style:none;display:flex;flex-direction:column;gap:clamp(6px,.5vh,9px)}
+.intel-card .ic-items li{font-size:clamp(13px,.78vw,17px);color:rgba(255,255,255,.75);padding-left:clamp(10px,.8vw,14px);border-left:3px solid var(--ic-accent,rgba(255,255,255,.15));line-height:1.45}
 .intel-card .ic-items li b{color:#fff}
 /* Vocabulary grid (P9) */
 .vocab-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(8px,.7vw,12px);max-width:760px}
@@ -258,7 +306,7 @@ h2 .o{color:#FF6B35}
 /* Responsive */
 @media(max-width:768px){
   .intel-grid,.ai-caps,.recap-grid,.track-grid{grid-template-columns:1fr 1fr}
-  .vocab-grid,.kolb-compact,.ai-four,.nature-two,.pitch-grid{grid-template-columns:1fr}
+  .vocab-grid,.kolb-compact,.ai-four,.nature-two,.pitch-grid,.power-blind,.prompt-duel{grid-template-columns:1fr}
   .kendama-steps{grid-template-columns:1fr 1fr}
   .pc,.sc{grid-template-columns:1fr}
 }
@@ -290,15 +338,15 @@ h2 .o{color:#FF6B35}
   <div class="pb"><img src="assets/bg/cover.jpg" alt="" /></div>
   <div class="od"></div>
   <div class="day-badge" id="day-badge">第 1 天</div>
-  <div class="pos" style="top:clamp(56px,7vh,120px);left:clamp(32px,3.5vw,60px);z-index:5">
+  <div class="slide-cover">
     <h1>超级<br/>AI<span class="o">三日营</span></h1>
-    <div class="p" style="color:rgba(255,255,255,.5);max-width:clamp(260px,28vw,460px);margin-top:clamp(6px,.6vh,12px)">教孩子 <b>用 AI 解决真问题</b></div>
-  </div>
-  <div class="pos b" style="z-index:5;display:flex;align-items:center;gap:clamp(12px,1.5vw,24px);border-top:1px solid rgba(255,255,255,.04);padding-top:clamp(6px,.6vh,10px)">
-    <span class="ps">夏令营 · 线下 · 每日 90–120 分钟</span>
-    <span style="display:flex;gap:4px">
-      <span class="tg">体验</span><span class="tg">观察</span><span class="tg">思考</span><span class="tg">实践</span>
-    </span>
+    <div class="p cover-sub">教孩子 <b>用 AI 解决真问题</b></div>
+    <div class="cover-foot">
+      <span class="ps">夏令营 · 线下 · 每日 90–120 分钟</span>
+      <span style="display:flex;gap:6px">
+        <span class="tg">体验</span><span class="tg">观察</span><span class="tg">思考</span><span class="tg">实践</span>
+      </span>
+    </div>
   </div>
   <div class="pgn"></div>
 </section>
@@ -313,24 +361,24 @@ h2 .o{color:#FF6B35}
       <h2>什么叫「<span class="o">聪明</span>」？</h2>
       <p class="lead">能学习、能解决问题——就是聪明。今天认识<b>三种聪明</b>。</p>
       <div class="intel-grid">
-        <div class="intel-card" style="border-left:4px solid #FF6B35">
-          <div class="ic-title" style="color:#FF6B35">🧠 人的聪明</div>
+        <div class="intel-card glass-card" style="--ic-accent:#FF6B35">
+          <div class="ic-title" style="color:#FF6B35">人的聪明</div>
           <ul class="ic-items">
             <li>摔倒了站起来，<b>靠经历学习</b></li>
             <li>有情感、有直觉、会创造</li>
             <li>能把「感受」变成知识</li>
           </ul>
         </div>
-        <div class="intel-card" style="border-left:4px solid #2A9D8F">
-          <div class="ic-title" style="color:#2A9D8F">🌿 自然的聪明</div>
+        <div class="intel-card glass-card" style="--ic-accent:#2A9D8F">
+          <div class="ic-title" style="color:#2A9D8F">自然的聪明</div>
           <ul class="ic-items">
             <li>亿万年进化，<b>选出最优解</b></li>
             <li>蚂蚁群体寻路，蝴蝶进化毒盾</li>
             <li>没有大脑，照样解决问题</li>
           </ul>
         </div>
-        <div class="intel-card" style="border-left:4px solid #52a8ff">
-          <div class="ic-title" style="color:#52a8ff">🤖 AI 的聪明</div>
+        <div class="intel-card glass-card" style="--ic-accent:#52a8ff">
+          <div class="ic-title" style="color:#52a8ff">AI 的聪明</div>
           <ul class="ic-items">
             <li>看过十亿张图，<b>认识了猫</b></li>
             <li>没身体，靠数据「体验」世界</li>
@@ -372,94 +420,80 @@ h2 .o{color:#FF6B35}
       <h2>Day 1 · 今日<span class="o">路线</span></h2>
       <p class="lead">约 <b>90–120 分钟</b>。点顶栏「目录」按 Day 跳转。</p>
       <div class="road day-road">
-        <div class="rg"><div class="rt">①</div><div class="rn">AI能做什么</div><div class="rm">20分</div></div>
-        <div class="rg"><div class="rt">②</div><div class="rn">古人观天</div><div class="rm">25分</div></div>
-        <div class="rg"><div class="rt">③</div><div class="rn">人怎么学</div><div class="rm">25分</div></div>
-        <div class="rg"><div class="rt">④</div><div class="rn">AI怎么学</div><div class="rm">30分</div></div>
+        <div class="rg glass-card"><div class="rt">①</div><div class="rn">AI能做什么</div><div class="rm">20分</div></div>
+        <div class="rg glass-card"><div class="rt">②</div><div class="rn">古人观天</div><div class="rm">25分</div></div>
+        <div class="rg glass-card"><div class="rt">③</div><div class="rn">人怎么学</div><div class="rm">25分</div></div>
+        <div class="rg glass-card"><div class="rt">④</div><div class="rn">AI怎么学</div><div class="rm">30分</div></div>
       </div>
     </div>
     <div class="day-block" data-day-road="2">
       <h2>Day 2 · 今日<span class="o">路线</span></h2>
       <p class="lead">约 <b>90–120 分钟</b>。工具演示 + 创作工坊。</p>
       <div class="road day-road">
-        <div class="rg"><div class="rt">①</div><div class="rn">AI 识别挑战</div><div class="rm">30分</div></div>
-        <div class="rg"><div class="rt">②</div><div class="rn">Prompt 游戏</div><div class="rm">25分</div></div>
-        <div class="rg"><div class="rt">③</div><div class="rn">工具演示</div><div class="rm">10分</div></div>
-        <div class="rg"><div class="rt">④</div><div class="rn">创作工坊</div><div class="rm">40分</div></div>
+        <div class="rg glass-card"><div class="rt">①</div><div class="rn">AI 识别挑战</div><div class="rm">30分</div></div>
+        <div class="rg glass-card"><div class="rt">②</div><div class="rn">Prompt 游戏</div><div class="rm">25分</div></div>
+        <div class="rg glass-card"><div class="rt">③</div><div class="rn">工具演示</div><div class="rm">10分</div></div>
+        <div class="rg glass-card"><div class="rt">④</div><div class="rn">创作工坊</div><div class="rm">40分</div></div>
       </div>
     </div>
     <div class="day-block" data-day-road="3">
       <h2>Day 3 · 今日<span class="o">路线</span></h2>
       <p class="lead">约 <b>90–120 分钟</b>。真问题 + 路演 + 结业。</p>
       <div class="road day-road">
-        <div class="rg"><div class="rt">①</div><div class="rn">选真问题</div><div class="rm">15分</div></div>
-        <div class="rg"><div class="rt">②</div><div class="rn">问 AI 做海报</div><div class="rm">50分</div></div>
-        <div class="rg"><div class="rt">③</div><div class="rn">小组路演</div><div class="rm">25分</div></div>
-        <div class="rg"><div class="rt">④</div><div class="rn">三日结业</div><div class="rm">10分</div></div>
+        <div class="rg glass-card"><div class="rt">①</div><div class="rn">选真问题</div><div class="rm">15分</div></div>
+        <div class="rg glass-card"><div class="rt">②</div><div class="rn">问 AI 做海报</div><div class="rm">50分</div></div>
+        <div class="rg glass-card"><div class="rt">③</div><div class="rn">小组路演</div><div class="rm">25分</div></div>
+        <div class="rg glass-card"><div class="rt">④</div><div class="rn">三日结业</div><div class="rm">10分</div></div>
       </div>
     </div>
   </div>
   <div class="pgn"></div>
 </section>
 
-<!-- S4: AI能做什么 (rich showcase + cat vote) -->
-<section class="slide" style="background:#080c10" data-slide-interactive data-title="AI能做什么" data-chapter="cat" data-day="1">
+<!-- S4: AI能做什么 -->
+<section class="slide" data-slide-interactive data-title="AI能做什么" data-chapter="cat" data-day="1">
   <div class="pb"><img src="assets/bg/cat-challenge.jpg" alt="" /></div>
-  <div class="od"></div>
+  <div class="ol od-strong"></div>
   <div class="mode mh">动手</div>
   <div class="slide-panel slide-cat">
     <div class="slide-head">
-      <h2>AI能做<span class="o">这些</span>！猜猜哪个是真的？</h2>
+      <h2>AI 能做<span class="o">这些</span></h2>
+      <p class="lead">点一下画面，放大观察细节——猜猜哪段是真实拍摄的？</p>
     </div>
     <div class="ai-caps">
-      <div class="ai-cap"><span class="cap-icon">🎬</span><div class="cap-label">生成视频</div><div class="cap-note">让猫穿西装开会</div></div>
-      <div class="ai-cap"><span class="cap-icon">✍️</span><div class="cap-label">写文章诗歌</div><div class="cap-note">3秒写100字</div></div>
-      <div class="ai-cap"><span class="cap-icon">🎨</span><div class="cap-label">描述就能画</div><div class="cap-note">任意画风</div></div>
-      <div class="ai-cap"><span class="cap-icon">🌐</span><div class="cap-label">识别翻译</div><div class="cap-note">100种语言</div></div>
+      <div class="ai-cap glass-card"><div class="cap-label">生成视频</div><div class="cap-note">让猫穿西装开会</div></div>
+      <div class="ai-cap glass-card"><div class="cap-label">写文章</div><div class="cap-note">几秒写出百字</div></div>
+      <div class="ai-cap glass-card"><div class="cap-label">描述作画</div><div class="cap-note">任意画风</div></div>
+      <div class="ai-cap glass-card"><div class="cap-label">识别翻译</div><div class="cap-note">百种语言</div></div>
     </div>
     <div class="cat-stage">
       <div class="cg">
         <div class="cc" id="c0" data-cat-i="0">
-          <button type="button" class="play-hit" data-no-advance aria-label="播放视频1"></button>
-          <img class="th" src="assets/cats/cat_daily.jpg" alt="可爱的日常猫" />
-          <div class="play-btn">▶</div>
+          <button type="button" class="play-hit" data-no-advance aria-label="放大观察1"></button>
+          <img class="th" src="assets/bg/cat-exp.jpg" alt="日常生活猫" />
+          <div class="play-btn">观察</div>
+          <div class="reveal-tag">AI 生成 · 找破绽</div>
           <div class="lb">01 · 日常生活猫</div>
-          <div class="cp" id="cp0">
-            <div class="video-loading">加载中…</div>
-            <video playsinline muted loop preload="metadata" src="assets/cats/cat_daily.mp4" title="01 日常猫"></video>
-            <iframe src="" allow="autoplay; encrypted-media; fullscreen" allowfullscreen title="01 日常猫" style="display:none"></iframe>
-            <div class="video-err">视频未就绪<br/>请下载真实 AI 猫视频<br/><span style="font-size:.85em;color:rgba(255,255,255,.3)">见 assets/cats/README.md</span></div>
-          </div>
         </div>
         <div class="cc" id="c1" data-cat-i="1">
-          <button type="button" class="play-hit" data-no-advance aria-label="播放视频2"></button>
-          <img class="th" src="assets/cats/cat_office.jpg" alt="穿西装上班的猫" />
-          <div class="play-btn">▶</div>
+          <button type="button" class="play-hit" data-no-advance aria-label="放大观察2"></button>
+          <img class="th" src="assets/bg/cat-do.jpg" alt="穿西装上班的猫" />
+          <div class="play-btn">观察</div>
+          <div class="reveal-tag">AI 生成 · 找破绽</div>
           <div class="lb">02 · 穿西装上班猫</div>
-          <div class="cp" id="cp1">
-            <div class="video-loading">加载中…</div>
-            <video playsinline muted loop preload="metadata" src="assets/cats/cat_office.mp4" title="02 上班猫"></video>
-            <iframe src="" allow="autoplay; encrypted-media; fullscreen" allowfullscreen title="02 上班猫" style="display:none"></iframe>
-            <div class="video-err">视频未就绪<br/>请下载真实 AI 猫视频<br/><span style="font-size:.85em;color:rgba(255,255,255,.3)">见 assets/cats/README.md</span></div>
-          </div>
         </div>
         <div class="cc" id="c2" data-cat-i="2">
-          <button type="button" class="play-hit" data-no-advance aria-label="播放视频3"></button>
-          <img class="th" src="assets/cats/cat_school.jpg" alt="背书包上学的猫" />
-          <div class="play-btn">▶</div>
+          <button type="button" class="play-hit" data-no-advance aria-label="放大观察3"></button>
+          <img class="th" src="assets/bg/cat-obs.jpg" alt="背书包上学的猫" />
+          <div class="play-btn">观察</div>
+          <div class="reveal-tag">AI 生成 · 找破绽</div>
           <div class="lb">03 · 背书包上学猫</div>
-          <div class="cp" id="cp2">
-            <div class="video-loading">加载中…</div>
-            <video playsinline muted loop preload="metadata" src="assets/cats/cat_school.mp4" title="03 上学猫"></video>
-            <iframe src="" allow="autoplay; encrypted-media; fullscreen" allowfullscreen title="03 上学猫" style="display:none"></iframe>
-            <div class="video-err">视频未就绪<br/>请下载真实 AI 猫视频<br/><span style="font-size:.85em;color:rgba(255,255,255,.3)">见 assets/cats/README.md</span></div>
-          </div>
         </div>
       </div>
     </div>
     <div class="vote-area">
-      <div class="rb" id="rb">全部由AI生成 —— 每一段都是！</div>
-      <p class="lead" style="text-align:center;font-size:clamp(15px,.85vw,19px)"><b>跟同桌说：</b>你觉得哪段最像真实拍摄的？</p>
+      <div class="rb" id="rb">全部由 AI 生成 —— 每一段都是！</div>
+      <p class="lead" style="font-size:clamp(14px,.82vw,18px)"><b>跟同桌说：</b>你觉得哪段最像真实拍摄的？</p>
       <div class="va" id="va">
         <div class="vb" data-no-advance data-vote="0">01 日常猫</div>
         <div class="vb" data-no-advance data-vote="1">02 上班猫</div>
@@ -481,10 +515,10 @@ h2 .o{color:#FF6B35}
     <h2>古人怎么<span class="o">看天</span>？</h2>
     <p class="lead">没有手机日历，他们靠星星知道何时<b>种地、收割、过年</b>。</p>
     <div class="kolb-table">
-      <div class="k-row"><div class="k-label">体验</div><p class="k-text">每晚仰头看——北斗七星的位置<b>一直在缓缓旋转</b></p></div>
-      <div class="k-row k-obs"><div class="k-label">观察</div><p class="k-text"><b>斗柄指东天下皆春，指南是夏</b>——像大钟指针在转</p></div>
-      <div class="k-row k-think"><div class="k-label">思考</div><p class="k-text">星星规律 = 季节规律——<b>总结出二十四节气</b></p></div>
-      <div class="k-row k-do"><div class="k-label">实践</div><p class="k-text">按星空日历耕种，<b>收成更好</b>——最早的农业科学</p></div>
+      <div class="k-row glass-card"><div class="k-label">体验</div><p class="k-text">每晚仰头看——北斗七星的位置<b>一直在缓缓旋转</b></p></div>
+      <div class="k-row k-obs glass-card"><div class="k-label">观察</div><p class="k-text"><b>斗柄指东天下皆春，指南是夏</b>——像大钟指针在转</p></div>
+      <div class="k-row k-think glass-card"><div class="k-label">思考</div><p class="k-text">星星规律 = 季节规律——<b>总结出二十四节气</b></p></div>
+      <div class="k-row k-do glass-card"><div class="k-label">实践</div><p class="k-text">按星空日历耕种，<b>收成更好</b>——最早的农业科学</p></div>
     </div>
     <p class="story-foot"><b>古人用眼睛观察星空；AI 用成千上万张照片学习。</b> 方法是一样的。</p>
   </div>
@@ -500,15 +534,15 @@ h2 .o{color:#FF6B35}
     <h2>自然里的两个<span class="o">好老师</span></h2>
     <p class="lead">它们没有课本，却都在用「体验→观察→思考→实践」。</p>
     <div class="nature-two">
-      <div class="nature-col" style="--nc:#FF6B35">
-        <div class="nc-title">🐜 蚁群找路</div>
+      <div class="nature-col glass-card" style="--nc:#FF6B35">
+        <div class="nc-title">蚁群找路</div>
         <div class="nc-row"><span class="nc-step">体验</span><span class="nc-text">出洞找食，<b>东爬西爬完全随机</b></span></div>
         <div class="nc-row"><span class="nc-step">观察</span><span class="nc-text">留气味痕迹，<b>走的蚂蚁越多气味越浓</b></span></div>
         <div class="nc-row"><span class="nc-step">思考</span><span class="nc-text">整群像大脑——<b>用气味投票出最佳路线</b></span></div>
         <div class="nc-row"><span class="nc-step">实践</span><span class="nc-text">写成蚁群算法 → <b>快递路线、互联网寻路</b></span></div>
       </div>
-      <div class="nature-col" style="--nc:#2A9D8F">
-        <div class="nc-title">🦋 花蝶共演</div>
+      <div class="nature-col glass-card" style="--nc:#2A9D8F">
+        <div class="nc-title">花蝶共演</div>
         <div class="nc-row"><span class="nc-step">体验</span><span class="nc-text">毛毛虫吃毒叶，<b>储毒让天敌不敢吃它</b></span></div>
         <div class="nc-row"><span class="nc-step">观察</span><span class="nc-text">翅膀鲜艳——<b>在喊「别吃我，我有毒！」</b></span></div>
         <div class="nc-row"><span class="nc-step">思考</span><span class="nc-text">植物产假卵迷惑蝶——<b>我变你也得变</b></span></div>
@@ -529,12 +563,12 @@ h2 .o{color:#FF6B35}
     <h2>人是怎么<span class="o">学会</span>一件事的？</h2>
     <p class="lead">用学骑车来说——你一定经历过这四步。</p>
     <div class="kolb-compact">
-      <div class="kc-step" style="--kc:#FF6B35"><h3>① 体验</h3><p>跨上去就晃，摔了擦破皮——<b>真实地「遇到」它</b></p></div>
-      <div class="kc-step" style="--kc:#457B9D"><h3>② 观察</h3><p>速度快更稳，眼睛看前方——<b>仔细看「发生了什么」</b></p></div>
-      <div class="kc-step" style="--kc:#2A9D8F"><h3>③ 思考</h3><p>「速度=稳定，看哪走哪」——<b>总结成口诀</b></p></div>
-      <div class="kc-step" style="--kc:#D62828"><h3>④ 实践</h3><p>再骑 10 米没倒；转弯摔了再改——<b>循环再来</b></p></div>
+      <div class="kc-step glass-card" style="--kc:#FF6B35"><h3>① 体验</h3><p>跨上去就晃，摔了擦破皮——<b>真实地「遇到」它</b></p></div>
+      <div class="kc-step glass-card" style="--kc:#457B9D"><h3>② 观察</h3><p>速度快更稳，眼睛看前方——<b>仔细看「发生了什么」</b></p></div>
+      <div class="kc-step glass-card" style="--kc:#2A9D8F"><h3>③ 思考</h3><p>「速度=稳定，看哪走哪」——<b>总结成口诀</b></p></div>
+      <div class="kc-step glass-card" style="--kc:#D62828"><h3>④ 实践</h3><p>再骑 10 米没倒；转弯摔了再改——<b>循环再来</b></p></div>
     </div>
-    <p class="ps" style="max-width:680px;margin-top:clamp(6px,.6vh,10px);padding:clamp(8px,.7vh,12px);border:1px solid rgba(255,255,255,.06);background:rgba(0,0,0,.35)">这四步叫 <b style="color:#FF6B35">科尔布学习循环</b>（Kolb）。你一直在用它——只是没有名字。古人观星、蚂蚁寻路，用的也是这四步。</p>
+    <p class="ps glass-card" style="max-width:680px;padding:clamp(12px,1.1vh,16px);text-align:left">这四步叫 <b style="color:#FF6B35">科尔布学习循环</b>（Kolb）。你一直在用它——只是没有名字。古人观星、蚂蚁寻路，用的也是这四步。</p>
     <p class="teacher-cue">跟同桌说：你学什么技能时哪步最难？</p>
   </div>
   <div class="pgn"></div>
@@ -549,22 +583,22 @@ h2 .o{color:#FF6B35}
     <h2>现在，来学<span class="o">一个新技能</span></h2>
     <p class="lead"><b>剑玉</b>——日本传统木质玩具。用科尔布四步现场学它。</p>
     <div class="kendama-steps">
-      <div class="kd-step" style="--kd:#FF6B35">
+      <div class="kd-step glass-card" style="--kd:#FF6B35">
         <div class="kd-num">①</div>
         <div class="kd-title">体验</div>
         <p class="kd-text">先随便玩 1 分钟<br/>不要看教程，先感受</p>
       </div>
-      <div class="kd-step" style="--kd:#457B9D">
+      <div class="kd-step glass-card" style="--kd:#457B9D">
         <div class="kd-num">②</div>
         <div class="kd-title">观察</div>
         <p class="kd-text">说出 3 个你发现的规律<br/>「我发现……」</p>
       </div>
-      <div class="kd-step" style="--kd:#2A9D8F">
+      <div class="kd-step glass-card" style="--kd:#2A9D8F">
         <div class="kd-num">③</div>
         <div class="kd-title">思考</div>
         <p class="kd-text">哪里卡住了？<br/>猜猜为什么会这样？</p>
       </div>
-      <div class="kd-step" style="--kd:#D62828">
+      <div class="kd-step glass-card" style="--kd:#D62828">
         <div class="kd-num">④</div>
         <div class="kd-title">实践</div>
         <p class="kd-text">再试 1 分钟<br/>只改一件事</p>
@@ -584,17 +618,17 @@ h2 .o{color:#FF6B35}
     <h2>AI也<span class="o">要上学</span></h2>
     <p class="lead"><b>数据→统计→调参→模型</b>，跟你学骑车的四步是一样的。</p>
     <div class="ai-four">
-      <div class="af-cell" style="--af:#FF6B35"><h3>数据 · AI 的「体验」</h3><p>百万张标好「这是猫」的图——<b>没身体也能「见到」猫</b></p></div>
-      <div class="af-cell" style="--af:#457B9D"><h3>统计 · AI 的「观察」</h3><p>从海量文字找规律——<b>像你从猫视频挑细节</b></p></div>
-      <div class="af-cell" style="--af:#2A9D8F"><h3>调参 · AI 的「思考」</h3><p>答错了就多给例子、改 Prompt——<b>修正自己的答案</b></p></div>
-      <div class="af-cell" style="--af:#D62828"><h3>模型 · AI 的「实践」</h3><p>学会的全压缩进模型——<b>几毫秒判断新图片</b></p></div>
+      <div class="af-cell glass-card" style="--af:#FF6B35"><h3>数据 · AI 的「体验」</h3><p>百万张标好「这是猫」的图——<b>没身体也能「见到」猫</b></p></div>
+      <div class="af-cell glass-card" style="--af:#457B9D"><h3>统计 · AI 的「观察」</h3><p>从海量文字找规律——<b>像你从猫视频挑细节</b></p></div>
+      <div class="af-cell glass-card" style="--af:#2A9D8F"><h3>调参 · AI 的「思考」</h3><p>答错了就多给例子、改 Prompt——<b>修正自己的答案</b></p></div>
+      <div class="af-cell glass-card" style="--af:#D62828"><h3>模型 · AI 的「实践」</h3><p>学会的全压缩进模型——<b>几毫秒判断新图片</b></p></div>
     </div>
-    <p class="ps" style="color:rgba(255,255,255,.5);margin-top:2px">认识几个 AI 词汇 ↓</p>
+    <p class="ps" style="color:rgba(255,255,255,.5);margin-top:2px">认识几个 AI 词汇</p>
     <div class="vocab-grid">
-      <div class="vocab-card" style="--vc:#FF6B35"><div class="vc-term">算法</div><p class="vc-def">解题步骤说明书</p><p class="vc-eg">你做饭用的菜谱就是算法</p></div>
-      <div class="vocab-card" style="--vc:#52a8ff"><div class="vc-term">大模型</div><p class="vc-def">学过海量信息的超大 AI</p><p class="vc-eg">豆包、Kimi 就是大模型</p></div>
-      <div class="vocab-card" style="--vc:#2A9D8F"><div class="vc-term">机器学习</div><p class="vc-def">让 AI 从例子里找规律</p><p class="vc-eg">猫挑战背后的技术</p></div>
-      <div class="vocab-card" style="--vc:#D62828"><div class="vc-term">幻觉</div><p class="vc-def">AI 编出来的「假事实」</p><p class="vc-eg">AI说今天是周一，其实是周三</p></div>
+      <div class="vocab-card glass-card" style="--vc:#FF6B35"><div class="vc-term">算法</div><p class="vc-def">解题步骤说明书</p><p class="vc-eg">你做饭用的菜谱就是算法</p></div>
+      <div class="vocab-card glass-card" style="--vc:#52a8ff"><div class="vc-term">大模型</div><p class="vc-def">学过海量信息的超大 AI</p><p class="vc-eg">豆包、Kimi 就是大模型</p></div>
+      <div class="vocab-card glass-card" style="--vc:#2A9D8F"><div class="vc-term">机器学习</div><p class="vc-def">让 AI 从例子里找规律</p><p class="vc-eg">猫挑战背后的技术</p></div>
+      <div class="vocab-card glass-card" style="--vc:#D62828"><div class="vc-term">幻觉</div><p class="vc-def">AI 编出来的「假事实」</p><p class="vc-eg">AI说今天是周一，其实是周三</p></div>
     </div>
   </div>
   <div class="pgn"></div>
@@ -609,27 +643,27 @@ h2 .o{color:#FF6B35}
     <h2>明天用的<span class="o">工具箱</span></h2>
     <p class="lead">今晚用手机或家里电脑，提前注册好账号。</p>
     <div class="tool-grid">
-      <div class="tool-card">
-        <div class="tl-icon">🫘</div>
+      <div class="tool-card glass-card">
+        <div class="tl-badge">豆</div>
         <div class="tl-name">豆包</div>
         <p class="tl-note">doubao.com<br/>字节出品，中文最流畅</p>
       </div>
-      <div class="tool-card">
-        <div class="tl-icon">🌊</div>
+      <div class="tool-card glass-card">
+        <div class="tl-badge">通</div>
         <div class="tl-name">通义千问</div>
         <p class="tl-note">tongyi.aliyun.com<br/>阿里出品，功能全面</p>
       </div>
-      <div class="tool-card">
-        <div class="tl-icon">🌙</div>
+      <div class="tool-card glass-card">
+        <div class="tl-badge">K</div>
         <div class="tl-name">Kimi</div>
         <p class="tl-note">kimi.moonshot.cn<br/>长文本超棒</p>
       </div>
     </div>
-    <div class="lab-box" style="margin-top:clamp(8px,.8vh,12px)">
-      <div style="font-weight:700;color:#D62828;margin-bottom:6px">安全规则（很重要！）</div>
-      <p class="p-sm" style="margin:0;line-height:1.7">🚫 不要输入真实姓名、手机号、家庭地址<br/>🚫 AI 说的话不一定是真的，要自己验证<br/>✅ 有疑问随时问老师</p>
+    <div class="lab-box glass-card" style="margin-top:clamp(8px,.8vh,12px)">
+      <div style="font-weight:700;color:#D62828;margin-bottom:6px">安全规则（很重要）</div>
+      <p class="p-sm" style="margin:0;line-height:1.7">禁止输入真实姓名、手机号、家庭地址<br/>AI 说的话不一定是真的，要自己验证<br/>有疑问随时问老师</p>
     </div>
-    <div class="act" style="margin-top:clamp(6px,.6vh,10px)"><b>明天带上账号，准备创作！</b></div>
+    <div class="act glass-card" style="margin-top:clamp(6px,.6vh,10px);padding:clamp(10px,1vh,14px)"><b>明天带上账号，准备创作！</b></div>
   </div>
   <div class="pgn"></div>
 </section>
@@ -644,18 +678,18 @@ h2 .o{color:#FF6B35}
   <div class="slide-panel">
     <h2>昨天，你学了<span class="o">什么</span>？</h2>
     <p class="lead">60 秒快速回顾，再出发！</p>
-    <div class="recap-grid">
-      <div class="recap-card">
+      <div class="recap-grid">
+      <div class="recap-card glass-card">
         <div class="rc-label">科尔布四步</div>
         <div class="rc-term">体验→观察→思考→实践</div>
         <p class="rc-def">学骑车、看星星、玩剑玉，都在用这四步</p>
       </div>
-      <div class="recap-card">
+      <div class="recap-card glass-card">
         <div class="rc-label">AI 四步</div>
         <div class="rc-term">数据→统计→调参→模型</div>
         <p class="rc-def">跟人一样的循环，只是「体验」是数据</p>
       </div>
-      <div class="recap-card">
+      <div class="recap-card glass-card">
         <div class="rc-label">关键词汇</div>
         <div class="rc-term">算法 · 大模型 · 幻觉</div>
         <p class="rc-def">今天你们要亲手驾驭它——写 Prompt</p>
@@ -667,59 +701,55 @@ h2 .o{color:#FF6B35}
 </section>
 
 <!-- S12: AI还是人？速答挑战 -->
-<section class="slide" style="background:#0c0c0c" data-slide-interactive data-title="AI还是人" data-chapter="ai" data-day="2">
+<section class="slide slide-game" data-slide-interactive data-title="AI还是人" data-chapter="ai" data-day="2">
+  <div class="pb"><img src="assets/bg/ai-data.jpg" alt="" /></div>
+  <div class="ol od-strong"></div>
   <div class="mode mh">游戏</div>
-  <div class="pos" style="top:clamp(14px,1.5vh,28px);left:50%;transform:translateX(-50%);z-index:10;text-align:center;width:90%">
-    <h2><span class="o">AI</span>还是人？速答挑战</h2>
-    <div class="p" style="text-align:center;margin-top:1px">看一句话，举手投票——是 AI 说的，还是人说的？</div>
-  </div>
-  <div class="pos" style="top:clamp(80px,9vh,150px);left:clamp(24px,3vw,60px);right:clamp(24px,3vw,60px);bottom:clamp(100px,11vh,180px);z-index:5">
-    <div id="qbox" style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1px solid rgba(255,255,255,.06);background:rgba(0,0,0,.3);padding:clamp(16px,2vh,36px)">
-      <div style="font-size:clamp(18px,1.6vw,32px);color:rgba(255,255,255,.2);margin-bottom:clamp(4px,.4vh,8px);font-weight:700">第 <span id="qr">1</span> / 5 题</div>
-      <div id="qt" style="font-size:clamp(20px,1.8vw,38px);color:#fff;font-weight:600;line-height:1.4;max-width:600px"> </div>
+  <div class="slide-panel">
+    <h2><span class="o">AI</span> 还是人？速答挑战</h2>
+    <p class="lead">看一句话，举手投票——是 AI 说的，还是人说的？</p>
+    <div id="qbox" class="game-stage glass-card">
+      <div style="font-size:clamp(16px,1.4vw,28px);color:rgba(255,255,255,.3);margin-bottom:clamp(8px,.7vh,12px);font-weight:700">第 <span id="qr">1</span> / 5 题</div>
+      <div id="qt" style="font-size:clamp(20px,1.8vw,36px);color:#fff;font-weight:600;line-height:1.45;max-width:600px"> </div>
     </div>
-  </div>
-  <div class="pos" style="bottom:clamp(28px,3vh,56px);left:50%;transform:translateX(-50%);z-index:10;text-align:center">
-    <div style="display:flex;gap:clamp(12px,1.2vw,24px);justify-content:center;margin-bottom:clamp(4px,.4vh,8px)">
-      <div class="qb" onclick="qa(0)" style="border:2px solid rgba(214,40,40,.3);color:#D62828;padding:clamp(6px,.6vh,14px) clamp(20px,2.2vw,44px);font-size:clamp(15px,1.1vw,26px);font-weight:900;cursor:pointer;transition:all .2s;background:rgba(214,40,40,.04)">🤖 AI</div>
-      <div class="qb" onclick="qa(1)" style="border:2px solid rgba(42,157,143,.3);color:#2A9D8F;padding:clamp(6px,.6vh,14px) clamp(20px,2.2vw,44px);font-size:clamp(15px,1.1vw,26px);font-weight:900;cursor:pointer;transition:all .2s;background:rgba(42,157,143,.04)">🧑 人类</div>
+    <div class="game-btns">
+      <button type="button" class="game-btn ai-btn" onclick="qa(0)">AI</button>
+      <button type="button" class="game-btn human-btn" onclick="qa(1)">人类</button>
     </div>
-    <div id="qfb" style="display:none;margin-top:clamp(2px,.2vh,6px);padding:clamp(4px,.4vh,10px);font-size:clamp(12px,.72vw,18px);line-height:1.5">
+    <div id="qfb" style="display:none;margin-top:clamp(8px,.7vh,12px);padding:clamp(6px,.6vh,10px);font-size:clamp(13px,.78vw,17px);line-height:1.5;max-width:600px">
       <span id="qresult" style="font-weight:700"></span>
-      <span id="qexplain" style="color:rgba(255,255,255,.3)"></span>
+      <span id="qexplain" style="color:rgba(255,255,255,.45)"></span>
     </div>
   </div>
   <div class="pgn"></div>
 </section>
 
 <!-- S13: 猜猜是什么 -->
-<section class="slide" style="background:#0c0c0c" data-slide-interactive data-title="猜猜是什么" data-chapter="ai" data-day="2">
+<section class="slide slide-game" data-slide-interactive data-title="猜猜是什么" data-chapter="ai" data-day="2">
+  <div class="pb"><img src="assets/bg/ai-intro.jpg" alt="" /></div>
+  <div class="ol od-strong"></div>
   <div class="mode mh">游戏</div>
-  <div class="pos" style="top:clamp(14px,1.5vh,28px);left:50%;transform:translateX(-50%);z-index:10;text-align:center;width:90%">
+  <div class="slide-panel">
     <h2>猜猜它是<span class="o">什么</span>？</h2>
-    <div class="p" style="text-align:center;margin-top:1px">屏幕上出现一张图——AI 怎么认出它是什么的？用手指来回答！</div>
-  </div>
-  <div class="pos" style="top:clamp(80px,9vh,150px);left:clamp(24px,3vw,60px);right:clamp(24px,3vw,60px);bottom:clamp(90px,10vh,160px);z-index:5">
-    <div id="cgbox" style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1px solid rgba(255,255,255,.06);background:rgba(0,0,0,.3);padding:clamp(16px,2vh,36px)">
-      <div style="font-size:clamp(18px,1.6vw,32px);color:rgba(255,255,255,.35);margin-bottom:clamp(4px,.4vh,8px);font-weight:700">第 <span id="cgr">1</span> / 5 题</div>
+    <p class="lead">屏幕上出现一张图——AI 怎么认出它是什么的？用手指来回答！</p>
+    <div id="cgbox" class="game-stage glass-card">
+      <div style="font-size:clamp(16px,1.4vw,28px);color:rgba(255,255,255,.35);margin-bottom:clamp(8px,.7vh,12px);font-weight:700">第 <span id="cgr">1</span> / 5 题</div>
       <img id="cgi" class="cg-img" src="" alt="" />
       <div id="cgn" class="cg-emoji" style="display:none"> </div>
-      <div id="cgh" style="font-size:clamp(20px,1.8vw,38px);color:#fff;font-weight:600;line-height:1.4;max-width:600px"> </div>
-      <div id="cga" style="display:none;margin-top:clamp(8px,.8vh,14px);padding:clamp(6px,.6vh,12px);font-size:clamp(14px,.9vw,24px);color:rgba(255,255,255,.4);line-height:1.5;max-width:600px"> </div>
+      <div id="cgh" style="font-size:clamp(20px,1.8vw,36px);color:#fff;font-weight:600;line-height:1.45;max-width:600px"> </div>
+      <div id="cga" style="display:none;margin-top:clamp(8px,.8vh,14px);padding:clamp(6px,.6vh,12px);font-size:clamp(14px,.88vw,22px);color:rgba(255,255,255,.5);line-height:1.5;max-width:600px"> </div>
     </div>
-  </div>
-  <div class="pos" style="bottom:clamp(28px,3vh,56px);left:50%;transform:translateX(-50%);z-index:10;text-align:center">
-    <div style="display:flex;gap:clamp(8px,.8vw,14px);justify-content:center;flex-wrap:wrap">
-      <div class="cgb" onclick="cg(0)" style="border:1px solid rgba(255,107,53,.2);color:rgba(255,255,255,.5);padding:clamp(4px,.4vh,9px) clamp(10px,.9vw,18px);font-size:clamp(13px,.82vw,20px);cursor:pointer;transition:all .2s;background:rgba(0,0,0,.2)">1️⃣ 猫</div>
-      <div class="cgb" onclick="cg(1)" style="border:1px solid rgba(255,107,53,.2);color:rgba(255,255,255,.5);padding:clamp(4px,.4vh,9px) clamp(10px,.9vw,18px);font-size:clamp(13px,.82vw,20px);cursor:pointer;transition:all .2s;background:rgba(0,0,0,.2)">2️⃣ 狗</div>
-      <div class="cgb" onclick="cg(2)" style="border:1px solid rgba(255,107,53,.2);color:rgba(255,255,255,.5);padding:clamp(4px,.4vh,9px) clamp(10px,.9vw,18px);font-size:clamp(13px,.82vw,20px);cursor:pointer;transition:all .2s;background:rgba(0,0,0,.2)">3️⃣ 车</div>
-      <div class="cgb" onclick="cg(3)" style="border:1px solid rgba(255,107,53,.2);color:rgba(255,255,255,.5);padding:clamp(4px,.4vh,9px) clamp(10px,.9vw,18px);font-size:clamp(13px,.82vw,20px);cursor:pointer;transition:all .2s;background:rgba(0,0,0,.2)">4️⃣ 房子</div>
-      <div class="cgb" onclick="cg(4)" style="border:1px solid rgba(255,107,53,.2);color:rgba(255,255,255,.5);padding:clamp(4px,.4vh,9px) clamp(10px,.9vw,18px);font-size:clamp(13px,.82vw,20px);cursor:pointer;transition:all .2s;background:rgba(0,0,0,.2)">5️⃣ 花</div>
+    <div class="game-btns">
+      <button type="button" class="cgb" onclick="cg(0)">1 · 猫</button>
+      <button type="button" class="cgb" onclick="cg(1)">2 · 狗</button>
+      <button type="button" class="cgb" onclick="cg(2)">3 · 车</button>
+      <button type="button" class="cgb" onclick="cg(3)">4 · 房子</button>
+      <button type="button" class="cgb" onclick="cg(4)">5 · 花</button>
     </div>
-    <div id="cgnb" style="display:none;margin-top:clamp(4px,.4vh,8px)">
-      <span data-no-advance onclick="cgnv()" style="display:inline-block;padding:clamp(4px,.4vh,8px) clamp(14px,1.3vw,28px);border:1px solid rgba(255,255,255,.1);cursor:pointer;font-size:clamp(12px,.72vw,18px);color:rgba(255,255,255,.5)">下一题 →</span>
+    <div id="cgnb" style="display:none;margin-top:clamp(8px,.7vh,12px)">
+      <button type="button" class="game-btn reveal-btn" data-no-advance onclick="cgnv()">下一题</button>
     </div>
-    <p class="p-sm" style="margin-top:6px;color:rgba(255,255,255,.35)"><b>全班一起比手指</b> — 1根=猫 2根=狗 3根=车 4根=房子 5根=花</p>
+    <p class="p-sm" style="margin-top:6px;color:rgba(255,255,255,.45)"><b>全班一起比手指</b> — 1根=猫 2根=狗 3根=车 4根=房子 5根=花</p>
   </div>
   <div class="pgn"></div>
 </section>
@@ -731,23 +761,23 @@ h2 .o{color:#FF6B35}
   <div class="mode ms">讨论</div>
   <div class="slide-panel">
     <h2>AI 的<span class="o">超能力</span> vs 盲区</h2>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,1vw,18px);flex:1">
-      <div style="border:1px solid rgba(42,157,143,.15);background:rgba(42,157,143,.02);padding:clamp(10px,.9vh,16px);display:flex;flex-direction:column">
-        <div style="font-size:clamp(16px,1.1vw,24px);font-weight:900;color:#2A9D8F;margin-bottom:clamp(6px,.5vh,10px)">⚡ AI 超能力</div>
-        <div style="display:flex;flex-direction:column;gap:clamp(4px,.4vh,7px)">
-          <div style="border-left:2px solid rgba(42,157,143,.2);padding-left:clamp(6px,.5vw,10px)"><div style="font-size:clamp(14px,.85vw,20px);color:#fff">一秒看 100 万张图</div><div class="ps" style="color:rgba(255,255,255,.3)">你一秒看 1 张，AI 看 100 万张</div></div>
-          <div style="border-left:2px solid rgba(42,157,143,.2);padding-left:clamp(6px,.5vw,10px)"><div style="font-size:clamp(14px,.85vw,20px);color:#fff">记住整个互联网</div><div class="ps" style="color:rgba(255,255,255,.3)">你记得上周二吃了什么吗？AI 记得所有事</div></div>
-          <div style="border-left:2px solid rgba(42,157,143,.2);padding-left:clamp(6px,.5vw,10px)"><div style="font-size:clamp(14px,.85vw,20px);color:#fff">24 小时不休息</div><div class="ps" style="color:rgba(255,255,255,.3)">不会困、不会走神、不会摸鱼</div></div>
-          <div style="border-left:2px solid rgba(42,157,143,.2);padding-left:clamp(6px,.5vw,10px)"><div style="font-size:clamp(14px,.85vw,20px);color:#fff">同时做 100 件事</div><div class="ps" style="color:rgba(255,255,255,.3)">同时回答 100 个人、翻译 100 种语言</div></div>
+    <div class="power-blind">
+      <div class="pb-col glass-card">
+        <div class="pb-head" style="color:#2A9D8F">AI 超能力</div>
+        <div class="pb-list">
+          <div class="pb-item"><div class="pb-title">一秒看 100 万张图</div><div class="ps">你一秒看 1 张，AI 看 100 万张</div></div>
+          <div class="pb-item"><div class="pb-title">记住整个互联网</div><div class="ps">你记得上周二吃了什么吗？AI 记得所有事</div></div>
+          <div class="pb-item"><div class="pb-title">24 小时不休息</div><div class="ps">不会困、不会走神、不会摸鱼</div></div>
+          <div class="pb-item"><div class="pb-title">同时做 100 件事</div><div class="ps">同时回答 100 个人、翻译 100 种语言</div></div>
         </div>
       </div>
-      <div style="border:1px solid rgba(214,40,40,.15);background:rgba(214,40,40,.02);padding:clamp(10px,.9vh,16px);display:flex;flex-direction:column">
-        <div style="font-size:clamp(16px,1.1vw,24px);font-weight:900;color:#D62828;margin-bottom:clamp(6px,.5vh,10px)">👁️ AI 的盲区</div>
-        <div style="display:flex;flex-direction:column;gap:clamp(4px,.4vh,7px)">
-          <div style="border-left:2px solid rgba(214,40,40,.2);padding-left:clamp(6px,.5vw,10px)"><div style="font-size:clamp(14px,.85vw,20px);color:#fff">分不清真假</div><div class="ps" style="color:rgba(255,255,255,.3)">猫挑战——全部 AI 生成它也分不清</div></div>
-          <div style="border-left:2px solid rgba(214,40,40,.2);padding-left:clamp(6px,.5vw,10px)"><div style="font-size:clamp(14px,.85vw,20px);color:#fff">没有常识</div><div class="ps" style="color:rgba(255,255,255,.3)">「狼是大狗」——AI 不知道狼尾巴是垂的</div></div>
-          <div style="border-left:2px solid rgba(214,40,40,.2);padding-left:clamp(6px,.5vw,10px)"><div style="font-size:clamp(14px,.85vw,20px);color:#fff">没有情绪</div><div class="ps" style="color:rgba(255,255,255,.3)">AI 会说「开心」，但它只是学会了这个词</div></div>
-          <div style="border-left:2px solid rgba(214,40,40,.2);padding-left:clamp(6px,.5vw,10px)"><div style="font-size:clamp(14px,.85vw,20px);color:#fff">说不出为什么</div><div class="ps" style="color:rgba(255,255,255,.3)">AI 能告诉你答案，但说不清原因</div></div>
+      <div class="pb-col glass-card">
+        <div class="pb-head" style="color:#D62828">AI 的盲区</div>
+        <div class="pb-list">
+          <div class="pb-item"><div class="pb-title">分不清真假</div><div class="ps">猫挑战——全部 AI 生成它也分不清</div></div>
+          <div class="pb-item"><div class="pb-title">没有常识</div><div class="ps">「狼是大狗」——AI 不知道狼尾巴是垂的</div></div>
+          <div class="pb-item"><div class="pb-title">没有情绪</div><div class="ps">AI 会说「开心」，但它只是学会了这个词</div></div>
+          <div class="pb-item"><div class="pb-title">说不出为什么</div><div class="ps">AI 能告诉你答案，但说不清原因</div></div>
         </div>
       </div>
     </div>
@@ -757,60 +787,58 @@ h2 .o{color:#FF6B35}
 </section>
 
 <!-- S15: AI错题本 -->
-<section class="slide" style="background:#0c0c0c" data-slide-interactive data-title="AI错题本" data-chapter="ai" data-day="2">
+<section class="slide slide-game" data-slide-interactive data-title="AI错题本" data-chapter="ai" data-day="2">
+  <div class="pb"><img src="assets/bg/ai-data.jpg" alt="" /></div>
+  <div class="ol od-strong"></div>
   <div class="mode mh">游戏</div>
-  <div class="pos" style="top:clamp(14px,1.5vh,28px);left:50%;transform:translateX(-50%);z-index:10;text-align:center;width:90%">
+  <div class="slide-panel">
     <h2>AI <span class="o">错题本</span></h2>
-    <div class="p" style="text-align:center;margin-top:1px">AI 也会犯错——你来当 AI 的老师，帮它改正！</div>
-  </div>
-  <div class="pos" style="top:clamp(80px,9vh,150px);left:clamp(24px,3vw,60px);right:clamp(24px,3vw,60px);bottom:clamp(100px,11vh,180px);z-index:5">
-    <div id="ebox" style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1px solid rgba(214,40,40,.1);background:rgba(214,40,40,.02);padding:clamp(16px,2vh,36px)">
-      <div style="font-size:clamp(18px,1.6vw,32px);color:rgba(214,40,40,.2);margin-bottom:clamp(4px,.4vh,8px);font-weight:700">第 <span id="er">1</span> / 3 关</div>
-      <div id="et" style="font-size:clamp(20px,1.8vw,38px);color:#D62828;font-weight:600;line-height:1.4;max-width:650px"> </div>
-      <div id="ea" style="display:none;margin-top:clamp(8px,.8vh,14px);padding:clamp(6px,.6vh,12px);font-size:clamp(14px,.9vw,24px);color:rgba(255,255,255,.5);line-height:1.5;max-width:600px"> </div>
+    <p class="lead">AI 也会犯错——你来当 AI 的老师，帮它改正！</p>
+    <div id="ebox" class="game-stage glass-card" style="border-left:4px solid rgba(214,40,40,.4)">
+      <div style="font-size:clamp(16px,1.4vw,28px);color:rgba(214,40,40,.35);margin-bottom:clamp(8px,.7vh,12px);font-weight:700">第 <span id="er">1</span> / 3 关</div>
+      <div id="et" style="font-size:clamp(20px,1.8vw,36px);color:#D62828;font-weight:600;line-height:1.45;max-width:650px"> </div>
+      <div id="ea" style="display:none;margin-top:clamp(8px,.8vh,14px);padding:clamp(6px,.6vh,12px);font-size:clamp(14px,.88vw,22px);color:rgba(255,255,255,.55);line-height:1.5;max-width:600px"> </div>
     </div>
-  </div>
-  <div class="pos" style="bottom:clamp(28px,3vh,56px);left:50%;transform:translateX(-50%);z-index:10;text-align:center">
-    <div id="ereveal" onclick="er()" style="border:1px solid rgba(214,40,40,.3);color:#D62828;padding:clamp(6px,.6vh,12px) clamp(20px,2.2vw,44px);font-size:clamp(15px,1.1vw,26px);font-weight:900;cursor:pointer;background:rgba(214,40,40,.04);display:inline-block">👀 看看 AI 错在哪</div>
-    <div id="enext" style="display:none;margin-top:clamp(6px,.6vh,12px)">
-      <span data-no-advance onclick="en()" style="display:inline-block;padding:clamp(4px,.4vh,8px) clamp(14px,1.3vw,28px);border:1px solid rgba(255,255,255,.1);cursor:pointer;font-size:clamp(12px,.72vw,18px);color:rgba(255,255,255,.5)">下一关 →</span>
+    <div class="game-btns">
+      <button type="button" id="ereveal" class="game-btn reveal-btn" onclick="er()">看看 AI 错在哪</button>
+      <div id="enext" style="display:none">
+        <button type="button" class="game-btn reveal-btn" data-no-advance onclick="en()">下一关</button>
+      </div>
     </div>
-    <p class="p-sm" style="margin-top:8px;color:rgba(255,255,255,.35)"><b>全班讨论：</b>AI 为什么弄错了？它少了什么信息？</p>
+    <p class="p-sm" style="margin-top:8px;color:rgba(255,255,255,.45)"><b>全班讨论：</b>AI 为什么弄错了？它少了什么信息？</p>
   </div>
   <div class="pgn"></div>
 </section>
 
 <!-- S16: Prompt擂台 -->
-<section class="slide" style="background:#0c0c0c" data-slide-interactive data-title="Prompt擂台" data-chapter="ai" data-day="2">
+<section class="slide slide-game" data-slide-interactive data-title="Prompt擂台" data-chapter="ai" data-day="2">
+  <div class="pb"><img src="assets/bg/lab.jpg" alt="" /></div>
+  <div class="ol od-strong"></div>
   <div class="mode mh">游戏</div>
-  <div class="pos" style="top:clamp(14px,1.5vh,28px);left:50%;transform:translateX(-50%);z-index:10;text-align:center;width:90%">
+  <div class="slide-panel">
     <h2>Prompt <span class="o">擂台</span></h2>
-    <div class="p" style="text-align:center;margin-top:1px">两个 Prompt PK——全班投票，哪个能得到更好的 AI 答案？</div>
-  </div>
-  <div class="pos" style="top:clamp(80px,9vh,150px);left:clamp(24px,3vw,60px);right:clamp(24px,3vw,60px);bottom:clamp(100px,11vh,180px);z-index:5">
-    <div id="pbox" style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1px solid rgba(255,107,53,.06);background:rgba(0,0,0,.2);padding:clamp(12px,1.5vh,24px)">
-      <div style="font-size:clamp(18px,1.6vw,32px);color:rgba(255,107,53,.2);margin-bottom:clamp(6px,.6vh,12px);font-weight:700">第 <span id="pr">1</span> / 3 轮</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,1vw,18px);width:100%;max-width:700px">
-        <div id="pa" onclick="pp(0)" style="border:2px solid rgba(255,107,53,.15);background:rgba(255,107,53,.02);padding:clamp(10px,1vh,18px);cursor:pointer;transition:all .2s">
-          <div style="font-size:clamp(11px,.65vw,15px);color:rgba(255,255,255,.2);margin-bottom:clamp(2px,.2vh,6px)">左</div>
-          <div id="pt0" style="font-size:clamp(13px,.8vw,22px);color:#fff;font-weight:500;line-height:1.4"> </div>
-        </div>
-        <div id="pb" onclick="pp(1)" style="border:2px solid rgba(42,157,143,.15);background:rgba(42,157,143,.02);padding:clamp(10px,1vh,18px);cursor:pointer;transition:all .2s">
-          <div style="font-size:clamp(11px,.65vw,15px);color:rgba(255,255,255,.2);margin-bottom:clamp(2px,.2vh,6px)">右</div>
-          <div id="pt1" style="font-size:clamp(13px,.8vw,22px);color:#fff;font-weight:500;line-height:1.4"> </div>
-        </div>
+    <p class="lead">两个 Prompt PK——全班投票，哪个能得到更好的 AI 答案？</p>
+    <div id="pbox" class="game-stage glass-card" style="padding:clamp(16px,1.5vh,28px)">
+      <div style="font-size:clamp(16px,1.4vw,28px);color:rgba(255,107,53,.35);margin-bottom:clamp(8px,.7vh,12px);font-weight:700">第 <span id="pr">1</span> / 3 轮</div>
+      <div class="prompt-duel">
+        <button type="button" id="pa" class="prompt-card glass-card" onclick="pp(0)">
+          <div class="prompt-side">左</div>
+          <div id="pt0" class="prompt-text"> </div>
+        </button>
+        <button type="button" id="pb" class="prompt-card glass-card" onclick="pp(1)">
+          <div class="prompt-side">右</div>
+          <div id="pt1" class="prompt-text"> </div>
+        </button>
       </div>
-      <div id="prfb" style="display:none;margin-top:clamp(6px,.6vh,12px);padding:clamp(4px,.4vh,10px) clamp(10px,1vw,18px);font-size:clamp(12px,.72vw,18px);color:rgba(255,255,255,.4)">
+      <div id="prfb" style="display:none;margin-top:clamp(10px,1vh,16px);padding:clamp(6px,.6vh,10px);font-size:clamp(13px,.78vw,18px);color:rgba(255,255,255,.5)">
         <span id="pwinner" style="color:#FF6B35;font-weight:700"></span>
         <span id="pwhy"></span>
       </div>
     </div>
-  </div>
-  <div class="pos" style="bottom:clamp(24px,2.5vh,40px);left:50%;transform:translateX(-50%);z-index:10;text-align:center">
-    <div id="pnbtn" style="display:none;margin-top:clamp(4px,.4vh,8px)">
-      <span data-no-advance onclick="pn()" style="display:inline-block;padding:clamp(4px,.4vh,8px) clamp(14px,1.3vw,28px);border:1px solid rgba(255,255,255,.1);cursor:pointer;font-size:clamp(12px,.72vw,18px);color:rgba(255,255,255,.5)">下一轮 →</span>
+    <div id="pnbtn" style="display:none;margin-top:clamp(8px,.7vh,12px)">
+      <button type="button" class="game-btn reveal-btn" data-no-advance onclick="pn()">下一轮</button>
     </div>
-    <p class="p-sm" style="margin-top:6px;color:rgba(255,255,255,.35)"><b>全班举左手/右手投票</b> — 哪个 Prompt 更好？</p>
+    <p class="p-sm" style="margin-top:6px;color:rgba(255,255,255,.45)"><b>全班举左手/右手投票</b> — 哪个 Prompt 更好？</p>
   </div>
   <div class="pgn"></div>
 </section>
@@ -846,9 +874,9 @@ h2 .o{color:#FF6B35}
       <div class="wf-step"><b>5 分</b>排练</div>
     </div>
     <div class="track-grid">
-      <div class="track-card"><img src="assets/day2/track-web.jpg" alt="网页"/><div class="tc-body"><h3>🌐 Website</h3><p>幻想乐园一页文案</p></div></div>
-      <div class="track-card"><img src="assets/day2/track-song.jpg" alt="歌词"/><div class="tc-body"><h3>🎵 Song</h3><p>约 8 行歌词 + 副歌</p></div></div>
-      <div class="track-card"><img src="assets/day2/track-video.jpg" alt="视频"/><div class="tc-body"><h3>🎬 Video</h3><p>30 秒分镜脚本</p></div></div>
+      <div class="track-card glass-card"><img src="assets/day2/track-web.jpg" alt="网页"/><div class="tc-body"><h3>Website</h3><p>幻想乐园一页文案</p></div></div>
+      <div class="track-card glass-card"><img src="assets/day2/track-song.jpg" alt="歌词"/><div class="tc-body"><h3>Song</h3><p>约 8 行歌词 + 副歌</p></div></div>
+      <div class="track-card glass-card"><img src="assets/day2/track-video.jpg" alt="视频"/><div class="tc-body"><h3>Video</h3><p>30 秒分镜脚本</p></div></div>
     </div>
     <p class="teacher-cue">3–4 人一组，必须记录 AI 帮了什么、人改了什么。</p>
   </div>
@@ -881,10 +909,10 @@ h2 .o{color:#FF6B35}
     <h2>Day 2 · <span class="o">创作清单</span></h2>
     <div class="p" style="margin-bottom:10px">打开豆包 / 通义 / Kimi，完成以下步骤：</div>
     <div class="lab-box" style="text-align:left;max-width:560px;margin:0 auto">
-      <p class="p-sm" style="margin:0 0 10px">☐ <b>我们的赛道：</b> 网页 / 歌词 / 视频</p>
-      <p class="p-sm" style="margin:0 0 10px">☐ <b>我写的 Prompt：</b> ________________________________</p>
-      <p class="p-sm" style="margin:0 0 10px">☐ <b>AI 初稿：</b> ________________________________</p>
-      <p class="p-sm" style="margin:0">☐ <b>人改了什么：</b> ________________________________</p>
+      <p class="p-sm" style="margin:0 0 10px">[ ] <b>我们的赛道：</b> 网页 / 歌词 / 视频</p>
+      <p class="p-sm" style="margin:0 0 10px">[ ] <b>我写的 Prompt：</b> ________________________________</p>
+      <p class="p-sm" style="margin:0 0 10px">[ ] <b>AI 初稿：</b> ________________________________</p>
+      <p class="p-sm" style="margin:0">[ ] <b>人改了什么：</b> ________________________________</p>
     </div>
     <div class="act" style="margin-top:10px"><b>约 40 分钟</b> — 做完举手，准备 Day 3 真问题！</div>
   </div>
@@ -966,7 +994,6 @@ const S=Array.from(document.querySelectorAll('.slide'));let c=0;
 const CHAPTER_NAMES={intro:'开场',cat:'AI能做什么',human:'人与自然',ai:'AI 学习',lab:'实验室',project:'项目',end:'结业'};
 const DAY_NAMES={1:'Day 1',2:'Day 2',3:'Day 3'};
 const CAMP_DAY=(()=>{const m=location.search.match(/[?&]day=(\d)/);const d=m?parseInt(m[1],10):1;return d>=1&&d<=3?d:1;})();
-const CAT_YT=['g6dhJx_GXaA','k8DzLwHWIbk','_fbiQUff82w'];
 
 function applyCampDay(){
   const badge=document.getElementById('day-badge');
@@ -1010,7 +1037,7 @@ function buildNav(){
 }
 function sh(i){if(i<0)i=0;if(i>=S.length)i=S.length-1;S[c].classList.remove('active');S[i].classList.add('active');c=i;updateNav();}
 function isInteractiveTarget(t){
-  return t.closest('.qb,.cgb,.cc,.play-hit,.vb,.pt,.pair-l,.pair-r,#ereveal,#enext,#pa,#pb,#pbox,#cgbox,#ebox,#qbox,.nav-bar,.nav-panel,.nav-btn,.ni,.nav-backdrop,[data-no-advance],[contenteditable="true"]');
+  return t.closest('.qb,.cgb,.cc,.play-hit,.vb,.pt,.pair-l,.pair-r,#ereveal,#enext,#pa,#pb,#pbox,#cgbox,#ebox,#qbox,.prompt-card,.nav-bar,.nav-panel,.nav-btn,.ni,.nav-backdrop,[data-no-advance],[contenteditable="true"]');
 }
 function isTypingInEditor(){
   const a=document.activeElement;
@@ -1043,77 +1070,15 @@ document.addEventListener('touchend',e=>{if(tx==null)return;const dx=e.changedTo
 /* —— Cat challenge —— */
 let activeCat=-1;
 function stopCatPlayback(i){
-  const pl=document.getElementById('cp'+i);
-  const cell=document.getElementById('c'+i);
-  if(!pl||!cell)return;
-  pl.style.display='none';cell.classList.remove('playing');
-  const vid=pl.querySelector('video');
-  const iframe=pl.querySelector('iframe');
-  const loading=pl.querySelector('.video-loading');
-  if(vid){vid.pause();vid.currentTime=0;}
-  if(iframe)iframe.src='';
-  if(loading)loading.classList.remove('sh');
+  document.getElementById('c'+i)?.classList.remove('playing');
 }
 function playCat(i,e){
   if(e){e.preventDefault();e.stopPropagation();}
   const cell=document.getElementById('c'+i);
-  const pl=document.getElementById('cp'+i);
-  if(!cell||!pl)return;
+  if(!cell)return;
   if(activeCat===i){stopCatPlayback(i);activeCat=-1;return;}
   if(activeCat>=0)stopCatPlayback(activeCat);
-  pl.style.display='block';cell.classList.add('playing');
-  const vid=pl.querySelector('video');
-  const iframe=pl.querySelector('iframe');
-  const err=pl.querySelector('.video-err');
-  const loading=pl.querySelector('.video-loading');
-  if(err)err.classList.remove('sh');
-  if(loading)loading.classList.add('sh');
-  if(vid){
-    vid.style.display='block';
-    if(iframe)iframe.style.display='none';
-    const tryPlay=()=>{
-      if(loading)loading.classList.remove('sh');
-      /* detect still-image MP4 (duration < 1s) — fall through to YouTube */
-      if(vid.duration>0&&vid.duration<1.5){
-        vid.style.display='none';
-        tryYT();
-        return;
-      }
-      vid.play().catch(()=>{});
-    };
-    const tryYT=()=>{
-      if(iframe){
-        iframe.style.display='block';
-        iframe.src='https://www.youtube-nocookie.com/embed/'+CAT_YT[i]+'?autoplay=1&mute=1&rel=0&playsinline=1';
-      }else if(err){loading&&loading.classList.remove('sh');err.classList.add('sh');}
-    };
-    if(vid.readyState>=2){
-      if(loading)loading.classList.remove('sh');
-      tryPlay();
-    }else{
-      vid.onloadedmetadata=()=>{
-        if(vid.duration>0&&vid.duration<1.5){
-          vid.style.display='none';
-          if(loading)loading.classList.remove('sh');
-          tryYT();
-        }
-      };
-      vid.onloadeddata=tryPlay;
-      vid.onerror=()=>{
-        if(loading)loading.classList.remove('sh');
-        vid.style.display='none';
-        tryYT();
-      };
-      vid.load();
-    }
-  }else if(iframe){
-    if(loading)loading.classList.remove('sh');
-    iframe.style.display='block';
-    iframe.src='https://www.youtube-nocookie.com/embed/'+CAT_YT[i]+'?autoplay=1&mute=1&rel=0&playsinline=1';
-  }else{
-    if(loading)loading.classList.remove('sh');
-    if(err)err.classList.add('sh');
-  }
+  cell.classList.add('playing');
   activeCat=i;
 }
 function initCatPage(){
@@ -1181,7 +1146,7 @@ function cg(choice){
   const ok=choice===d.a;
   const cga=document.getElementById('cga');
   const cgnb=document.getElementById('cgnb');
-  if(cga){cga.style.display='block';cga.innerHTML=(ok?'✓ 对了！':'再想想——')+'<b>AI 在看：</b>'+d.e;}
+  if(cga){cga.style.display='block';cga.innerHTML=(ok?'对了！':'再想想——')+'<b>AI 在看：</b>'+d.e;}
   if(cgnb)cgnb.style.display='block';
   document.querySelectorAll('.cgb').forEach(b=>{b.style.opacity='.4';b.style.pointerEvents='none';});
 }
@@ -1211,8 +1176,8 @@ function qa(choice){
     const d=qd[qi];
     const rs=document.getElementById('qresult'),ex=document.getElementById('qexplain'),fb=document.getElementById('qfb');
     if(!rs||!ex||!fb)return;
-    if(choice===d.a){rs.textContent='✓ 答对了！';rs.style.color='#2A9D8F';}
-    else{rs.textContent='✗ 猜错了...';rs.style.color='#D62828';}
+    if(choice===d.a){rs.textContent='答对了！';rs.style.color='#2A9D8F';}
+    else{rs.textContent='猜错了…';rs.style.color='#D62828';}
     ex.textContent=' '+d.e;fb.style.display='block';
     setTimeout(()=>{
       qi++;
@@ -1220,7 +1185,7 @@ function qa(choice){
         const qbox=document.getElementById('qbox');
         if(qbox)qbox.innerHTML='<div style="font-size:clamp(22px,2vw,44px);color:#FF6B35;font-weight:900">挑战完成！</div><div style="font-size:clamp(13px,.78vw,18px);color:rgba(255,255,255,.3);margin-top:4px">全班讨论：AI 擅长什么？不擅长什么？</div>';
         if(fb)fb.style.display='none';
-        const qr=document.getElementById('qr');if(qr)qr.textContent='✓';
+        const qr=document.getElementById('qr');if(qr)qr.textContent='完成';
         return;
       }
       const qr=document.getElementById('qr');if(qr)qr.textContent=qi+1;
@@ -1232,9 +1197,9 @@ function qa(choice){
 
 /* —— AI 错题本 —— */
 const ed=[
-  {t:'AI 说："这是一把小提琴🎻"',a:'这是尤克里里——只有 4 根弦。AI 把大小搞混了。',m:'它少了「数几根弦」这种细节观察。'},
-  {t:'AI 说："这是一只大狗🐕"',a:'这是狼。狼尾巴垂着，狗尾巴翘起。',m:'它少了「尾巴怎么翘」这种常识。'},
-  {t:'AI 说："这是日出🌅"',a:'这是日落。太阳在西边，云是暖橙红色。',m:'它少了「太阳在哪边、光线方向」这种现场信息。'}
+  {t:'AI 说："这是一把小提琴"',a:'这是尤克里里——只有 4 根弦。AI 把大小搞混了。',m:'它少了「数几根弦」这种细节观察。'},
+  {t:'AI 说："这是一只大狗"',a:'这是狼。狼尾巴垂着，狗尾巴翘起。',m:'它少了「尾巴怎么翘」这种常识。'},
+  {t:'AI 说："这是日出"',a:'这是日落。太阳在西边，云是暖橙红色。',m:'它少了「太阳在哪边、光线方向」这种现场信息。'}
 ];
 let ei=0;
 function er(){
@@ -1243,7 +1208,7 @@ function er(){
     const et=document.getElementById('et'),ea=document.getElementById('ea'),ereveal=document.getElementById('ereveal'),enext=document.getElementById('enext');
     if(!et||!ea)return;
     et.textContent=ed[ei].t;
-    ea.innerHTML='💡 '+ed[ei].a+'<br/><span style="color:rgba(255,255,255,.45);font-size:clamp(14px,.78vw,18px)">当老师要补：'+ed[ei].m+'</span>';
+    ea.innerHTML='提示：'+ed[ei].a+'<br/><span style="color:rgba(255,255,255,.45);font-size:clamp(14px,.78vw,18px)">当老师要补：'+ed[ei].m+'</span>';
     ea.style.display='block';
     if(ereveal)ereveal.style.display='none';
     if(enext)enext.style.display='block';
@@ -1257,7 +1222,7 @@ function en(){
       if(ebox)ebox.innerHTML='<div style="font-size:clamp(22px,2vw,44px);color:#FF6B35;font-weight:900">全部通关！</div><div style="font-size:clamp(13px,.78vw,18px);color:rgba(255,255,255,.3);margin-top:4px">AI 缺少常识和真实体验，所以会犯不同的错。</div>';
       if(ereveal)ereveal.style.display='none';
       if(enext)enext.style.display='none';
-      if(er_el)er_el.textContent='✓';
+      if(er_el)er_el.textContent='完成';
       return;
     }
     if(er_el)er_el.textContent=ei+1;
@@ -1297,7 +1262,7 @@ function pn(){
     if(pi>=pd.length){
       if(pbox)pbox.innerHTML='<div style="font-size:clamp(22px,2vw,44px);color:#FF6B35;font-weight:900">擂台结束！</div><div style="font-size:clamp(13px,.78vw,18px);color:rgba(255,255,255,.3);margin-top:4px">记住：<b>越具体，AI 越懂你！</b></div>';
       if(fb)fb.style.display='none';if(nb)nb.style.display='none';
-      if(pr)pr.textContent='✓';
+      if(pr)pr.textContent='完成';
       return;
     }
     pl=false;if(pr)pr.textContent=pi+1;
