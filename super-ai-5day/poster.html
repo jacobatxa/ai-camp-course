@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>万物机理AI探索五日营 — 武陵山自然学校</title>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@400;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0d14;
+  --accent:#FF6B35;
+  --accent2:#2A9D8F;
+  --gold:#D4A843;
+  --text:#e8e6e3;
+  --text2:rgba(232,230,227,.7);
+  --text3:rgba(232,230,227,.4);
+  --glass:rgba(10,13,20,.85);
+  --border:rgba(255,255,255,.08);
+}
+html{background:var(--bg);color:var(--text);scroll-behavior:smooth}
+body{max-width:1200px;margin:0 auto;font-family:'Noto Sans SC','Big Shoulders Display',sans-serif;-webkit-font-smoothing:antialiased}
+
+/* Hero */
+.hero{position:relative;width:100%;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.35) saturate(.8)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,13,20,.3) 0%,rgba(10,13,20,.7) 60%,var(--bg) 100%);z-index:1}
+.hero-content{position:relative;z-index:2;text-align:center;padding:0 clamp(20px,4vw,80px)}
+.hero-tag{font-family:'JetBrains Mono',monospace;font-size:clamp(11px,.7vw,14px);letter-spacing:.3em;color:var(--accent);text-transform:uppercase;margin-bottom:clamp(12px,1.5vh,24px)}
+.hero-title{font-family:'Big Shoulders Display','Noto Sans SC',sans-serif;font-size:clamp(52px,7vw,140px);font-weight:900;line-height:.9;letter-spacing:-.02em;margin-bottom:clamp(8px,1vh,20px)}
+.hero-title .hl{color:var(--accent)}
+.hero-sub{font-size:clamp(16px,1.5vw,24px);color:var(--text2);font-weight:300;letter-spacing:.15em;margin-bottom:clamp(12px,1.5vh,24px)}
+.hero-meta{display:flex;gap:clamp(8px,1.5vw,24px);justify-content:center;flex-wrap:wrap;margin-top:clamp(20px,3vh,40px)}
+.hero-meta-item{font-size:clamp(12px,.9vw,16px);color:var(--text2);padding:clamp(4px,.5vh,8px) clamp(12px,1vw,20px);border:1px solid var(--border);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);background:rgba(255,255,255,.03)}
+.hero-meta-item span{color:var(--accent);font-weight:700}
+.hero-coords{font-family:'JetBrains Mono',monospace;font-size:clamp(11px,.7vw,13px);color:var(--text3);margin-top:clamp(16px,2vh,32px)}
+
+/* Sections */
+.section{padding:clamp(40px,7vh,80px) clamp(20px,6vw,100px);position:relative}
+.section-label{font-family:'JetBrains Mono',monospace;font-size:clamp(10px,.6vw,12px);color:var(--accent);letter-spacing:.2em;text-transform:uppercase;margin-bottom:clamp(8px,1vh,16px)}
+.section-title{font-family:'Big Shoulders Display',sans-serif;font-size:clamp(36px,5vw,72px);font-weight:900;line-height:1;margin-bottom:clamp(16px,2vh,32px)}
+.section-title .hl{color:var(--accent)}
+
+/* Philosophy */
+.philo-block{background:var(--glass);border:1px solid var(--border);padding:clamp(24px,4vh,48px) clamp(20px,3vw,40px);text-align:center;max-width:800px;margin:0 auto;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.philo-quote{font-size:clamp(20px,2.2vw,36px);font-weight:300;line-height:1.6;color:var(--text2)}
+.philo-quote strong{color:var(--accent);font-weight:700}
+
+/* Three Pillars */
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,1.5vw,20px)}
+.pillar{text-align:center;padding:clamp(24px,3vh,40px) clamp(16px,2vw,24px);border:1px solid var(--border);background:rgba(255,255,255,.02)}
+.pillar-icon{font-size:clamp(28px,3vw,48px);margin-bottom:clamp(12px,1.5vh,20px);opacity:.8}
+.pillar-name{font-size:clamp(18px,1.5vw,24px);font-weight:700;color:var(--accent);margin-bottom:clamp(6px,.8vh,12px)}
+.pillar-desc{font-size:clamp(13px,.9vw,16px);color:var(--text2);line-height:1.7}
+
+/* Highlights */
+.highlights{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:clamp(8px,1vw,14px)}
+.hl-card{padding:clamp(16px,2vh,28px) clamp(14px,1.5vw,20px);border-left:3px solid var(--accent);background:rgba(255,255,255,.02)}
+.hl-card-title{font-size:clamp(15px,1.1vw,18px);font-weight:700;margin-bottom:clamp(4px,.5vh,8px)}
+.hl-card-desc{font-size:clamp(12px,.8vw,14px);color:var(--text2);line-height:1.7}
+
+/* Venue Gallery */
+.venue-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(6px,.8vw,12px)}
+.venue-card{position:relative;overflow:hidden;border:1px solid var(--border)}
+.venue-card.small{aspect-ratio:4/3}
+.venue-card.big{grid-column:span 2;grid-row:span 2}
+.venue-card img{width:100%;height:100%;object-fit:cover;filter:brightness(.78) saturate(.7) contrast(1.1)}
+.venue-card .venue-label{position:absolute;bottom:0;left:0;right:0;padding:clamp(12px,2vh,20px) clamp(12px,1.5vw,16px);background:linear-gradient(0deg,rgba(0,0,0,.85) 0%,transparent 100%);font-size:clamp(12px,.9vw,15px);font-weight:700;color:var(--text)}
+.venue-card .venue-sub{font-size:clamp(10px,.7vw,12px);color:var(--text2);font-weight:400;margin-top:2px}
+.venue-card .img-wrap{position:relative;overflow:hidden}
+.venue-card .img-wrap::after{content:'';position:absolute;inset:0;background:rgba(10,13,20,.25);pointer-events:none}
+
+/* Activity Showcase */
+.activities{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(10px,1.5vw,20px)}
+.activity-card{position:relative;overflow:hidden;border:1px solid var(--border);background:var(--glass)}
+.activity-card .act-img{width:100%;aspect-ratio:16/9;object-fit:cover;filter:brightness(.78) saturate(.7) contrast(1.1)}
+.activity-card .img-wrap{position:relative;overflow:hidden}
+.activity-card .img-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,13,20,.35) 0%,rgba(10,13,20,.1) 100%);pointer-events:none}
+.activity-card .act-body{padding:clamp(16px,2.5vh,28px) clamp(14px,1.5vw,20px)}
+.activity-card .act-title{font-size:clamp(16px,1.2vw,20px);font-weight:700;color:var(--accent);margin-bottom:clamp(4px,.5vh,8px)}
+.activity-card .act-desc{font-size:clamp(12px,.8vw,14px);color:var(--text2);line-height:1.7}
+
+/* Food Section */
+.food-gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(10px,1.5vw,20px)}
+.food-card{position:relative;overflow:hidden;border:1px solid var(--border);background:var(--glass)}
+.food-card img{width:100%;aspect-ratio:4/3;object-fit:cover;filter:brightness(.78) saturate(.7) contrast(1.1)}
+.food-card .food-body{padding:clamp(16px,2.5vh,28px) clamp(14px,1.5vw,20px)}
+.food-card .food-title{font-size:clamp(15px,1.1vw,18px);font-weight:700;color:var(--accent2);margin-bottom:clamp(4px,.5vh,8px)}
+/* Food images - dark overlay */
+.food-card .img-wrap{position:relative;overflow:hidden}
+.food-card .img-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,13,20,.4) 0%,rgba(10,13,20,.1) 100%);pointer-events:none}
+.food-card .food-desc{font-size:clamp(12px,.8vw,14px);color:var(--text2);line-height:1.7}
+
+/* Schedule */
+.schedule{width:100%;border-collapse:collapse}
+.schedule thead th{font-family:'JetBrains Mono',monospace;font-size:clamp(10px,.6vw,12px);color:var(--text3);letter-spacing:.15em;text-transform:uppercase;padding:0 0 clamp(12px,1.5vh,20px) 0;text-align:left;border-bottom:1px solid var(--border)}
+.schedule tbody td{padding:clamp(14px,2vh,24px) clamp(8px,1vw,16px);border-bottom:1px solid rgba(255,255,255,.04);font-size:clamp(13px,.9vw,16px);vertical-align:top}
+.schedule .day-num{font-family:'Big Shoulders Display',sans-serif;font-size:clamp(32px,3.5vw,56px);font-weight:900;color:var(--accent);line-height:1;width:clamp(60px,8vw,100px)}
+.schedule .day-theme{font-weight:700;font-size:clamp(15px,1.1vw,18px);min-width:clamp(100px,12vw,160px)}
+.schedule .day-content{color:var(--text2);line-height:1.7}
+
+/* Pricing */
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,1.5vw,20px)}
+.price-card{text-align:center;padding:clamp(28px,4vh,48px) clamp(16px,2vw,24px);border:1px solid var(--border);background:rgba(255,255,255,.02);position:relative}
+.price-card.featured{border-color:var(--accent);background:rgba(255,107,53,.06)}
+.price-card.featured::before{content:'推荐';position:absolute;top:0;left:50%;transform:translate(-50%,-50%);background:var(--accent);color:#fff;font-size:clamp(10px,.6vw,12px);font-weight:700;padding:clamp(2px,.3vh,4px) clamp(12px,1vw,16px);letter-spacing:.1em}
+.price-card .price-type{font-size:clamp(13px,.9vw,16px);color:var(--text2);margin-bottom:clamp(4px,.5vh,8px)}
+.price-card .price-amount{font-family:'Big Shoulders Display',sans-serif;font-size:clamp(40px,4.5vw,72px);font-weight:900;color:var(--accent);line-height:1;margin-bottom:clamp(8px,1vh,16px)}
+.price-card .price-amount small{font-size:clamp(14px,1vw,18px);font-weight:400;color:var(--text2);vertical-align:middle;margin-left:4px}
+.price-card .price-note{font-size:clamp(11px,.7vw,13px);color:var(--text3);line-height:1.8}
+/* Single Pricing */
+.pricing-single{text-align:center;padding:clamp(32px,5vh,56px) clamp(20px,4vw,40px);border:1px solid var(--accent);background:rgba(255,107,53,.06);max-width:500px;margin:0 auto}
+.pricing-single .price-badge{font-family:'JetBrains Mono',monospace;font-size:clamp(11px,.7vw,13px);color:var(--accent);letter-spacing:.15em;margin-bottom:clamp(8px,1vh,16px)}
+.pricing-single .price-amount{font-family:'Big Shoulders Display',sans-serif;font-size:clamp(56px,6vw,100px);font-weight:900;color:var(--accent);line-height:1;margin-bottom:clamp(8px,1vh,16px)}
+.pricing-single .price-amount small{font-size:clamp(16px,1.2vw,24px);font-weight:400;color:var(--text2);vertical-align:middle;margin-left:4px}
+.pricing-single .price-note{font-size:clamp(12px,.8vw,14px);color:var(--text2);line-height:1.7}
+
+.price-includes{margin-top:clamp(32px,5vh,56px);padding:clamp(20px,3vh,36px) clamp(20px,3vw,36px);border:1px solid var(--border);background:rgba(255,255,255,.02)}
+.price-includes h3{font-size:clamp(16px,1.2vw,20px);font-weight:700;color:var(--accent);margin-bottom:clamp(12px,1.5vh,20px);text-align:center}
+.price-includes .includes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:clamp(10px,1vw,16px)}
+.price-includes .inc-item{font-size:clamp(12px,.8vw,14px);color:var(--text2);padding:clamp(8px,1vh,12px) clamp(10px,1vw,14px);border-left:2px solid var(--accent2)}
+
+/* Why Us */
+.why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(10px,1.5vw,16px)}
+.why-item{display:flex;gap:clamp(12px,1.5vw,20px);align-items:flex-start;padding:clamp(16px,2vh,28px);border:1px solid var(--border);background:rgba(255,255,255,.02)}
+.why-num{font-family:'Big Shoulders Display',sans-serif;font-size:clamp(36px,4vw,64px);font-weight:900;color:var(--accent);line-height:.8;min-width:clamp(40px,5vw,70px);text-align:center}
+.why-text h3{font-size:clamp(15px,1.1vw,18px);font-weight:700;margin-bottom:clamp(4px,.5vh,8px)}
+.why-text p{font-size:clamp(12px,.8vw,14px);color:var(--text2);line-height:1.7}
+
+/* Testimonial */
+.testimonial{max-width:700px;margin:0 auto;padding:clamp(28px,4vh,48px) clamp(20px,3vw,36px);border:1px solid var(--border);background:var(--glass);text-align:center;position:relative}
+.testimonial .t-quote{font-size:clamp(16px,1.5vw,22px);font-weight:300;line-height:1.8;color:var(--text2);margin-bottom:clamp(12px,1.5vh,20px)}
+.testimonial .t-quote::before{content:'\201C';font-family:'Big Shoulders Display',serif;font-size:clamp(48px,5vw,80px);color:var(--accent);line-height:0;vertical-align:middle;margin-right:8px}
+.testimonial .t-author{font-size:clamp(12px,.8vw,14px);color:var(--text3)}
+
+/* CTA */
+.cta{text-align:center;padding:clamp(60px,12vh,140px) clamp(20px,4vw,60px);position:relative}
+.cta-bg{position:absolute;inset:0;z-index:0}
+.cta-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.32) saturate(.7)}
+.cta-overlay{position:absolute;inset:0;background:linear-gradient(0deg,var(--bg) 0%,rgba(10,13,20,.6) 50%,var(--bg) 100%);z-index:1}
+.cta-content{position:relative;z-index:2}
+.cta-title{font-family:'Big Shoulders Display',sans-serif;font-size:clamp(40px,5vw,80px);font-weight:900;line-height:1;margin-bottom:clamp(12px,1.5vh,20px)}
+.cta-sub{font-size:clamp(14px,1vw,18px);color:var(--text2);margin-bottom:clamp(24px,3vh,40px)}
+.cta-btn{display:inline-block;padding:clamp(12px,1.5vh,20px) clamp(32px,4vw,56px);background:var(--accent);color:#fff;font-size:clamp(14px,1vw,18px);font-weight:700;text-decoration:none;letter-spacing:.1em}
+.cta-info{font-size:clamp(11px,.7vw,13px);color:var(--text3);margin-top:clamp(20px,3vh,36px);font-family:'JetBrains Mono',monospace}
+
+/* Footer */
+.footer{padding:clamp(32px,5vh,60px) clamp(20px,4vw,60px);text-align:center;border-top:1px solid var(--border)}
+.footer-text{font-size:clamp(11px,.7vw,13px);color:var(--text3);line-height:2}
+.divider{width:clamp(40px,5vw,80px);height:3px;background:var(--accent);margin:clamp(12px,2vh,24px) auto}
+
+@media(max-width:768px){
+  .pillars{grid-template-columns:1fr}
+  .why-grid{grid-template-columns:1fr}
+  .activities{grid-template-columns:1fr}
+  .food-gallery{grid-template-columns:1fr}
+  .pricing-grid{grid-template-columns:1fr}
+  .venue-gallery{grid-template-columns:1fr 1fr}
+  .venue-card.big{grid-column:span 2;grid-row:span 1;aspect-ratio:16/9}
+  .schedule .day-num{font-size:clamp(24px,6vw,40px);width:clamp(44px,12vw,70px)}
+}
+@media(max-width:480px){
+  .venue-gallery{grid-template-columns:1fr}
+  .venue-card.big{grid-column:span 1;aspect-ratio:16/9}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="img/venue-hero.jpg" alt="武陵山自然学校">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-tag">WULING MOUNTAIN NATURE SCHOOL</div>
+    <h1 class="hero-title">万物机理<br><span class="hl">AI探索</span>五日营</h1>
+    <p class="hero-sub">不是学编程，是学一种新的观察方式</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><span>8.26</span> - 8.30</div>
+      <div class="hero-meta-item"><span>5</span> 天 4 晚</div>
+      <div class="hero-meta-item"><span>8–14</span> 岁</div>
+      <div class="hero-meta-item">武陵山 · 海拔1200m</div>
+    </div>
+    <p class="hero-coords">29.5 N · 108.7 E · ALT 1200m · 每期限额 20 人</p>
+  </div>
+</section>
+
+<!-- CORE PHILOSOPHY -->
+<section class="section">
+  <div class="section-label">核心理念</div>
+  <h2 class="section-title">用AI向<span class="hl">自然</span>提问</h2>
+  <div class="philo-block">
+    <p class="philo-quote">不是学编程，是学一种<strong>新的观察方式</strong>。<br>用 AI 重新理解山、水、星空和生命。</p>
+  </div>
+</section>
+
+<!-- VENUE GALLERY — 真实场地实拍 -->
+<section class="section" style="padding-top:0">
+  <div class="section-label">场地实景</div>
+  <h2 class="section-title">海拔1200米的<span class="hl">山野教室</span></h2>
+  <div class="venue-gallery">
+    <div class="venue-card big">
+      <div class="img-wrap"><img src="img/venue-wide-01.jpg" alt="武陵山营地全景" loading="lazy"></div>
+      <div class="venue-label">武陵山自然学校<span class="venue-sub">营地全景</span></div>
+    </div>
+    <div class="venue-card small">
+      <div class="img-wrap"><img src="img/venue-scene-01.jpg" alt="教学与活动空间" loading="lazy"></div>
+      <div class="venue-label">室内教学空间<span class="venue-sub">AI工坊与讨论区</span></div>
+    </div>
+    <div class="venue-card small">
+      <div class="img-wrap"><img src="img/venue-scene-02.jpg" alt="户外探索" loading="lazy"></div>
+      <div class="venue-label">户外探索区<span class="venue-sub">物种识别与自然观察</span></div>
+    </div>
+    <div class="venue-card small">
+      <div class="img-wrap"><img src="img/venue-scene-03.jpg" alt="营地环境" loading="lazy"></div>
+      <div class="venue-label">营地自然环境<span class="venue-sub">森林与溪流环绕</span></div>
+    </div>
+    <div class="venue-card small">
+      <div class="img-wrap"><img src="img/venue-scene-04.jpg" alt="住宿与生活" loading="lazy"></div>
+      <div class="venue-label">住宿与生活区<span class="venue-sub">标准双人间</span></div>
+    </div>
+    <div class="venue-card small">
+      <div class="img-wrap"><img src="img/venue-wide-02.jpg" alt="周边山野" loading="lazy"></div>
+      <div class="venue-label">峡谷与山野<span class="venue-sub">步行可达的野外课堂</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- THREE PILLARS -->
+<section class="section">
+  <div class="section-label">三大核心板块</div>
+  <div class="pillars">
+    <div class="pillar">
+      <div class="pillar-icon">+</div>
+      <div class="pillar-name">AI 科技教育</div>
+      <p class="pillar-desc">零代码体验大模型，学会用自然语言与 AI 对话，理解机器学习的基本逻辑。</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">=</div>
+      <div class="pillar-name">户外探案实践</div>
+      <p class="pillar-desc">走进武陵山峡谷溪流，用 AI 辅助物种识别、地质采样、生态数据采集与分析。</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">*</div>
+      <div class="pillar-name">自然成长与自我发现</div>
+      <p class="pillar-desc">在真实自然中培养观察力、提问能力和科学思维，找到自己的探索节奏。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ACTIVITIES — 真实场景 -->
+<section class="section">
+  <div class="section-label">营地日常</div>
+  <h2 class="section-title">在这里<span class="hl">每一天</span>都怎么过</h2>
+  <div class="activities">
+    <div class="activity-card">
+      <div class="img-wrap"><img class="act-img" src="img/venue-scene-05.jpg" alt="清晨户外" loading="lazy"></div>
+      <div class="act-body">
+        <div class="act-title">清晨自然观察</div>
+        <p class="act-desc">在山间晨雾中醒来，带着 AI 工具走进森林。识别植物、记录鸟鸣、采集数据——不是在教室里看幻灯片，是在真实山野里做科学。</p>
+      </div>
+    </div>
+    <div class="activity-card">
+      <div class="img-wrap"><img class="act-img" src="img/venue-pano-01.jpg" alt="AI工坊" loading="lazy"></div>
+      <div class="act-body">
+        <div class="act-title">AI 对话工坊</div>
+        <p class="act-desc">不需要写代码。孩子们用自然语言跟大模型对话，让 AI 帮忙分析早上采集的数据，学习「问对问题」比「知道答案」更重要。</p>
+      </div>
+    </div>
+    <div class="activity-card">
+      <div class="img-wrap"><img class="act-img" src="img/venue-pano-02.jpg" alt="峡谷调查" loading="lazy"></div>
+      <div class="act-body">
+        <div class="act-title">峡谷野外调查</div>
+        <p class="act-desc">走进武陵山峡谷和溪流，采集水样、岩石标本、昆虫样本。用 AI 辅助分类和识别，把野外的发现变成科学观察笔记。</p>
+      </div>
+    </div>
+    <div class="activity-card">
+      <div class="img-wrap"><img class="act-img" src="img/venue-scene-03.jpg" alt="晚间活动" loading="lazy"></div>
+      <div class="act-body">
+        <div class="act-title">暗夜星空观测</div>
+        <p class="act-desc">海拔1200米远离城市光污染。用 AI 星图识别星座，记录行星位置，理解宇宙尺度——这不是课本上的图，是头顶真实的银河。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOD & DINING — 新增 -->
+<section class="section">
+  <div class="section-label">餐饮与生活</div>
+  <h2 class="section-title">吃住<span class="hl">安心</span></h2>
+  <div class="food-gallery">
+    <div class="food-card">
+      <div class="img-wrap"><img src="img/food-01-new.jpg" alt="营地餐饮" loading="lazy"></div>
+      <div class="food-body">
+        <div class="food-title">现炒家常菜</div>
+        <p class="food-desc">营地自有厨房每日现炒，荤素搭配四菜一汤。新鲜山野食材，不预制、不外卖，孩子吃得健康放心。</p>
+      </div>
+    </div>
+    <div class="food-card">
+      <div class="img-wrap"><img src="img/food-02-new.jpg" alt="家常菜" loading="lazy"></div>
+      <div class="food-body">
+        <div class="food-title">明火现炒</div>
+        <p class="food-desc">大厨明火颠勺，锅气十足。回锅肉、宫保鸡丁、清炒时蔬——不是大锅饭，是热腾腾的家常菜。</p>
+      </div>
+    </div>
+    <div class="food-card">
+      <div class="img-wrap"><img src="img/food-03-new.jpg" alt="用餐环境" loading="lazy"></div>
+      <div class="food-body">
+        <div class="food-title">圆桌共餐</div>
+        <p class="food-desc">每桌6-8人，老师陪餐。孩子自己盛饭、轮流添菜，学会照顾自己也照顾同伴。</p>
+      </div>
+    </div>
+    <div class="food-card">
+      <div class="img-wrap"><img src="img/food-04-new.jpg" alt="茶歇点心" loading="lazy"></div>
+      <div class="food-body">
+        <div class="food-title">户外野餐</div>
+        <p class="food-desc">峡谷探索归来，山泉煮茶配上新鲜水果和手工点心。在高山草甸上席地而食——这是任何餐厅都给不了的体验。</p>
+      </div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:clamp(32px,5vh,56px)">
+    <p style="color:var(--text3);font-size:clamp(12px,.8vw,14px)">所有餐饮费用已含在营费中，无需额外付费</p>
+  </div>
+</section>
+
+<!-- COURSE HIGHLIGHTS -->
+<section class="section">
+  <div class="section-label">课程亮点</div>
+  <h2 class="section-title">五个<span class="hl">不可替代</span>的理由</h2>
+  <div class="highlights">
+    <div class="hl-card">
+      <div class="hl-card-title">真实山野课堂</div>
+      <p class="hl-card-desc">在峡谷、溪流、星空下用 AI，不是教室演示</p>
+    </div>
+    <div class="hl-card">
+      <div class="hl-card-title">无代码 AI 体验</div>
+      <p class="hl-card-desc">用大模型理解世界，不写一行代码</p>
+    </div>
+    <div class="hl-card">
+      <div class="hl-card-title">提问式学习法</div>
+      <p class="hl-card-desc">教孩子「问对问题」比背答案更重要</p>
+    </div>
+    <div class="hl-card">
+      <div class="hl-card-title">跨学科融合</div>
+      <p class="hl-card-desc">AI + 生态 + 地质 + 天文，四天四主题</p>
+    </div>
+    <div class="hl-card">
+      <div class="hl-card-title">小班深度</div>
+      <p class="hl-card-desc">每期限额 20 人，1:5 师生比</p>
+    </div>
+  </div>
+</section>
+
+<!-- 5-DAY SCHEDULE -->
+<section class="section">
+  <div class="section-label">五日行程</div>
+  <h2 class="section-title">五天的<span class="hl">探索地图</span></h2>
+  <table class="schedule">
+    <thead>
+      <tr><th></th><th>主题</th><th>核心内容</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="day-num">01</td>
+        <td class="day-theme">AI 初识</td>
+        <td class="day-content">开营仪式 + 大模型初体验，学会用自然语言与 AI 对话。下午走进森林，学习「用数据描述自然」的观察方法。</td>
+      </tr>
+      <tr>
+        <td class="day-num">02</td>
+        <td class="day-theme">观察训练</td>
+        <td class="day-content">清晨物种识别 + AI 辅助分类。下午 AI 提问工坊：让大模型成为探索自然的同伴，学习提示词思维。</td>
+      </tr>
+      <tr>
+        <td class="day-num">03</td>
+        <td class="day-theme">野外调查</td>
+        <td class="day-content">全天峡谷探索：地质采样、溪流水质检测、昆虫标本采集。晚间 AI 数据分析，建立科学观察笔记。</td>
+      </tr>
+      <tr>
+        <td class="day-num">04</td>
+        <td class="day-theme">提问工坊</td>
+        <td class="day-content">从现象到假说，每个孩子提出自己的科学问题。AI 验证与迭代，学习科学思维。晚间天文观测 + AI 星图识别。</td>
+      </tr>
+      <tr>
+        <td class="day-num">05</td>
+        <td class="day-theme">成果展览</td>
+        <td class="day-content">孩子讲述自己的发现故事，结营仪式。带走的不只是作品，是持续一生的提问习惯。</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- PRICING -->
+<section class="section">
+  <div class="section-label">费用说明</div>
+  <h2 class="section-title">透明<span class="hl">定价</span></h2>
+  <div class="pricing-single">
+    <div class="price-badge">5天4晚 · 全包价</div>
+    <div class="price-amount">3,980<small>元</small></div>
+    <div class="price-note">每人 · 含全部课程、住宿、餐饮、装备、保险、往返交通</div>
+  </div>
+  <div class="price-includes">
+    <h3>费用包含</h3>
+    <div class="includes-grid">
+      <div class="inc-item">全程课程与导师费用</div>
+      <div class="inc-item">4 晚标准住宿（双人间）</div>
+      <div class="inc-item">现炒家常菜水果</div>
+      <div class="inc-item">AI 设备使用（每人一台）</div>
+      <div class="inc-item">户外装备与采样工具</div>
+      <div class="inc-item">全程意外保险</div>
+      <div class="inc-item">结营证书与科学笔记</div>
+      <div class="inc-item">重庆市区往返营地交通</div>
+    </div>
+  </div>
+</section>
+
+<!-- PARENT TESTIMONIAL -->
+<section class="section">
+  <div class="section-label">家长反馈</div>
+  <div class="testimonial">
+    <p class="t-quote">孩子回来之后变化很大，开始主动观察路边的植物，拿着手机跟 AI 对话问这是什么花。以前觉得 AI 离孩子很远，现在发现只要方式对，AI 是孩子最好的探索伙伴。</p>
+    <p class="t-author">—— 往期营员家长 · 2025 夏季营</p>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="section">
+  <div class="section-label">为什么选择我们</div>
+  <h2 class="section-title">四个<span class="hl">决定性</span>差异</h2>
+  <div class="why-grid">
+    <div class="why-item">
+      <div class="why-num">01</div>
+      <div class="why-text">
+        <h3>独家自然场地</h3>
+        <p>武陵山自然学校海拔 1200 米真实野外环境，峡谷、溪流、星空都是教室。不是租来的会议室。</p>
+      </div>
+    </div>
+    <div class="why-item">
+      <div class="why-num">02</div>
+      <div class="why-text">
+        <h3>双重专业背景导师</h3>
+        <p>AI 研究者 + 自然教育者联合授课。硕士以上学历，不是只会教编程的工程师。</p>
+      </div>
+    </div>
+    <div class="why-item">
+      <div class="why-num">03</div>
+      <div class="why-text">
+        <h3>不是编程课</h3>
+        <p>我们教的是用 AI 重新观察世界的方式。不写一行代码，但学会一种受益终身的思维。</p>
+      </div>
+    </div>
+    <div class="why-item">
+      <div class="why-num">04</div>
+      <div class="why-text">
+        <h3>带回提问习惯</h3>
+        <p>孩子带回的不是作品集，是持续一生的提问习惯和科学好奇心。这是任何培训班给不了的。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="cta-bg">
+    <img src="img/venue-wide-01.jpg" alt="武陵山">
+  </div>
+  <div class="cta-overlay"></div>
+  <div class="cta-content">
+    <h2 class="cta-title">8.26 - 8.30<br><span style="color:var(--accent)">武陵山见</span></h2>
+    <p class="cta-sub">8.26-8.30 · 仅此一期 · 限额 20 人</p>
+    <a href="#" class="cta-btn">立即报名</a>
+    <p class="cta-info">WULING MOUNTAIN · 29.5 N 108.7 E · ALT 1200m · 8–14 AGE · MAX 20</p>
+  </div>
+</section>
+
+<footer class="footer">
+  <p class="footer-text">武陵山自然学校 · Wuling Mountain Nature School<br>万物机理AI探索五日营 · 8.26-8.30 · 5 Days · Age 8–14<br>咨询/报名请联系招生老师</p>
+</footer>
+
+</body>
+</html>
